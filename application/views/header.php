@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperature Detection and Alertion System</title>
+    <title>Temperature Detection and Alertion</title>
     <?php
         echo link_tag( "public/bootstrap/css/bootstrap.css" , 'stylesheet');
         echo link_tag( "public/customs/css/style.css" , 'stylesheet');
@@ -14,4 +14,6 @@
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
     <div class="container-fluid">
-
+        
+/* End of file header.php */
+/* Location: ./application/view/header.php */

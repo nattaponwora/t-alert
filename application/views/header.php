@@ -14,6 +14,3 @@
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
     <div class="container-fluid">
-        
-/* End of file header.php */
-/* Location: ./application/view/header.php */

@@ -9,11 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Login Form</title>
-<<<<<<< HEAD
         <link rel="stylesheet" href="<?= base_url('public/bootstrap/css/style.css') ?>">
-=======
-        <link rel="stylesheet" href="public/bootstrap/css//style.css">
->>>>>>> 33769da2d6d4a8123438d18ec79140e8fe5fa43f
         <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     </head>
     <body>

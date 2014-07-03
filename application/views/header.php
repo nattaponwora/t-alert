@@ -7,7 +7,6 @@
     <title>Temperature Detection and Alertion</title>
     <?php
         echo link_tag( "public/bootstrap/css/bootstrap.css" , 'stylesheet');
-        echo link_tag( "public/customs/css/style.css" , 'stylesheet');
     ?>
 </head>
 <body>

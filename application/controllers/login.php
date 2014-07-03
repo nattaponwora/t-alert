@@ -19,8 +19,9 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('login_view');
+		$this->view->section_view('login_view');
 	}
+    
 }
 
 /* End of file welcome.php */

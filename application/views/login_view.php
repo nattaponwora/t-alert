@@ -1,10 +1,9 @@
-<link rel="stylesheet" href="<?= base_url ('public/loginform/css/style.css') ?>">
-<section class="container_loginform">
+<section class="">
     <div class="login">
         <h1>เข้าสู่ระบบ</h1>
         <form method="post" action="index.html">
             <p>
-                <input type="text" name="login" value="" placeholder="Username or Email">
+                <input type="text" name="login" value="" placeholder="Username">
             </p>
             <p>
                 <input type="password" name="password" value="" placeholder="Password">

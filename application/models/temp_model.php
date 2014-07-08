@@ -7,11 +7,19 @@ class Temp_model extends CI_model {
         $this->load->database();
     }     
     
-    function showtable( ) { 
-        $result = $this->db->query('SELECT * FROM asset');
-        foreach ($result->result_array() as $row) {
-            $asset[] = $row;
+    function showtable( $in) {         
+        $query = $this->db->query("SELECT * FROM asset WHERE store_id = '$in' ");
+        foreach ($query->result_array() as $row) {
+            $assets[] = $row;
         }
-        return $asset;
+        return $assets;
+    }
+    
+    function searchAsset() {         
+        $query = $this->db->query("SELECT store_id FROM asset");
+        foreach ($query->result_array() as $row) {
+            $assets[] = $row;
+        }
+        return $assets;
     }
  }

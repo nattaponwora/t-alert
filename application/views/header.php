@@ -9,7 +9,8 @@
         echo link_tag( "public/bootstrap/css/bootstrap.css" , 'stylesheet');
     ?>
 </head>
-<body>
+<body onload="ajaxFunction('fw')" ;="">
+    
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
     <div class="container-fluid">

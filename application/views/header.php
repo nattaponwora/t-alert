@@ -13,4 +13,5 @@
     
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
+    <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery-dataTables.js") ?>"></script>
     <div class="container-fluid">

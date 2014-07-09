@@ -10,8 +10,8 @@ class Temp_model extends CI_model {
     function showtable( $in) {         
         $query = $this->db->query("SELECT * FROM asset 
                                    JOIN temperature
-                                   ON temperature.asset_id = asset.asset_id
-                                   WHERE store_id = '$in' ");
+                                   ON temperature.asset_id = asset.id
+                                   WHERE store_id = '$in' ORDER BY temperature.id DESC ");
         foreach ($query->result_array() as $row) {
             $assets[] = $row;
         }
@@ -27,11 +27,7 @@ class Temp_model extends CI_model {
         return $assets;
     }
     
-    // function searchtemp( $in) {
-        // $query = $this->db->query("SELECT * FROM temperature WHERE asset_id = '$in' ");
-        // foreach ($query->result_array() as $row) {
-            // $assets[] = $row;
-        // }
-        // return $assets;
-    // }
+    function inserttemp($id, $temp) {
+        $query = $this->db->insert("temperature", array('asset_id' => $id,'temp' => $temp));  
+    }
  }

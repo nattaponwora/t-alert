@@ -6,9 +6,7 @@ class Send extends CI_Controller {
         $this->load->model("temp_model");  
     }
     
-    public function index() {
-        $showTable["id"] = 0;
-        $showTable["searchTerm"] = null;
-        $this->view->section_view("temp_view", $showTable);
+    public function data($id, $temp) {
+        $this->temp_model->inserttemp($id, $temp);
     }
 }

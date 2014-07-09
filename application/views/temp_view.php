@@ -24,13 +24,14 @@
 <table class="table table- -->hover" border="0">
     <thead>
         <tr>
-            <th style="width:50px">Index</th>
-            <th style="width:100px">Store ID</th>
-            <th style="width:100px">Store Name</th>
-            <th style="width:100px">Asset ID</th>
-            <th style="width:100px">Asset Shortname</th>
-            <th style="width:100px">Asset Description</th>
-            <th style="width:100px">Temperature</th>
+            <th style="width:50px">ลำดับที่</th>
+            <th style="width:100px">รหัสสาขา</th>
+            <th style="width:100px">ชื่อสาขา</th>
+            <th style="width:100px">อุปกรณ์</th>
+            <th style="width:100px">หมายเลขบาร์โค้ด</th>
+            <th style="width:100px">ชื่อย่ออุปกรณ์</th>
+            <th style="width:100px">อุณหภูมิ</th>
+            <th style="width:100px">เวลา</th>
         </tr>
     </thead>
     <tbody>
@@ -38,9 +39,16 @@
         if($id > 0){
             foreach ($id as $r) {
                 echo "<tr>";
-                foreach ($r as $c) {
-                    echo "<td>$c</td>";
-                }
+                
+                echo "<td>{$r['id']}</td>";
+                echo "<td>{$r['store_id']}</td>";
+                echo "<td>{$r['store_name']}</td>";
+                echo "<td>{$r['asset_desc']}</td>";
+                echo "<td>{$r['asset_barcode']}</td>";
+                echo "<td>{$r['asset_shortname']}</td>";
+                echo "<td>{$r['temp']}</td>";
+                echo "<td>{$r['time']}</td>";
+                
                 echo "</tr>";
             }
         }

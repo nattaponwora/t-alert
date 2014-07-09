@@ -37,6 +37,7 @@
     <tbody>
         <?php
         if($id > 0){
+            
             foreach ($id as $r) {
                 echo "<tr>";
                 
@@ -63,8 +64,9 @@
 </form>
 
 <script type='text/javascript'>
-        setTimeout($("#search_form").fieldcontain('refresh'),1000);
+        setTimeout(a, 1000);
         function a() {
-            setTimeout($("#search_form").fieldcontain('refresh'),1000); 
+            $("#table_form").load("<?= base_url('temp')?> #table_form");
+            setTimeout(a, 1000);
         }
 </script>

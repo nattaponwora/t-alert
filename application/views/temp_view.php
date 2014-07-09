@@ -2,14 +2,19 @@
 <form id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
 
     <div class="form-group">
-        <input id="search_storeasset" name="search_storeasset" type="text">
+        <?php if($searchTerm == null) { ?>
+            <input id="search_storeasset" name="search_storeasset" type="text">
+        <?php } ?>
+        <?php if($searchTerm != null) { ?>
+            <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>">
+        <?php } ?>
     </div>
     
     <label>อุปกรณ์</label>
-    <select class="form-control">
-        <option>ทั้งหมด</option>
-        <option>OpenType</option>
-        <option>Wall</option>
+    <select class="form-control" name="search_assetlist">
+        <option value="all">ทั้งหมด</option>
+        <option value="opentype">OpenType</option>
+        <option value="wall">ตู้ไอศครีม Wall</option>
     </select>
 
     <button id="search" name="search" type="submit">Search</button>
@@ -49,9 +54,9 @@
     </p>
 </form>
 
-<!-- <script type='text/javascript'>
-        setTimeout($("#table_form").fieldcontain('refresh'),2000);
+<script type='text/javascript'>
+        setTimeout($("#search_form").fieldcontain('refresh'),1000);
         function a() {
-            setTimeout($("#table_form").fieldcontain('refresh'),2000); 
+            setTimeout($("#search_form").fieldcontain('refresh'),1000); 
         }
-</script> -->
+</script>

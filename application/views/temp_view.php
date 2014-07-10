@@ -1,9 +1,9 @@
 <br>
 <form id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
-
+    <label>รหัสร้าน</label>
     <div class="form-group">
         <?php if($searchTerm == null) { ?>
-            <input id="search_storeasset" name="search_storeasset" type="text">
+            <input id="search_storeasset" name="search_storeasset" type="text" value="">
         <?php } ?>
         <?php if($searchTerm != null) { ?>
             <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>">
@@ -11,11 +11,21 @@
     </div>
     
     <label>อุปกรณ์</label>
-    <select class="form-control" name="search_assetlist">
-        <option value="all">ทั้งหมด</option>
-        <option value="opentype">OpenType</option>
-        <option value="wall">ตู้ไอศครีม Wall</option>
-    </select>
+    <?php
+        echo form_dropdown('search_assetlist', $selection, $search_asset);
+    ?>
+    <!-- <select class="form-control" name="search_assetlist"> -->
+        <!-- <?php 
+            foreach ($selection as $r) {
+         ?>        -->
+                <!-- <option value="<?= $r['id'] ?>"> <?= $r['type'] ?> </option> -->
+        <!-- <?php 
+            }
+         ?>  -->
+        <!-- <option value="all">ทั้งหมด</option>
+            <option value="opentype">Open Type</option>
+            <option value="wall">ตู้ไอศครีม Wall</option> -->
+    <!-- </select> -->
 
     <button id="search" name="search" type="submit">Search</button>
 </form>
@@ -37,19 +47,19 @@
     <tbody>
         <?php
         if($id > 0){
-            
+            $i = 1;
             foreach ($id as $r) {
                 echo "<tr>";
                 
-                echo "<td>{$r['id']}</td>";
+                echo "<td>{$i}</td>";
                 echo "<td>{$r['store_id']}</td>";
                 echo "<td>{$r['store_name']}</td>";
-                echo "<td>{$r['asset_desc']}</td>";
+                echo "<td>{$r['type']}</td>";
                 echo "<td>{$r['asset_barcode']}</td>";
                 echo "<td>{$r['asset_shortname']}</td>";
                 echo "<td>{$r['temp']}</td>";
                 echo "<td>{$r['time']}</td>";
-                
+                $i++;
                 echo "</tr>";
             }
         }
@@ -64,9 +74,9 @@
 </form>
 
 <script type='text/javascript'>
-        setTimeout(a, 1000);
+        setTimeout(a, 5000);
         function a() {
-            $("#table_form").load("<?= base_url('temp')?> #table_form");
-            setTimeout(a, 1000);
+            $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset") ?> #table_form");
+            setTimeout(a, 5000);
         }
 </script>

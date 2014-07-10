@@ -9,25 +9,28 @@ class Temp extends CI_Controller {
     public function index() {
         $showTable["id"] = 0;
         $showTable["searchTerm"] = null;
+        $showTable["search_asset"] = null;
+        $showTable["selection"] = $this->temp_model->selection();  
         $this->view->section_view("temp_view", $showTable);
     }
    
     public function search() {
         $searchTerm = $this->input->post('search_storeasset');
-        $searchAsset = $this->input->post('search_assetlist');
+        $search_asset = $this->input->post('search_assetlist');
         
         if ($searchTerm == "") {
-            echo "Enter name you are searching for.";
+            echo "โปรดกรอกรหัสร้านก่อนค้นหา.";
             exit();
         }
              
         $searchasset["store_id"] = $this->temp_model->searchasset();  
+        $showTable["selection"] = $this->temp_model->selection();  
         $showTable["id"] = null;
         if(count($searchasset) > 0)
         {
             foreach ($searchasset["store_id"] as $r) {
                 if($r["store_id"] == $searchTerm) {
-                    $showTable["id"] = $this->temp_model->showtable($searchTerm);
+                    $showTable["id"] = $this->temp_model->showtable($searchTerm, $search_asset);
                     break;
                 }
             }
@@ -36,6 +39,27 @@ class Temp extends CI_Controller {
             echo "There was no matching record for the name " . $searchTerm;
         }
         $showTable["searchTerm"] = $searchTerm;
-        $this->view->section_view("temp_view", $showTable);         
+        $showTable["search_asset"] = $search_asset;
+        $this->view->section_view("temp_view", $showTable);           
+    }
+    
+    public function show( $in, $type) {
+        $searchTerm = $in;
+        $searchAsset = $in;
+        $search_asset = $type;
+             
+        $searchasset["store_id"] = $this->temp_model->searchasset();  
+        $showTable["id"] = null;
+        if(count($searchasset) > 0)
+        {
+            foreach ($searchasset["store_id"] as $r) {
+                if($r["store_id"] == $searchTerm) {
+                    $showTable["id"] = $this->temp_model->showtable($searchTerm, $search_asset);
+                    break;
+                }
+            }
+        } 
+        $showTable["searchTerm"] = $searchTerm;
+        $this->view->section_view("temp_view", $showTable, $search_asset);   
     }
 }

@@ -1,16 +1,50 @@
+<script type="text/javascript">
+    function loadStates(){
+        
+        var formName = 'search_form';
+        var store_id = document[formName]['search_storeasset'].value;
+        if( store_id.length == 5 ){
+            var xmlhttp = null;
+            if(typeof XMLHttpRequest != 'undefined'){
+                xmlhttp = new XMLHttpRequest();
+            }else if(typeof ActiveXObject != 'undefined'){
+                xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+            }else 
+                throw new Error('You browser doesn\'t support ajax');
+            xmlhttp.open('GET', '<?= base_url('temp/load_states/') ?>'+"/"+store_id, true);
+            xmlhttp.onreadystatechange = function (){
+                if(xmlhttp.readyState == 4)
+                    insertStates(xmlhttp);
+            };
+            xmlhttp.send(null);
+        }
+    }
+    
+    function insertStates(xhr){
+        if(xhr.status == 200){
+            document.getElementById('assetlist').innerHTML = xhr.responseText;
+        }else 
+            throw new Error('Server has encountered an error\n'+
+                             'Error code = '+xhr.status);
+    }
+
+</script>
 <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
     <label>รหัสร้าน</label>
     <div class="form-group">
         <?php if($searchTerm == null) { ?>
-        <input id="search_storeasset" name="search_storeasset" type="text" value="">
+        <input id="search_storeasset" name="search_storeasset" type="text" value="" onchange="loadStates()" />
         <?php } ?>
         <?php if($searchTerm != null) { ?>
-        <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>">
+        <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="loadStates()" />
         <?php } ?>
     </div>
 
     <label>อุปกรณ์</label>
-    <?= form_dropdown('search_assetlist', $selection, $search_asset); ?>
+    <div class="form-group" id ='assetlist'>
+        <?= form_dropdown('search_assetlist', $selection, $search_asset); ?>
+    </div>
+    
     
     <label>หมายเลขอุปกรณ์</label>
     <div class="form-group">

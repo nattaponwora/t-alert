@@ -62,4 +62,18 @@ class Temp extends CI_Controller {
         $showTable["searchTerm"] = $searchTerm;
         $this->view->section_view("temp_view", $showTable, $search_asset);   
     }
+    
+    public function load_states($store_id){
+        if(isset($store_id))
+        {
+            //$assetlist = $this -> temp_model -> get_assetlist($store_id);
+            $assetlist = array('1' =>'a', '2' => 'b');
+            $states = '';
+            
+            
+            echo form_dropdown('search_assetlist', $assetlist);
+            
+            //echo '<select name="state"><option disabled>Select State</option>'.$states.'</select>';
+        }
+    }
 }

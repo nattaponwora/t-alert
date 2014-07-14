@@ -14,7 +14,9 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/t-alert';
+$config['base_url']  = 'http://localhost/t-alert';
+
+// $config['base_url']	= 'http://alert.app-cpr.com';
 
 /*
 |--------------------------------------------------------------------------

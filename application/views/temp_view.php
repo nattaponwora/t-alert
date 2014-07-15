@@ -4,7 +4,8 @@
         function load_asset() {
             var search_value = document['search_form']['search_storeasset'].value; 
             var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
-            loadStates(url, 'search_assetlist');      
+            loadStates(url, 'search_assetlist'); 
+            load_assettype();     
         }
         
         function load_assettype() {

@@ -71,6 +71,8 @@ class Temp extends CI_Controller {
             $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"';
             echo form_dropdown('search_assetlist', $assetlist, 0, $js);
             
+            $js = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
+            echo form_dropdown('search_assettypelist', $assettypelist, 0, $js);
             //echo '<select name="state"><option disabled>Select State</option>'.$states.'</select>';
         }
     }
@@ -83,6 +85,9 @@ class Temp extends CI_Controller {
             $states = '';
             $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"';
             echo form_dropdown('search_assetlist', $assetlist, 0, $js);
+            
+            $js = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
+            echo form_dropdown('search_assettypelist', $assettypelist, 0, $js);
             
             //echo '<select name="state"><option disabled>Select State</option>'.$states.'</select>';
         }

@@ -1,63 +1,48 @@
 <div class="container">
+    <script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>
     <script type="text/javascript">
-    function loadStates(){
-        
-        var formName = 'search_form';
-        var store_id = document[formName]['search_storeasset'].value;
-        if( store_id.length == 5 ){
-            var xmlhttp = null;
-            if(typeof XMLHttpRequest != 'undefined'){
-                xmlhttp = new XMLHttpRequest();
-            }else if(typeof ActiveXObject != 'undefined'){
-                xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-            }else 
-                throw new Error('You browser doesn\'t support ajax');
-            xmlhttp.open('GET', '<?= base_url('temp/load_states/') ?>'+"/"+store_id, true);
-            xmlhttp.onreadystatechange = function (){
-                if(xmlhttp.readyState == 4)
-                    insertStates(xmlhttp);
-            };
-            xmlhttp.send(null);
+        function load_asset() {
+            var search_value = document['search_form']['search_storeasset'].value; 
+            var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
+            loadStates(url, 'search_assetlist');      
         }
-    }
-    
-    function insertStates(xhr){
-        if(xhr.status == 200){
-            document.getElementById('assetlist').innerHTML = xhr.responseText;
-        }else 
-            throw new Error('Server has encountered an error\n'+
-                             'Error code = '+xhr.status);
-    }
-    
+        
+        function load_assettype() {
+            var search_value = document['search_form']['search_storeasset'].value; 
+            var search_valuelist = document['search_form']['search_assetlist'].value; 
+            var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
+            loadStates(url, 'search_assettypelist');      
+        }
     </script>
+    
     <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
-    <label>รหัสร้าน</label>
-    <div class="form-group">
-        <?php if($searchTerm == null) { ?>
-        <input id="search_storeasset" name="search_storeasset" type="text" value="" onchange="loadStates()" />
-        <?php } ?>
-        <?php if($searchTerm != null) { ?>
-        <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="loadStates()" />
-        <?php } ?>
-    </div>
-    
-    <label>อุปกรณ์</label>
-    <div class="form-group" id ='assetlist'>
-        <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"'; ?>
-        <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
-    </div>
-    
-    
-    <label>หมายเลขอุปกรณ์</label>
-    <div class="form-group" >
-        <select name="opttwo" size="1" class="btn btn-default dropdown-toggle">
-            <option value=" " selected="selected">ทั้งหมด</option>
-        </select>
-    </div>
-    
-    <button id="search" name="search" type="submit" class="btn btn-primary">
-        Search
-    </button>
+        <label>รหัสร้าน</label>
+        <div class="form-group">
+            <?php if($searchTerm == null) { ?>
+            <input id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
+            <?php } ?>
+            <?php if($searchTerm != null) { ?>
+            <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
+            <?php } ?>
+        </div>
+        
+        <label>อุปกรณ์</label>
+        <div class="form-group" id ='assetlist'>
+            <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+            <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
+        </div>
+        
+        
+        <label>หมายเลขอุปกรณ์</label>
+        <div class="form-group" id ='assettypelist'>
+            <select id='search_assettypelist' name="search_assettypelist" size="1" class="btn btn-default dropdown-toggle">
+                <option value=" " selected="selected">โปรดเลือก</option>
+            </select>
+        </div>
+        
+        <button id="search" name="search" type="submit" class="btn btn-primary">
+            Search
+        </button>
     </form>
     <br>
     

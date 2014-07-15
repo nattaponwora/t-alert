@@ -10,7 +10,7 @@ class Temp extends CI_Controller {
         $showTable["id"] = 0;
         $showTable["searchTerm"] = null;
         $showTable["search_asset"] = null;
-        $showTable["selection"] = array("กรอกรหัสร้าน");  
+        $showTable["selection"] = array("โปรดเลือก");  
         $this->view->section_view("temp_view", $showTable);
     }
    
@@ -67,6 +67,19 @@ class Temp extends CI_Controller {
         if(isset($store_id))
         {
             $assetlist = $this -> temp_model -> get_assetlist($store_id);
+            $states = '';
+            $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"';
+            echo form_dropdown('search_assetlist', $assetlist, 0, $js);
+            
+            //echo '<select name="state"><option disabled>Select State</option>'.$states.'</select>';
+        }
+    }
+    
+    public function load_statestype($store_id, $asset_list){
+        
+        if(isset($store_id) && isset($asset_list))
+        {
+            $assetlist = $this -> temp_model -> get_assettypelist($store_id, $asset_list);
             $states = '';
             $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"';
             echo form_dropdown('search_assetlist', $assetlist, 0, $js);

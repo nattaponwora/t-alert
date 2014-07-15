@@ -1,4 +1,5 @@
-<script type="text/javascript">
+<div class="container">
+    <script type="text/javascript">
     function loadStates(){
         
         var formName = 'search_form';
@@ -27,9 +28,9 @@
             throw new Error('Server has encountered an error\n'+
                              'Error code = '+xhr.status);
     }
-
-</script>
-<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
+    
+    </script>
+    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
     <label>รหัสร้าน</label>
     <div class="form-group">
         <?php if($searchTerm == null) { ?>
@@ -39,26 +40,27 @@
         <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="loadStates()" />
         <?php } ?>
     </div>
-
+    
     <label>อุปกรณ์</label>
     <div class="form-group" id ='assetlist'>
-        <?= form_dropdown('search_assetlist', $selection, $search_asset); ?>
+        <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"'; ?>
+        <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
     </div>
     
     
     <label>หมายเลขอุปกรณ์</label>
-    <div class="form-group">
-        <select name="opttwo" size="1">
+    <div class="form-group" >
+        <select name="opttwo" size="1" class="btn btn-default dropdown-toggle">
             <option value=" " selected="selected">ทั้งหมด</option>
         </select>
     </div>
-
-    <button id="search" name="search" type="submit">
+    
+    <button id="search" name="search" type="submit" class="btn btn-primary">
         Search
     </button>
-</form>
-<br>
-
+    </form>
+    <br>
+    
 <form id="table_form" method="post">
     <table class="table table- -->hover" border="0">
         <thead>
@@ -95,12 +97,18 @@
         </tbody>
     </table>
 </form>
-<form id="back_form" action="<?= base_url("temp/logout") ?>" method="post" >
-    <p>
-        <input id="back_button" name="back_button" type="submit" value="Back" />
-    </p>
-</form>
 
+<ul class="pagination">
+  <li><a href="#">&laquo;</a></li>
+  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
+
+</div>
 <script type='text/javascript'>
     setTimeout(a, 5000);
     function a() {

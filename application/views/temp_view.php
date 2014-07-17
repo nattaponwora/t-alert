@@ -1,22 +1,25 @@
-<div class="container">
+
+<div class="container box" >
     <script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>
     <script type="text/javascript">
         function load_asset() {
             var search_value = document['search_form']['search_storeasset'].value; 
             var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
-            loadStates(url, 'search_assetlist'); 
+            loadStates(url, 'assetlist'); 
             load_assettype();     
         }
         
         function load_assettype() {
             var search_value = document['search_form']['search_storeasset'].value; 
             var search_valuelist = document['search_form']['search_assetlist'].value; 
+            
+            //alert(search_valuelist);
             var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
-            loadStates(url, 'search_assettypelist');      
+            loadStates(url, 'assettypelist');      
         }
     </script>
     
-    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
+    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post" style="padding-top: 35px;">
         <label>รหัสร้าน</label>
         <div class="form-group">
             <?php if($searchTerm == null) { ?>
@@ -28,16 +31,16 @@
         </div>
         
         <label>อุปกรณ์</label>
-        <div class="form-group" id ='assetlist'>
-            <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+        <div class="form-group" id ='assetlist'>            
+            <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_asset()"'; ?>
             <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
         </div>
         
         
         <label>หมายเลขอุปกรณ์</label>
         <div class="form-group" id ='assettypelist'>
-            <select id='search_assettypelist' name="search_assettypelist" size="1" class="btn btn-default dropdown-toggle">
-                <option value=" " selected="selected">โปรดเลือก</option>
+            <?php $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+            <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
             </select>
         </div>
         
@@ -46,7 +49,10 @@
         </button>
     </form>
     <br>
-    
+</div>
+
+<div class="container box" >
+
 <form id="table_form" method="post">
     <table class="table table- -->hover" border="0">
         <thead>
@@ -98,7 +104,7 @@
 <script type='text/javascript'>
     setTimeout(a, 5000);
     function a() {
-        $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset") ?>
+        $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?>
         #table_form");
         setTimeout(a, 5000);
     }

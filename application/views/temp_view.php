@@ -32,14 +32,14 @@
         
         <label>อุปกรณ์</label>
         <div class="form-group" id ='assetlist'>            
-            <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_asset()"'; ?>
+            <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
             <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
         </div>
         
         
         <label>หมายเลขอุปกรณ์</label>
         <div class="form-group" id ='assettypelist'>
-            <?php $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+            <?php $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
             <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
             </select>
         </div>

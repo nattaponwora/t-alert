@@ -61,6 +61,7 @@ class Temp_model extends CI_model {
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["asset_shortname"];
         }
+
         return $assets;
     }
     

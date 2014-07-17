@@ -32,19 +32,11 @@ class Temp extends CI_Controller {
         }
         
         $showTable["selection"] = $this -> temp_model -> get_assetlist($searchTerm);
-        $showTable["selectiontype"] = $this -> temp_model -> get_assettypelist($search_asset, $search_assettypelists);
+        $showTable["selectiontype"] = $this -> temp_model -> get_assettypelist($searchTerm, $search_asset);
                         
-        $searchasset["store_id"] = $this->temp_model->searchasset();  
+        $searchasset["store_id"] = $this->temp_model->searchasset();   //ไม่ได้ใช้
         $showTable["id"] = null;
-        if(count($searchasset) > 0)
-        {
-            foreach ($searchasset["store_id"] as $r) {
-                if($r["store_id"] == $searchTerm) {
                     $showTable["id"] = $this->temp_model->showtable($searchTerm, $search_asset, $search_assettypelists);
-                    break;
-                }
-            }
-        } 
         if($showTable["id"] == null) {
             echo "There was no matching record for the name " . $searchTerm;
         }

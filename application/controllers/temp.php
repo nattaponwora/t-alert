@@ -74,8 +74,6 @@ class Temp extends CI_Controller {
             $states = '';
             $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"';
             echo form_dropdown('search_assetlist', $assetlist, 0, $js);
-            
-            //echo '<select name="state"><option disabled>Select State</option>'.$states.'</select>';
         }
     }
     
@@ -84,12 +82,9 @@ class Temp extends CI_Controller {
         {
             $assetlist2 = $this -> temp_model -> get_assettypelist($store_id, $asset_list);
             $states = '';
-            // $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle"';
-            // echo form_dropdown('search_assetlist', $assetlist, 0, $js);
             
             $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
             echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
-            //echo '<select name="state"><option disabled>Select State</option>'.$states.'</select>';
         }
     }
 }

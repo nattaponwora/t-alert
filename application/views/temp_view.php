@@ -19,7 +19,7 @@
         }
     </script>
     
-    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post" style="padding-top: 35px;">
+    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post" style="padding-top: 30px;">
         <label>รหัสร้าน</label>
         <div class="form-group">
             <?php if($searchTerm == null) { ?>

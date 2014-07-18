@@ -1,5 +1,6 @@
 
-<div class="container box" >
+<div class="container box">
+    
     <script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>
     <script type="text/javascript">
         function load_asset() {
@@ -19,7 +20,7 @@
         }
     </script>
     
-    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post" style="padding-top: 30px;">
+    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
         <label>รหัสร้าน</label>
         <div class="form-group">
             <?php if($searchTerm == null) { ?>

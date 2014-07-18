@@ -7,7 +7,23 @@ class Temp_model extends CI_model {
         $this->load->database();
     }     
     
+    function get_infomation( $in, $type_id, $droptype) {
+        $this->db->select('asset.store_id, asset.store_name, asset.asset_barcode, asset.asset_shortname, asset_type.type');
+        $this->db->from('asset');
+        $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
+        $this->db->where('asset.store_id', $in);
+        $this->db->where('asset_typeid', $type_id);
+        $this->db->where('asset.id', $droptype);
+        $query = $this->db->get();
+        $asset = array();                       
+        foreach ($query->result_array() as $row) {
+            $assets[] = $row;
+        }
+        return $assets;
+    }
+    
     function showtable( $in, $type_id, $droptype) {
+        $this->db->select('temperature.temp, temperature.time');
         $this->db->from('asset');
         $this->db->join('temperature', 'temperature.asset_id = asset.id');
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
@@ -16,12 +32,6 @@ class Temp_model extends CI_model {
         $this->db->where('asset.id', $droptype);
         $this->db->order_by('temperature.id', 'DESC');
         $query = $this->db->get();
-        
-        // $query = $this->db->query("SELECT * FROM asset
-                                   // JOIN temperature ON temperature.asset_id = asset.id
-                                   // JOIN asset_type ON asset_type.id = asset.asset_typeid
-                                   // WHERE (asset.store_id = '$in' AND asset_type.id = '$type_id' AND asset.id = '$droptype')
-                                   // ORDER BY temperature.id DESC ");
         $asset = array();                       
         foreach ($query->result_array() as $row) {
             $assets[] = $row;
@@ -40,15 +50,6 @@ class Temp_model extends CI_model {
     function inserttemp($id, $temp) {
         $query = $this->db->insert("temperature", array('asset_id' => $id,'temp' => $temp));  
     }
-
-    // function selection() {
-        // $query = $this->db->query("SELECT * FROM asset_type");
-        // $assets[0] = "ทั้งหมด";
-        // foreach ($query->result_array() as $row) {
-            // $assets[$row["id"]] = $row["type"];
-        // }
-        // return $assets;
-    // }
     
     function get_assetlist( $in){
         $this->db->distinct();
@@ -57,9 +58,6 @@ class Temp_model extends CI_model {
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
         $this->db->where('asset.store_id', $in);
         $query = $this->db->get();
-        // $query = $this->db->query("SELECT DISTINCT asset_type.id, asset_type.type FROM asset
-                                   // JOIN asset_type ON asset_type.id = asset.asset_typeid
-                                   // WHERE asset.store_id = '$in'");
         $assets[0] = "โปรดเลือก";
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["type"];
@@ -75,10 +73,6 @@ class Temp_model extends CI_model {
         $this->db->where('asset.store_id', $in);
         $this->db->where('asset_typeid', $in2);
         $query = $this->db->get();
-        
-        // $query = $this->db->query("SELECT asset.id, asset.asset_shortname, asset_type.type FROM asset
-                                   // JOIN asset_type ON asset_type.id = asset.asset_typeid
-                                   // WHERE asset.store_id = '$in' AND asset_typeid = '$in2'");
         $assets[0] = "โปรดเลือก";
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["asset_shortname"];
@@ -93,9 +87,6 @@ class Temp_model extends CI_model {
         $this->db->where('asset.asset_typeid', $in);
         $this->db->where('asset.id', $in2);
         $query = $this->db->get();
-        
-        // $query = $this->db->query("SELECT asset.id, asset.asset_shortname FROM asset
-                                   // WHERE asset.asset_typeid = '$in' AND asset.id = '$in2'");
         $assets[0] = "โปรดเลือก";
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["asset_shortname"];

@@ -51,55 +51,99 @@
     </form>
     <br>
 </div>
+<div class="row"></div>
+    <div class="col-xs-4 col-xs-offset-1">
+    <div class="box" >
+        <div class="form-group">
+            <label class="col-sm-5 control-label">รหัสสาขา</label>
+            <div class="col-sm-7">
+                <p class="form-control-static"><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['store_id']}"; }}?> </p>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">ชื่อสาขา</label>
+            <div class="col-sm-7">
+                <p class="form-control-static"><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['store_name']}"; }}?> </p>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">อุปกรณ์</label>
+            <div class="col-sm-7">
+                <p class="form-control-static"><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['type']}"; }}?> </p>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">หมายเลขบาร์โค้ด</label>
+            <div class="col-sm-7">
+                <p class="form-control-static"><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['asset_barcode']}"; }}?> </p>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
+            <div class="col-sm-7">
+                <p class="form-control-static"><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['asset_shortname']}"; }}?> </p>
+            </div>
+        </div>
+        <br>
+        <!-- <th style="width:100px">รหัสสาขา</th>
+        <th style="width:100px">ชื่อสาขา</th>
+        <th style="width:100px">อุปกรณ์</th>
+        <th style="width:100px">หมายเลขบาร์โค้ด</th>
+        <th style="width:100px">ชื่อย่ออุปกรณ์</th> -->
+    </div>    
+    </div>    
+    <div class="col-xs-6">
+    <div class="box" >
 
-<div class="container box" >
-
-<form id="table_form" method="post">
-    <table class="table table- -->hover" border="0">
-        <thead>
-            <tr>
-                <th style="width:50px">ลำดับที่</th>
-                <th style="width:100px">รหัสสาขา</th>
-                <th style="width:100px">ชื่อสาขา</th>
-                <th style="width:100px">อุปกรณ์</th>
-                <th style="width:100px">หมายเลขบาร์โค้ด</th>
-                <th style="width:100px">ชื่อย่ออุปกรณ์</th>
-                <th style="width:100px">อุณหภูมิ</th>
-                <th style="width:100px">เวลา</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($id > 0) {
-                $i = 1;
-                foreach ($id as $r) {
-                    echo "<tr>";
-                    echo "<td>{$i}</td>";
-                    echo "<td>{$r['store_id']}</td>";
-                    echo "<td>{$r['store_name']}</td>";
-                    echo "<td>{$r['type']}</td>";
-                    echo "<td>{$r['asset_barcode']}</td>";
-                    echo "<td>{$r['asset_shortname']}</td>";
-                    echo "<td>{$r['temp']}</td>";
-                    echo "<td>{$r['time']}</td>";
-                    $i++;
-                    echo "</tr>";
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-</form>
-
-<ul class="pagination">
-  <li><a href="#">&laquo;</a></li>
-  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
+        <form id="table_form" method="post">
+            <table class="table table- -->hover table table-hover" border="0">
+                <thead>
+                    <tr>
+                        <th style="width:100px">ลำดับที่</th>
+                        <th style="width:100px">อุณหภูมิ</th>
+                        <th style="width:100px">เวลา</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // echo "<td>{$r['store_id']}</td>";
+                    // echo "<td>{$r['store_name']}</td>";
+                    // echo "<td>{$r['type']}</td>";
+                    // echo "<td>{$r['asset_barcode']}</td>";
+                    // echo "<td>{$r['asset_shortname']}</td>";
+                    if ($id > 0) {
+                        $i = 1;
+                        foreach ($id as $r) {
+                            echo "<tr>";
+                            echo "<td>{$i}</td>";
+                            echo "<td>{$r['temp']}</td>";
+                            echo "<td>{$r['time']}</td>";
+                            $i++;
+                            echo "</tr>";
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </form>
+        
+        <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
 </ul>
+</div>
+</div>
+
+
 
 </div>
 <script type='text/javascript'>

@@ -8,6 +8,7 @@ class Temp extends CI_Controller {
     
     public function index() {
         $showTable["id"] = 0;
+        $showTable["infomation"] = 0;
         $showTable["searchTerm"] = null;
         $showTable["search_asset"] = null;
         $showTable["search_assettypelists"] = null;
@@ -34,9 +35,10 @@ class Temp extends CI_Controller {
         $showTable["selection"] = $this -> temp_model -> get_assetlist($searchTerm);
         $showTable["selectiontype"] = $this -> temp_model -> get_assettypelist($searchTerm, $search_asset);
                         
-        $searchasset["store_id"] = $this->temp_model->searchasset();   //ไม่ได้ใช้
-        $showTable["id"] = null;
-                    $showTable["id"] = $this->temp_model->showtable($searchTerm, $search_asset, $search_assettypelists);
+        //$searchasset["store_id"] = $this->temp_model->searchasset();   //ไม่ได้ใช้
+        $showTable["id"] = $this->temp_model->showtable($searchTerm, $search_asset, $search_assettypelists);
+        $showTable["infomation"] = $this->temp_model->get_infomation($searchTerm, $search_asset, $search_assettypelists);
+        //$showTable[""]
         if($showTable["id"] == null) {
             echo "There was no matching record for the name " . $searchTerm;
         }
@@ -51,7 +53,6 @@ class Temp extends CI_Controller {
         $searchAsset = $in;
         $search_asset = $type;
         $search_assettypelists = $list;
-             
         $searchasset["store_id"] = $this->temp_model->searchasset();  
         $showTable["id"] = null;
         if(count($searchasset) > 0)
@@ -82,7 +83,6 @@ class Temp extends CI_Controller {
         {
             $assetlist2 = $this -> temp_model -> get_assettypelist($store_id, $asset_list);
             $states = '';
-            
             $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
             echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
         }

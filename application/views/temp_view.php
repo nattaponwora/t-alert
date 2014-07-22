@@ -24,10 +24,10 @@
         <label>รหัสร้าน</label>
         <div class="form-group">
             <?php if($searchTerm == null) { ?>
-            <input class="form-control col-lg-8" placeholder="Search" id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
+            <input id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
             <?php } ?>
             <?php if($searchTerm != null) { ?>
-            <input class="form-control col-lg-8" placeholder="Search" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
+            <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
             <?php } ?>
         </div>
         
@@ -89,11 +89,6 @@
             </div>
         </div>
         <br>
-        <!-- <th style="width:100px">รหัสสาขา</th>
-        <th style="width:100px">ชื่อสาขา</th>
-        <th style="width:100px">อุปกรณ์</th>
-        <th style="width:100px">หมายเลขบาร์โค้ด</th>
-        <th style="width:100px">ชื่อย่ออุปกรณ์</th> -->
     </div>    
     </div>    
     <div class="col-xs-6">
@@ -110,11 +105,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    // echo "<td>{$r['store_id']}</td>";
-                    // echo "<td>{$r['store_name']}</td>";
-                    // echo "<td>{$r['type']}</td>";
-                    // echo "<td>{$r['asset_barcode']}</td>";
-                    // echo "<td>{$r['asset_shortname']}</td>";
                     if ($id > 0) {
                         $i = 1;
                         foreach ($id as $r) {

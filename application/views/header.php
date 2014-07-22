@@ -20,12 +20,6 @@
     </button>
     <a class="navbar-brand" href="#">Home</a>
   </div>
-  <div class="navbar-collapse collapse navbar-inverse-collapse">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Temperature</a></li>
-      <li><a href="#">Insert Asset</a></li>
-    </ul>
-  </div>
 </div>
 
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>

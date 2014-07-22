@@ -24,25 +24,24 @@
         <label>รหัสร้าน</label>
         <div class="form-group">
             <?php if($searchTerm == null) { ?>
-            <input id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
+            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
             <?php } ?>
             <?php if($searchTerm != null) { ?>
-            <input id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
+            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
             <?php } ?>
         </div>
         
         <label>อุปกรณ์</label>
-        <div class="form-group" id ='assetlist'>            
-            <?php $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+        <div class="form-group" id ="assetlist" name="assetlist">            
+            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
             <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
         </div>
         
         
         <label>หมายเลขอุปกรณ์</label>
-        <div class="form-group" id ='assettypelist'>
-            <?php $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
+        <div class="form-group" id ="assettypelist" name="assettypelist">
+            <?php $js2 = 'id="search_assettypelist" name="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
             <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
-            </select>
         </div>
         
         <button id="search" name="search" type="submit" class="btn btn-primary">
@@ -121,14 +120,14 @@
             </table>
         </form>
         
-        <ul class="pagination">
+        <!-- <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
         <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">2</a></li>
         <li><a href="#">3</a></li>
         <li><a href="#">4</a></li>
         <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
+        <li><a href="#">&raquo;</a></li> -->
 </ul>
 </div>
 </div>
@@ -139,8 +138,7 @@
 <script type='text/javascript'>
     setTimeout(a, 5000);
     function a() {
-        $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?>
-        #table_form");
+        $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
         setTimeout(a, 5000);
     }
 </script>

@@ -7,6 +7,7 @@ class Insert extends CI_Controller {
     }
     
     public function index() {
-        $this->view->section_view("insert_view");
+    	$data["assettype"] = $this -> insert_model -> get_assettype();
+        $this->view->section_view("insert_view", $data);
     }
 }

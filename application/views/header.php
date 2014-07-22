@@ -11,18 +11,13 @@
 </head>
 <body onload="ajaxFunction('fw')" ;="">
     
-    <div class="navbar navbar-default navbar-fixed-top">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#">Home</a>
+    <div class="navbar navbar-default">
+  	<div class="navbar-static-top">
+    <a class="navbar-brand" href="#">รหัสร้านทดลอง 04770</a>
   </div>
 </div>
 
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery-dataTables.js") ?>"></script>
-    <div class="container-fluid" style="padding-top: 50px">
+    <!-- <div class="container-fluid" style="padding-top: 10px"> -->

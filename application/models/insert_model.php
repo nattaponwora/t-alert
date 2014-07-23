@@ -17,4 +17,8 @@ class Insert_model extends CI_model {
         }
         return $assets;
     }
+	
+	function insert_asset( $in ) {
+		$this->db->insert("asset_type", $in);
+	}
 }

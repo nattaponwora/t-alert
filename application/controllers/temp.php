@@ -40,7 +40,7 @@ class Temp extends CI_Controller {
         $showTable["infomation"] = $this->temp_model->get_infomation($searchTerm, $search_asset, $search_assettypelists);
         //$showTable[""]
         if($showTable["id"] == null) {
-            echo "There was no matching record for the name " . $searchTerm;
+          
         }
         $showTable["searchTerm"] = $searchTerm;
         $showTable["search_asset"] = $search_asset;

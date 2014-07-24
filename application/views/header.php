@@ -10,12 +10,7 @@
     ?>
 </head>
 <body onload="ajaxFunction('fw')" ;="">
-    
-    <div class="navbar navbar-default">
-  	<div class="navbar-static-top">
-    <a class="navbar-brand" href="#">รหัสร้านทดลอง 04770</a>
-  </div>
-</div>
+   
 
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>

@@ -1,11 +1,20 @@
-<form name="insert_form" id="insert_form" action= "<?= base_url("insert/added") ?>" role="form" method="post">
+<form name="insert_form" id="insert_form" action= "<?= base_url("inserttemp/added") ?>" role="form" method="post">
 	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3">
 			<div class="box">
 				<br>
 				<br>
 				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
-					<label class="col-sm-5 control-label">ประเภทอุปกรณ์</label>
+					<label class="col-sm-5 control-label">ชื่ออุปกรณ์</label>
+					<div class="col-sm-7 form-group">
+						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
+						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
+					</div>
+				</div>
+				<br>
+				<br>
+				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
+					<label class="col-sm-5 control-label">ชื่ออุปกรณ์</label>
 					<div class="col-sm-7 form-group">
 						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
 						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>

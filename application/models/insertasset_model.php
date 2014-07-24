@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Insert_model extends CI_model {
+class Insertasset_model extends CI_model {
 
     function __construct() {
         parent::__construct();
@@ -19,6 +19,7 @@ class Insert_model extends CI_model {
     }
 	
 	function insert_asset( $in ) {
-		$this->db->insert("asset_type", $in);
+		$this->db->where('id', $in["id"]);
+		$this->db->update('asset_type', $in); 
 	}
 }

@@ -7,8 +7,13 @@ class Inserttemp extends CI_Controller {
     }
     
     public function index() {
-    	$data["assettype"] = $this -> inserttemp_model -> get_assettype();
-        $this->view->page_view("inserttemp_view", $data);
+    	$cookie = get_cookie('username_cookie');
+		if( $cookie != null) {
+        	$data["assettype"] = $this -> inserttemp_model -> get_assettype();
+        	$this->view->page_view("inserttemp_view", $data);
+		} else {
+			redirect('/login/', 'refresh');
+		} 
     }
 	
 	public function added() {
@@ -18,5 +23,6 @@ class Inserttemp extends CI_Controller {
 		$insert["std_time"] = $this->input->post('std_time');
 		
 		$this->inserttemp_model->insert_asset($insert); 
+		redirect('/inserttemp/', 'refresh');
 	}
 }

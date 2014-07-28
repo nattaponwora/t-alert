@@ -7,11 +7,12 @@ class Criticaltemp extends CI_Controller {
     }
     
     public function index() {
-		
-		
-        //$showTable["id"] = $this->criticaltemp_model->showtable();  
-        //$this->view->page_view("criticaltemp_view", $showTable);
-        $this->view->page_view("criticaltemp_view");
+		$cookie = get_cookie('username_cookie');
+		if( $cookie != null) {
+        	$this->view->page_view("criticaltemp_view");
+		} else {
+			redirect('/login/', 'refresh');
+		}  
     }
    
     public function show( $in, $type, $list) {

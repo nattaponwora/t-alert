@@ -7,15 +7,20 @@ class Temp extends CI_Controller {
     }
     
     public function index() {
-        $showTable["id"] = 0;
-        $showTable["infomation"] = 0;
-        $showTable["searchTerm"] = null;
-        $showTable["search_asset"] = null;
-        $showTable["search_assettypelists"] = null;
-        $showTable["selection"] = array("โปรดเลือก");  
-        $showTable["selectiontype"] = array("โปรดเลือก");  
-
-        $this->view->page_view("temp_view", $showTable);
+		$cookie = get_cookie('username_cookie');
+		if( $cookie != null) {
+	        $showTable["id"] = 0;
+	        $showTable["infomation"] = 0;
+	        $showTable["searchTerm"] = null;
+	        $showTable["search_asset"] = null;	
+	        $showTable["search_assettypelists"] = null;
+	        $showTable["selection"] = array("โปรดเลือก");  
+	        $showTable["selectiontype"] = array("โปรดเลือก");  
+	
+	        $this->view->page_view("temp_view", $showTable);
+		} else {
+			redirect('/login/', 'refresh');
+		}
     }
    
     public function search() {

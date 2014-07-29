@@ -2,7 +2,8 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Index extends CI_Controller {
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,34 +21,12 @@ class Login extends CI_Controller {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this -> load -> model("login_model");
+		//$this -> load -> model("login_model");
 	}
 
 	public function index() {
-		
-		$this -> view -> section_view('login_view');
+		$this -> view -> page_view('index_view');
 	}
-
-	public function check() {
-		$username = $this -> input -> get('username');
-		$password = $this -> input -> get('password');
-
-		$data["id"] = $this -> login_model -> get_user($username, $password);
-
-		if ($data["id"] != null) {
-			$cookie = array('name' => 'username_cookie', 
-							'value' => 'username', 
-							'expire' => '86500',
-							'path'   => '/',
-			);
-			$this -> input -> set_cookie($cookie);
-			redirect('/index/', 'refresh');
-		} else {
-			delete_cookie("username_cookie");
-			redirect('/login/', 'refresh');
-		}
-	}
-
 }
 
 /* End of file login.php */

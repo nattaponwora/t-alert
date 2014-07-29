@@ -1,3 +1,8 @@
+<style>
+	body {
+		background-image: url("public/images/background.jpg");
+	}
+</style>
 <div class="box" style="width: 500px; height: 300px;position:absolute; left: 50%;  top: 50%;margin-left: -250px;margin-top: -225px;">
 	<form id="login_form" name="login_form" class="form-signin" action="<?= base_url('login/check') ?>" role="form">
 		<center>

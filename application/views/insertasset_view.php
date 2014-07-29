@@ -5,7 +5,7 @@
 				<br>
 				<br>
 				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
-					<label class="col-sm-5 control-label">ชื่ออุปกรณ์</label>
+					<label class="col-sm-5 control-label">รหัสร้าน</label>
 					<div class="col-sm-7 form-group">
 						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
 						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>

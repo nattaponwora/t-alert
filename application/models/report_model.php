@@ -6,30 +6,16 @@ class Report_model extends CI_model {
         parent::__construct();
         $this->load->database();
     }     
-    
-    function get_infomation( $in, $type_id, $droptype) {
-        $this->db->select('asset.store_id, asset.store_name, asset.asset_barcode, asset.asset_shortname, asset_type.type');
-        $this->db->from('asset');
-        $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
-        $this->db->where('asset.store_id', $in);
-        $this->db->where('asset_typeid', $type_id);
-        $this->db->where('asset.id', $droptype);
-        $query = $this->db->get();
-        $assets = array();                       
-        foreach ($query->result_array() as $row) {
-            $assets[] = $row;
-        }
-        return $assets;
-    }
-    
-    function showtable( $in, $type_id, $droptype) {
+
+    function showtable( $in, $type_id, $droptype, $begindate, $lastdate) {
         //$this->db->select('temperature.temp, temperature.time');
         $this->db->from('asset');
         $this->db->join('temperature', 'temperature.asset_id = asset.id');
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
         $this->db->where('asset.store_id', $in);
         $this->db->where('asset_typeid', $type_id);
-        $this->db->where('asset.id', $droptype);
+        $this->db->where('temperature.time >=', $begindate);
+		$this->db->where('temperature.time <=', $lastdate);
         $this->db->order_by('temperature.id', 'DESC');
 		$this->db->limit(10);
         $query = $this->db->get();
@@ -59,7 +45,7 @@ class Report_model extends CI_model {
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
         $this->db->where('asset.store_id', $in);
         $query = $this->db->get();
-        $assets[0] = "โปรดเลือก";
+        $assets[0] = "ทั้งหมด";
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["type"];
         }
@@ -74,7 +60,7 @@ class Report_model extends CI_model {
         $this->db->where('asset.store_id', $in);
         $this->db->where('asset_typeid', $in2);
         $query = $this->db->get();
-        $assets[0] = "โปรดเลือก";
+        $assets[0] = "ทั้งหมด";
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["asset_shortname"];
         }
@@ -88,10 +74,23 @@ class Report_model extends CI_model {
         $this->db->where('asset.asset_typeid', $in);
         $this->db->where('asset.id', $in2);
         $query = $this->db->get();
-        $assets[0] = "โปรดเลือก";
+        $assets[0] = "ทั้งหมด";
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["asset_shortname"];
         }
         return $assets;
     }
+	
+	function get_store() {
+		$this->db->select('store_id');
+		$this->db->from('store');
+        $query = $this->db->get();
+        $assets[0] = "ทั้งหมด";
+        $i = 1;
+        foreach ($query->result_array() as $row) {
+            $assets[$i] = $row["store_id"];
+			$i++;
+        }
+        return $assets;
+	}
 }

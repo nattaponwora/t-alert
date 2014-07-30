@@ -32,9 +32,11 @@ class Report extends CI_Controller {
 	        $showTable["searchTerm"] = null;
 	        $showTable["search_asset"] = null;	
 	        $showTable["search_assettypelists"] = null;
-	        $showTable["selection"] = array("โปรดเลือก");  
-	        $showTable["selectiontype"] = array("โปรดเลือก");  
-	
+			$showTable["begindate"] = null;
+			$showTable["lastdate"] = null;
+	        $showTable["selection"] = array("ทั้งหมด");  
+	        $showTable["selectiontype"] = array("ทั้งหมด");  
+			$showTable["search_store"] = $this->report_model->get_store();
 	        $this -> view -> page_view('report_view', $showTable);
 		} else {
 			redirect('/login/', 'refresh');
@@ -45,29 +47,22 @@ class Report extends CI_Controller {
         $searchTerm = $this->input->post('search_storeasset');
         $search_asset = $this->input->post('search_assetlist');
         $search_assettypelists = $this->input->post('search_assettypelist');
-        if ($searchTerm == "") {
-            echo "โปรดกรอกรหัสร้านก่อนค้นหา.";
-            exit();
-        }
+		$begindate = $_POST['begindate'];
+		$lastdate = $_POST['lastdate'];
         
-        if ($search_assettypelists == "") {
-            echo "โปรดเลือกประเภทอุปกรณ์ก่อนค้นหา.";
-            exit();
-        }
-        
+		$showTable["searchTerm"] = $searchTerm;
         $showTable["selection"] = $this -> report_model -> get_assetlist($searchTerm);
         $showTable["selectiontype"] = $this -> report_model -> get_assettypelist($searchTerm, $search_asset);
-                        
-        //$searchasset["store_id"] = $this->temp_model->searchasset();   //ไม่ได้ใช้
-        $showTable["id"] = $this->report_model->showtable($searchTerm, $search_asset, $search_assettypelists);
-        $showTable["infomation"] = $this->report_model->get_infomation($searchTerm, $search_asset, $search_assettypelists);
-        //$showTable[""]
+        $showTable["id"] = $this->report_model->showtable($searchTerm, $search_asset, $search_assettypelists, $begindate, $lastdate);
         if($showTable["id"] == null) {
           
         }
-        $showTable["searchTerm"] = $searchTerm;
+		
+        $showTable["search_store"] = $this->report_model->get_store(); 
         $showTable["search_asset"] = $search_asset;
         $showTable["search_assettypelists"] = $search_assettypelists;
+		$showTable["begindate"] = $begindate;
+		$showTable["lastdate"] = $lastdate;
         $this->view->page_view("report_view", $showTable);           
     }
 

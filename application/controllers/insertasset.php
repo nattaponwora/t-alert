@@ -10,6 +10,7 @@ class Insertasset extends CI_Controller {
     	$cookie = get_cookie('username_cookie');
 		if( $cookie != null) {
         	$data["assettype"] = $this -> insertasset_model -> get_assettype();
+			$data["store"] = $this -> insertasset_model -> get_store();
         	$this->view->page_view("insertasset_view", $data);
 		} else {
 			redirect('/login/', 'refresh');

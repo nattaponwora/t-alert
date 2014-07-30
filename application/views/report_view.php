@@ -1,11 +1,29 @@
 <script>
-	
-	
+        $(function() {
+            $( "#begindate" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                dateFormat: ('yy-mm-dd'),
+                onClose: function( selectedDate ) {
+                    $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
+                }
+            });
+            $( "#lastdate" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                dateFormat: ('yy-mm-dd'),
+                onClose: function( selectedDate ) {
+                    $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
+                }
+            });
+        });
 </script>
 
 <div class="container box">
-
-	<script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>
 	<script type="text/javascript">
 	function load_asset() {
 		var search_value = document['search_form']['search_storeasset'].value;
@@ -24,16 +42,24 @@
 	</script>
 
 	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("report/search") ?>" method="post">
+		<label>วันที่</label>
+		<?php if ( $begindate == null ) { ?>
+        	<input class="form-control" type="text" id="begindate" name="begindate" />
+        <?php } if ( $begindate != null ) { ?>
+        	<input class="form-control" type="text" id="begindate" name="begindate" value=" <?= $begindate ?>" />
+        <?php } ?>
+        <label>ถึง</label>
+        <?php if ( $lastdate == null ) { ?>
+        	<input class="form-control" type="text" id="lastdate" name="lastdate" />
+        <?php } if ( $lastdate != null ) { ?>
+        	<input class="form-control" type="text" id="lastdate" name="lastdate" value=" <?= $lastdate ?>" />
+       	<?php } ?>
+		 <br>
+		 <br>
 		<label>รหัสร้าน</label>
 		<div class="form-group">
-			<?php if($searchTerm == null) {
-			?>
-			<input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
-			<?php } ?>
-			<?php if($searchTerm != null) {
-			?>
-			<input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
-			<?php } ?>
+			<?php $js = 'id="search_storeasset" name="search_storeasset" class="btn btn-default dropdown-toggle" onchange="load_asset()"'; ?>
+			<?= form_dropdown('search_storeasset', $search_store, $searchTerm, $js); ?>
 		</div>
 
 		<label>อุปกรณ์</label>

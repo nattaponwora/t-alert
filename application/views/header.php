@@ -7,6 +7,7 @@
     <title>Temperature Detection and Alertion</title>
     <?php
         echo link_tag( "public/bootstrap/css/bootstrap.css" , 'stylesheet');
+		echo link_tag( "public/bootstrap/css/jquery-ui.css" , 'stylesheet');	
     ?>
     
 </head>
@@ -14,3 +15,5 @@
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery.min.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery-dataTables.js") ?>"></script>
+    <script type="text/javascript" src="<?= base_url("public/bootstrap/js/jquery-ui.js") ?>"></script>
+    <script type="text/javascript" src="<?= base_url("public/bootstrap/js/dynamic_dropdown.js") ?>"></script>

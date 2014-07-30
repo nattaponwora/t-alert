@@ -1,15 +1,31 @@
-<form name="insert_form" id="insert_form" action= "<?= base_url("inserttemp/added") ?>" role="form" method="post">
+<script>
+  $(function() {
+    var availableTags =  <?= $store ?>;// ["ASD", "DSA"];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+</script>
+
+ 
+
+
+<form name="insert_form" id="insert_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3">
 			<div class="box">
 				<br>
 				<br>
+				<?= $this->view->p($store); ?>
 				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
-					<label class="col-sm-5 control-label">รหัสร้าน</label>
-					<div class="col-sm-7 form-group">
-						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
-						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
+					<label>รหัสร้าน</label>
+					<div class="ui-widget">
+				  		<label for="tags">Tags: </label>
+				  		<input id="tags">
 					</div>
+			        <div class="form-group">
+			            <!-- <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $store ?>"/> -->
+			        </div>
 				</div>
 				<br>
 				<br>

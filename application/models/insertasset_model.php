@@ -18,6 +18,19 @@ class Insertasset_model extends CI_model {
         return $assets;
     }
 	
+	function get_store() {
+		$this->db->select('store_id');
+		$this->db->from('store');
+        $query = $this->db->get();
+        $assets[0] = "โปรดเลือก";
+		$i = 1;
+        foreach ($query->result_array() as $row) {
+            $assets[$i] = $row["store_id"];
+			$i++;
+        }
+        return $assets;
+	}
+	
 	function insert_asset( $in ) {
 		$this->db->where('id', $in["id"]);
 		$this->db->update('asset_type', $in); 

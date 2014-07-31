@@ -1,47 +1,51 @@
+<?php 
+echo "
 <script>
-        $(function() {
-            $( "#begindate" ).datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                changeYear: true,
-                numberOfMonths: 1,
-                dateFormat: ('yy-mm-dd'),
-                onClose: function( selectedDate ) {
-                    $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
-                }
-            });
-            $( "#lastdate" ).datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                changeYear: true,
-                numberOfMonths: 1,
-                dateFormat: ('yy-mm-dd'),
-                onClose: function( selectedDate ) {
-                    $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
-                }
-            });
-        });
-</script>
+  $(function() {
+  	var str = '".$storename."';
+    var availableTags = str.split(',');
+    $( '#search_storeasset' ).autocomplete({
+      source: availableTags
+    });
+  });
+</script>";
+?>
+ 
 
-<div class="container box">
-	<script type="text/javascript">
-	function load_asset() {
-		var search_value = document['search_form']['search_storeasset'].value;
-		var url = '<?= base_url("report/load_states") ?>/' + search_value;
-		loadStates(url, 'assetlist');
-		load_assettype();
-	}
+<script type="text/javascript">
+    $(function() {
+        $( "#begindate" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat: ('yy-mm-dd'),
+            onClose: function( selectedDate ) {
+                $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $( "#lastdate" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat: ('yy-mm-dd'),
+            onClose: function( selectedDate ) {
+                $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+    });
+        
 
 	function load_assettype() {
-		var search_value = document['search_form']['search_storeasset'].value;
 		var search_valuelist = document['search_form']['search_assetlist'].value;
 
-		var url = '<?= base_url("report/load_statestype") ?>/' + search_value + '/' + search_valuelist;
+		var url = '<?= base_url("reportstore/load_statestype") ?>/' + search_valuelist;
 		loadStates(url, 'assettypelist');
 	}
-	</script>
-
-	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("report/search") ?>" method="post">
+</script>
+<div class="container box">
+	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("reportstore/search") ?>" method="post">
 		<label>วันที่</label>
 		<?php if ( $begindate == null ) { ?>
         	<input class="form-control" type="text" id="begindate" name="begindate" />
@@ -54,24 +58,11 @@
         <?php } if ( $lastdate != null ) { ?>
         	<input class="form-control" type="text" id="lastdate" name="lastdate" value=" <?= $lastdate ?>" />
        	<?php } ?>
-		 <br>
-		 <br>
-		<label>รหัสร้าน</label>
-		<div class="form-group">
-			<?php $js = 'id="search_storeasset" name="search_storeasset" class="btn btn-default dropdown-toggle" onchange="load_asset()"'; ?>
-			<?= form_dropdown('search_storeasset', $search_store, $searchTerm, $js); ?>
-		</div>
-
-		<label>อุปกรณ์</label>
-		<div class="form-group" id ="assetlist" name="assetlist">
-			<?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
-			<?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
-		</div>
-
-		<label>หมายเลขอุปกรณ์</label>
-		<div class="form-group" id ="assettypelist" name="assettypelist">
-			<?php $js2 = 'id="search_assettypelist" name="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
-			<?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
+		<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
+			<label class="control-label">รหัสร้าน</label>
+			<div class="form-group">
+		  		<input class="form-control" id="search_storeasset" name="search_storeasset">
+			</div>
 		</div>
 
 		<button id="search" name="search" type="submit" class="btn btn-primary">
@@ -80,6 +71,7 @@
 	</form>
 	<br>
 </div>
+
 <div class="row"></div>
 	<div class="container box" >
 

@@ -1,18 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Report_model extends CI_model {
+class Reportasset_model extends CI_model {
 
     function __construct() {
         parent::__construct();
         $this->load->database();
     }     
 
-    function showtable( $in, $type_id, $droptype, $begindate, $lastdate) {
+    function showtable($type_id, $begindate, $lastdate) {
         //$this->db->select('temperature.temp, temperature.time');
         $this->db->from('asset');
         $this->db->join('temperature', 'temperature.asset_id = asset.id');
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
-        $this->db->where('asset.store_id', $in);
         $this->db->where('asset_typeid', $type_id);
         $this->db->where('temperature.time >=', $begindate);
 		$this->db->where('temperature.time <=', $lastdate);
@@ -38,12 +37,11 @@ class Report_model extends CI_model {
         $query = $this->db->insert("temperature", array('asset_id' => $id,'temp' => $temp));  
     }
     
-    function get_assetlist( $in){
+    function get_assetlist( ) {
         $this->db->distinct();
         $this->db->select('asset_type.id, asset_type.type');
         $this->db->from('asset');
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
-        $this->db->where('asset.store_id', $in);
         $query = $this->db->get();
         $assets[0] = "ทั้งหมด";
         foreach ($query->result_array() as $row) {
@@ -52,6 +50,8 @@ class Report_model extends CI_model {
         return $assets;
         
     }
+	
+	
     
     function get_assettypelist( $in, $in2){
         $this->db->select('asset.id, asset.asset_shortname, asset_type.type');

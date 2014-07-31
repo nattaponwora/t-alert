@@ -1,25 +1,22 @@
-
-<div class="container box">
+<script type="text/javascript">
+    function load_asset() {
+        var search_value = document['search_form']['search_storeasset'].value; 
+        var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
+        loadStates(url, 'assetlist'); 
+        load_assettype();     
+    }
     
-    <script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>
-    <script type="text/javascript">
-        function load_asset() {
-            var search_value = document['search_form']['search_storeasset'].value; 
-            var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
-            loadStates(url, 'assetlist'); 
-            load_assettype();     
-        }
+    function load_assettype() {
+        var search_value = document['search_form']['search_storeasset'].value; 
+        var search_valuelist = document['search_form']['search_assetlist'].value; 
         
-        function load_assettype() {
-            var search_value = document['search_form']['search_storeasset'].value; 
-            var search_valuelist = document['search_form']['search_assetlist'].value; 
-            
-            //alert(search_valuelist);
-            var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
-            loadStates(url, 'assettypelist');      
-        }
-    </script>
+        //alert(search_valuelist);
+        var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
+        loadStates(url, 'assettypelist');      
+    }
+</script>
     
+<div class="container box">
     <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
         <label>รหัสร้าน</label>
         <div class="form-group">

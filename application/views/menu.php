@@ -1,3 +1,9 @@
+<style>
+	body {
+		background-image: url("public/images/backgroundall.png");
+	}
+</style>
+
 <div class="navbar navbar-default ">
 	<div class="container">
 		<div class="navbar-header">
@@ -18,9 +24,16 @@
 				<li>
 					<a href="<?= base_url("insertasset") ?>">Insert Asset</a>
 				</li>
-				<li>
-					<a href="<?= base_url("report") ?>">Report</a>
-				</li>
+				
+				<li class="dropdown">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <b class="caret"></b></a>
+		        	<ul class="dropdown-menu">
+			          	<li>
+							<a href="<?= base_url("reportasset") ?>">Report Asset</a>
+						</li>
+			          	<li><a href="<?= base_url("reportstore") ?>">Report Store</a></li>
+		        	</ul>
+		      	</li>
 			</ul>
 			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("logout") ?>" method="post">
 				<ul class="nav navbar-nav navbar-right">

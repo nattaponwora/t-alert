@@ -1,12 +1,15 @@
+<?php 
+echo "
 <script>
   $(function() {
-    var availableTags =  <?= $store ?>;// ["ASD", "DSA"];
-    $( "#tags" ).autocomplete({
+  	var str = '".$storename."';
+    var availableTags = str.split(',');
+    $( '#search_storeasset' ).autocomplete({
       source: availableTags
     });
   });
-</script>
-
+</script>";
+?>
  
 
 
@@ -16,17 +19,20 @@
 			<div class="box">
 				<br>
 				<br>
-				<?= $this->view->p($store); ?>
-				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
-					<label>รหัสร้าน</label>
-					<div class="ui-widget">
-				  		<label for="tags">Tags: </label>
-				  		<input id="tags">
+				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
+					<label class="col-sm-5 control-label">รหัสร้าน</label>
+					<div class="col-sm-4 form-group">
+				  		<input class="form-control" id="search_storeasset" name="search_storeasset">
 					</div>
-			        <div class="form-group">
-			            <!-- <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $store ?>"/> -->
-			        </div>
+					
 				</div>
+				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
+					<label class="col-sm-5 control-label">ชื่อร้าน</label>
+					<div class="col-sm-4 form-group">
+				  		<input class="form-control" id="search_storeasset" name="search_storeasset">
+					</div>
+				</div>
+				<br>
 				<br>
 				<br>
 				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
@@ -34,6 +40,12 @@
 					<div class="col-sm-7 form-group">
 						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
 						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
+					</div>
+				</div>
+				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
+					<label class="col-sm-5 control-label">หมายเลขบาร์โค๊ดของอุปกรณ์</label>
+					<div class="col-sm-7 form-group">
+				  		<input class="form-control" id="barcode_asset" name="barcode_asset">
 					</div>
 				</div>
 				<br>
@@ -54,7 +66,6 @@
 					</div>
 					<label class="control-label">องศาเซลเซียส</label>
 				</div>
-				<br>
 				<br>
 				<div class="form-group">
 					<label class="col-sm-5 control-label">เวลาที่อุณหภูมิเกินได้สูงสุด</label>

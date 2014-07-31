@@ -2,93 +2,47 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class Report extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+class Reportasset extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this -> load -> model("report_model");
+		$this -> load -> model("reportasset_model");
 	}
 
 	public function index() {
 		$cookie = get_cookie('username_cookie');
-		if( $cookie != null) {
-	        $showTable["id"] = 0;
-	        $showTable["infomation"] = 0;
-	        $showTable["searchTerm"] = null;
-	        $showTable["search_asset"] = null;	
-	        $showTable["search_assettypelists"] = null;
+		if ($cookie != null) {
+			$showTable["id"] = 0;
+			$showTable["search_asset"] = null;
 			$showTable["begindate"] = null;
 			$showTable["lastdate"] = null;
-	        $showTable["selection"] = array("ทั้งหมด");  
-	        $showTable["selectiontype"] = array("ทั้งหมด");  
-			$showTable["search_store"] = $this->report_model->get_store();
-	        $this -> view -> page_view('report_view', $showTable);
+			$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
+			$this -> view -> page_view('reportasset_view', $showTable);
 		} else {
 			redirect('/login/', 'refresh');
 		}
-    }
-   
-    public function search() {
-        $searchTerm = $this->input->post('search_storeasset');
-        $search_asset = $this->input->post('search_assetlist');
-        $search_assettypelists = $this->input->post('search_assettypelist');
+	}
+
+	public function search() {
+		$search_asset = $this -> input -> post('search_assetlist');
 		$begindate = $_POST['begindate'];
 		$lastdate = $_POST['lastdate'];
-        
-		$showTable["searchTerm"] = $searchTerm;
-        $showTable["selection"] = $this -> report_model -> get_assetlist($searchTerm);
-        $showTable["selectiontype"] = $this -> report_model -> get_assettypelist($searchTerm, $search_asset);
-        $showTable["id"] = $this->report_model->showtable($searchTerm, $search_asset, $search_assettypelists, $begindate, $lastdate);
-        if($showTable["id"] == null) {
-          
-        }
-		
-        $showTable["search_store"] = $this->report_model->get_store(); 
-        $showTable["search_asset"] = $search_asset;
-        $showTable["search_assettypelists"] = $search_assettypelists;
+
+		$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
+		$showTable["id"] = $this -> reportasset_model -> showtable($search_asset, $begindate, $lastdate);
+		if ($showTable["id"] == null) {
+
+		}
+
+		$showTable["search_asset"] = $search_asset;
 		$showTable["begindate"] = $begindate;
 		$showTable["lastdate"] = $lastdate;
-        $this->view->page_view("report_view", $showTable);           
-    }
-
-    public function load_states($store_id){
-        if(isset($store_id))
-        {
-            $assetlist = $this -> report_model -> get_assetlist($store_id);
-            $states = '';
-            $js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"';
-            echo form_dropdown('search_assetlist', $assetlist, 0, $js);
-        }
-    }
-    
-    public function load_statestype($store_id, $asset_list){
-        if(isset($store_id) && isset($asset_list))
-        {
-            $assetlist2 = $this -> report_model -> get_assettypelist($store_id, $asset_list);
-            $states = '';
-            $js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
-            echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
-        }
-    }
-	
-	public function exportpdf() {
-		
+		$this -> view -> page_view("reportasset_view", $showTable);
 	}
+
+	public function exportpdf() {
+
+	}
+
 }
 
 /* End of file login.php */

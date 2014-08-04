@@ -43,6 +43,15 @@ echo "
 					</div>
 				</div>
 				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
+					<label class="col-sm-5 control-label">ชื่อย่อของอุปกรณ์</label>
+					<div class="col-sm-4 form-group">
+				  		<input class="form-control" id="barcode_asset" name="barcode_asset">
+					</div>
+				</div>
+				<br>
+				<br>
+				<br>
+				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
 					<label class="col-sm-5 control-label">หมายเลขบาร์โค๊ดของอุปกรณ์</label>
 					<div class="col-sm-7 form-group">
 				  		<input class="form-control" id="barcode_asset" name="barcode_asset">
@@ -51,35 +60,7 @@ echo "
 				<br>
 				<br>
 				<br>
-				<div class="form-group">
-					<label class="col-sm-5 control-label">อุณหภูมิมาตราฐาน</label>
-					<div class="col-sm-2">
-						<p>
-							<input class="form-control" id="min_temp" name="min_temp" type="text" value="" />
-						</p>
-					</div>
-					<label class="col-sm-1 control-label">ถึง</label>
-					<div class="col-sm-2">
-						<p>
-							<input class="form-control" id="max_temp" name="max_temp" type="text" value="" />
-						</p>
-					</div>
-					<label class="control-label">องศาเซลเซียส</label>
-				</div>
-				<br>
-				<div class="form-group">
-					<label class="col-sm-5 control-label">เวลาที่อุณหภูมิเกินได้สูงสุด</label>
-					<div class="col-sm-2">
-						<p>
-							<input class="form-control" id="std_time" name="std_time" type="text" value="" />
-						</p>
-					</div>
-					<label class="control-label">นาที</label>
-				</div>
-				<br>
-				<br>
-				<br>
-
+				
 				<div class="row">
 					<div class="form-group">
 						<div class="col-xs-4 col-xs-offset-3">

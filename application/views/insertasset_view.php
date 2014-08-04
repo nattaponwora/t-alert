@@ -21,42 +21,38 @@ echo "
 				<br>
 				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 					<label class="col-sm-5 control-label">รหัสร้าน</label>
-					<div class="col-sm-4 form-group">
+					<div class="col-sm-4 input-group">
 				  		<input class="form-control" id="search_storeasset" name="search_storeasset">
 					</div>
 					
 				</div>
 				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 					<label class="col-sm-5 control-label">ชื่อร้าน</label>
-					<div class="col-sm-4 form-group">
+					<div class="col-sm-4 input-group">
 				  		<input class="form-control" id="search_storeasset" name="search_storeasset">
 					</div>
 				</div>
-				<br>
-				<br>
-				<br>
+				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
+					<label class="col-sm-5 control-label">หมายเลขบาร์โค๊ดอุปกรณ์</label>
+					<div class="col-sm-4 input-group">
+				  		<input class="form-control" id="barcode_asset" name="barcode_asset">
+					</div>
+				</div>
 				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
 					<label class="col-sm-5 control-label">ชื่ออุปกรณ์</label>
-					<div class="col-sm-7 form-group">
+					<div class="col-sm-7 input-group">
 						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
 						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
 					</div>
 				</div>
 				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
-					<label class="col-sm-5 control-label">ชื่อย่อของอุปกรณ์</label>
-					<div class="col-sm-4 form-group">
-				  		<input class="form-control" id="barcode_asset" name="barcode_asset">
+					<label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
+					<div class="col-sm-2 input-group">
+							<span class="input-group-addon">OSC</span>
+					  		<input class="form-control" type="text" id="barcode_asset" name="barcode_asset">
 					</div>
 				</div>
-				<br>
-				<br>
-				<br>
-				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
-					<label class="col-sm-5 control-label">หมายเลขบาร์โค๊ดของอุปกรณ์</label>
-					<div class="col-sm-7 form-group">
-				  		<input class="form-control" id="barcode_asset" name="barcode_asset">
-					</div>
-				</div>
+			
 				<br>
 				<br>
 				<br>

@@ -48,9 +48,19 @@ class Temp_model extends CI_model {
         return $assets;
     }
     
-    function inserttemp($id, $temp) {
-        $query = $this->db->insert("temperature", array('asset_id' => $id,'temp' => $temp));  
+    function get_assetid_from_meter( $meter_id ){
+        $this -> db -> where( 'meter_id', $meter_id );
+        $rs = $this -> db -> get('meter');
+        foreach ($rs -> result_array() as $row) {
+            return $row['asset_id'];
+        }
     }
+    
+    function inserttemp($meter_id, $temp) {
+        $asset_id = $this -> get_assetid_from_meter( $meter_id );
+        $query = $this->db->insert("temperature", array('asset_id' => $asset_id,'temp' => $temp));  
+    }
+    
     
     function get_assetlist( $in){
         $this->db->distinct();

@@ -1,6 +1,6 @@
 <style>
 	body {
-		background-image: url("public/images/backgroundall.png");
+		background-image: url("<?= base_url('public/images/backgroundall.png') ?>" );
 	}
 </style>
 

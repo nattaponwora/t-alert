@@ -29,7 +29,6 @@ class Login extends CI_Controller {
 	}
 
 	public function check() {
-		echo "Waiting for loging-in...";
 		$username = $this -> input -> post('username');
 		$password = $this -> input -> post('password');
 

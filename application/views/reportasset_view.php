@@ -4,21 +4,21 @@
             defaultDate: "+1w",
             changeMonth: true,
             changeYear: true,
-            numberOfMonths: 1,
             dateFormat: ('yy-mm-dd'),
             onClose: function( selectedDate ) {
                 $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
-            }
+            },
+            monthNames: [ "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม" ]
         });
         $( "#lastdate" ).datepicker({
             defaultDate: "+1w",
             changeMonth: true,
             changeYear: true,
-            numberOfMonths: 1,
             dateFormat: ('yy-mm-dd'),
             onClose: function( selectedDate ) {
                 $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
-            }
+            },
+            monthNames: [ "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม" ]
         });
     });
         

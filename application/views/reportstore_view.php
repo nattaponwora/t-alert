@@ -1,15 +1,12 @@
-<?php 
-echo "
 <script>
   $(function() {
-  	var str = '".$storename."';
+  	var str = '<?=$storename?>';
     var availableTags = str.split(',');
     $( '#search_storeasset' ).autocomplete({
       source: availableTags
     });
   });
-</script>";
-?>
+</script>
  
 
 <script type="text/javascript">
@@ -22,7 +19,8 @@ echo "
             dateFormat: ('yy-mm-dd'),
             onClose: function( selectedDate ) {
                 $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
-            }
+            },
+            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
         $( "#lastdate" ).datepicker({
             defaultDate: "+1w",
@@ -32,7 +30,8 @@ echo "
             dateFormat: ('yy-mm-dd'),
             onClose: function( selectedDate ) {
                 $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
-            }
+            },
+            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
     });
         

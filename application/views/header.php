@@ -8,6 +8,7 @@
     <?php
         echo link_tag( "public/bootstrap/css/bootstrap.css" , 'stylesheet');
         echo link_tag( "public/jquery/ui/1.10.3/themes/smoothness/jquery-ui.css" , 'stylesheet');
+        echo link_tag( "public/css/style.css" , 'stylesheet');
     ?>
     
 </head>

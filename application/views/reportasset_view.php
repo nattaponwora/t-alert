@@ -8,7 +8,7 @@
             onClose: function( selectedDate ) {
                 $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
             },
-            monthNames: [ "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม" ]
+            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
         $( "#lastdate" ).datepicker({
             defaultDate: "+1w",
@@ -18,7 +18,7 @@
             onClose: function( selectedDate ) {
                 $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
             },
-            monthNames: [ "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฏาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม" ]
+            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
     });
         
@@ -34,15 +34,15 @@
 	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("reportasset/search") ?>" method="post">
 		<label>วันที่</label>
 		<?php if ( $begindate == null ) { ?>
-        	<input class="form-control" type="text" id="begindate" name="begindate" />
+        	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
         <?php } if ( $begindate != null ) { ?>
-        	<input class="form-control" type="text" id="begindate" name="begindate" value=" <?= $begindate ?>" />
+        	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" value=" <?= $begindate ?>" />
         <?php } ?>
         <label>ถึง</label>
         <?php if ( $lastdate == null ) { ?>
-        	<input class="form-control" type="text" id="lastdate" name="lastdate" />
+        	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate" style="cursor: pointer" readonly="readonly" />
         <?php } if ( $lastdate != null ) { ?>
-        	<input class="form-control" type="text" id="lastdate" name="lastdate" value=" <?= $lastdate ?>" />
+        	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate" style="cursor: pointer" readonly="readonly" value=" <?= $lastdate ?>" />
        	<?php } ?>
 		<label>อุปกรณ์</label>
 		<div class="form-group" id ="assetlist" name="assetlist">

@@ -1,7 +1,7 @@
 <form name="insert_form" id="insert_form" action= "<?= base_url("inserttemp/added") ?>" role="form" method="post">
 	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3">
-			<div class="box">
+			<div class="box" style="background-color: beige">
 				<br>
 				<br>
 				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
@@ -52,7 +52,7 @@
 							</button>
 						</div>
 						<div class="">
-							<button id="search" name="search" type="submit" class="btn btn-danger btn-lg ">
+							<button id="search" name="search" type="reset" class="btn btn-danger btn-lg ">
 								Reset
 							</button>
 						</div>

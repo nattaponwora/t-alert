@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 class Reportasset extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
+		$this->session->set_userdata('session_page', 'reportasset');
 		$this -> load -> model("reportasset_model");
 	}
 

@@ -43,7 +43,7 @@
 		loadStates(url, 'assettypelist');
 	}
 </script>
-<div class="container box">
+<div class="container box" style="background-color: beige">
 	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("reportstore/search") ?>" method="post">
 		<label>วันที่</label>
 		<?php if ( $begindate == null ) { ?>
@@ -72,7 +72,7 @@
 </div>
 
 <div class="row"></div>
-	<div class="container box" >
+	<div class="container box" style="background-color: beige">
 
 		<form id="table_form" method="post">
 			<table class="table table- -->hover table table-hover" border="0">

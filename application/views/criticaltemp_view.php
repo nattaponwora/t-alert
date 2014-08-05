@@ -1,5 +1,5 @@
 <div class="row">  
-    <div class="box" style="width: 80%">
+    <div class="box" style="width: 80%; background-color: beige">
 		<?php 
 			$id[] = array('store_id' => '02192','store_name' => 'พันธ์ทิพย์พลาซ่า (BW)', 'type' => 'Open Type', 'shortcode' => 'OSC 1', 'asset_barcode' => '0000000228296', 'temp' => '8.1', 'status' => 'ALERT', 'time' => '120', 'datetime' => '2014-07-22');
 			$id[] = array('store_id' => '06589','store_name' => 'ชุมชนใสน้ำเย็น 2 (RS)', 'type' => 'Open Type', 'shortcode' => 'OSC 1', 'asset_barcode' => '00000253814', 'temp' => '7.4', 'status' => 'ALERT', 'time' => '98', 'datetime' => '2014-07-22');

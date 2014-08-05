@@ -16,7 +16,7 @@
     }
 </script>
     
-<div class="container box">
+<div class="container box" style="background-color: beige">
     <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
         <label>รหัสร้าน</label>
         <div class="form-group">
@@ -49,7 +49,7 @@
 </div>
 <div class="row"></div>
     <div class="col-xs-4 col-xs-offset-1">
-    <div class="box" >
+    <div class="box" style="background-color: beige">
         <div class="form-group">
             <label class="col-sm-5 control-label">รหัสสาขา</label>
             <div class="col-sm-7">
@@ -88,7 +88,7 @@
     </div>    
     </div>    
     <div class="col-xs-6">
-    <div class="box" >
+    <div class="box" style="background-color: beige">
 
         <form id="table_form" method="post">
             <table class="table table- -->hover table table-hover" border="0">

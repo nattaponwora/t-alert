@@ -3,6 +3,7 @@
 class Inserttemp extends CI_Controller {
     public function __construct(){
         parent::__construct();
+		$this->session->set_userdata('session_page', 'inserttemp');
         $this->load->model("inserttemp_model");  
     }
     

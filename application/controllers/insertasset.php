@@ -3,6 +3,7 @@
 class Insertasset extends CI_Controller {
     public function __construct(){
         parent::__construct();
+		$this->session->set_userdata('session_page', 'insertasset');
         $this->load->model("insertasset_model");  
     }
     

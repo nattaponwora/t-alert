@@ -11,7 +11,7 @@ class Insertasset_model extends CI_model {
         $this->db->select('asset_type.type, asset_type.id');
         $this->db->from('asset_type');
         $query = $this->db->get();
-        $asset = array();                       
+        $assets = array();                       
         foreach ($query->result_array() as $row) {
             $assets[$row["id"]] = $row["type"];
         }

@@ -23,7 +23,6 @@ class Temp_model extends CI_model {
     }
     
     function showtable( $in, $type_id, $droptype) {
-        $this->db->select('temperature.temp, temperature.time');
         $this->db->from('asset');
         $this->db->join('temperature', 'temperature.asset_id = asset.id');
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
@@ -31,7 +30,7 @@ class Temp_model extends CI_model {
         $this->db->where('asset_typeid', $type_id);
         $this->db->where('asset.id', $droptype);
         $this->db->order_by('temperature.id', 'DESC');
-		$this->db->limit(10);
+		//$this->db->limit(10);
         $query = $this->db->get();
         $assets = array();                       
         foreach ($query->result_array() as $row) {

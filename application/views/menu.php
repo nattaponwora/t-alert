@@ -8,7 +8,7 @@
 <div class="navbar navbar-default ">
 	<div class="container">
 		<div class="navbar-header">
-			<a href="<?= base_url("index") ?>" class="navbar-brand"><img src=<?= base_url('public/images/logo.png') ?> height="40" width="80"></a>
+			<a href="<?= base_url("index") ?>" class="navbar-brand"><img src=<?= base_url('public/images/logo.png') ?> style="margin-top: -15px;" height="50"></a>
 			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
 	        	<span class="icon-bar"></span>
 	        	<span class="icon-bar"></span>
@@ -31,6 +31,9 @@
 				</li>
 				<li class="<?= (($session_page == 'technician') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("technician") ?>">Technician</a>
+				</li>
+				<li class="<?= (($session_page == 'store') ?  'active' : 'last'); ?>">
+					<a href="<?= base_url("store") ?>">Store</a>
 				</li>
 				
 				<li class="dropdown <?= (($session_page == 'reportstore' || ($session_page == 'reportasset') ) ?  'active' : 'last'); ?>">

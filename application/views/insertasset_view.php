@@ -65,7 +65,7 @@ echo "
 							</button>
 						</div>
 						<div class="">
-							<button id="search" name="search" type="submit" class="btn btn-danger btn-lg ">
+							<button id="search" name="search" type="reset" class="btn btn-danger btn-lg ">
 								Reset
 							</button>
 						</div>

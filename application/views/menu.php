@@ -9,7 +9,11 @@
 	<div class="container">
 		<div class="navbar-header">
 			<a href="<?= base_url("index") ?>" class="navbar-brand">Home</a>
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main"></button>
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	        </button>
 		</div>
 		<div class="navbar-collapse collapse" id="navbar-main">
 			<ul class="nav navbar-nav">
@@ -38,6 +42,7 @@
 		        	</ul>
 		      	</li>
 			</ul>
+		
 			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("logout") ?>" method="post">
 				<ul class="nav navbar-nav navbar-right">
 					<?php  $cookie = get_cookie('username_cookie'); ?>
@@ -50,6 +55,5 @@
 				</ul>
 			</form>
 		</div>
-
 	</div>
 </div>

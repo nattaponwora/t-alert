@@ -1,4 +1,4 @@
-<div class="box" style="background-color: beige	; margin-top: 100px; width: 60%">
+<div class="box" style="background-color: beige	; margin-top: 60px; width: 60%">
         <form id="table_form" method="post">
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover" border="0">

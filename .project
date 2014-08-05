@@ -3,6 +3,7 @@
 	<name>t-alert</name>
 	<comment></comment>
 	<projects>
+		<project>system</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>

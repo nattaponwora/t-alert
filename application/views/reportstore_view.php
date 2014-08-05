@@ -49,13 +49,13 @@
 		<?php if ( $begindate == null ) { ?>
         	<input class="form-control" type="text" id="begindate" name="begindate" />
         <?php } if ( $begindate != null ) { ?>
-        	<input class="form-control" type="text" id="begindate" name="begindate" value=" <?= $begindate ?>" />
+        	<input class="form-control" type="text" id="begindate" name="begindate" value="<?= $begindate ?>" />
         <?php } ?>
         <label>ถึง</label>
         <?php if ( $lastdate == null ) { ?>
         	<input class="form-control" type="text" id="lastdate" name="lastdate" />
         <?php } if ( $lastdate != null ) { ?>
-        	<input class="form-control" type="text" id="lastdate" name="lastdate" value=" <?= $lastdate ?>" />
+        	<input class="form-control" type="text" id="lastdate" name="lastdate" value="<?= $lastdate ?>" />
        	<?php } ?>
 		<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 			<label class="control-label">รหัสร้าน</label>

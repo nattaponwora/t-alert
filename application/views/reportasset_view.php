@@ -36,13 +36,13 @@
 		<?php if ( $begindate == null ) { ?>
         	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
         <?php } if ( $begindate != null ) { ?>
-        	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" value=" <?= $begindate ?>" />
+        	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" value="<?= $begindate ?>" />
         <?php } ?>
         <label>ถึง</label>
         <?php if ( $lastdate == null ) { ?>
         	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate" style="cursor: pointer" readonly="readonly" />
         <?php } if ( $lastdate != null ) { ?>
-        	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate" style="cursor: pointer" readonly="readonly" value=" <?= $lastdate ?>" />
+        	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate" style="cursor: pointer" readonly="readonly" value="<?= $lastdate ?>" />
        	<?php } ?>
 		<label>อุปกรณ์</label>
 		<div class="form-group" id ="assetlist" name="assetlist">

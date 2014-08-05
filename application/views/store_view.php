@@ -1,11 +1,11 @@
 <div class="box" style="background-color: beige	; margin-top: 100px; width: 60%">
         <form id="table_form" method="post">
         <div class="table-responsive">
-            <table class="table table-hover .table-condensed" border="0">
+            <table class="table table-striped table-bordered table-hover" border="0">
             	<caption style="font-size: 50px">Store</caption>
                 <thead>
                     <tr>
-                        <th style="width:50px">รหัสร้าน</th>
+                        <th style="width:100px">รหัสร้าน</th>
                         <th style="width:50px">ชื้อร้าน</th>
                         <th style="width:50px">เขต</th>
                     </tr>

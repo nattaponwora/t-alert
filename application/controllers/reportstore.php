@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 class Reportstore extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
+		$this->session->set_userdata('session_page', 'reportstore');
 		$this -> load -> model("reportstore_model");
 	}
 

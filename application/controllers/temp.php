@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 class Temp extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
+		$this->session->set_userdata('session_page', 'temp');
 		$this -> load -> model("temp_model");
 	}
 

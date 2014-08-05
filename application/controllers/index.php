@@ -21,6 +21,7 @@ class Index extends CI_Controller {
 	 */
 	public function __construct() {
 		parent::__construct();
+		$session_page = $this->session->set_userdata('index');
 		//$this -> load -> model("login_model");
 	}
 

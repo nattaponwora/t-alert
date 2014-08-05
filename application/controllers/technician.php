@@ -10,7 +10,7 @@ class Technician extends CI_Controller {
     public function index() {
     	$cookie = get_cookie('username_cookie');
 		if( $cookie != null) {
-        	$data["assettype"] = $this -> technician_model -> get_assettype();
+        	$data["id"] = $this -> technician_model -> get_technician();
         	$this->view->page_view("technician_view", $data);
 		} else {
 			redirect('/login/', 'refresh');

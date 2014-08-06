@@ -35,6 +35,9 @@
 				<li class="<?= (($session_page == 'store') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("store") ?>">Store</a>
 				</li>
+				<li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
+					<a href="<?= base_url("register") ?>">Register</a>
+				</li>
 				
 				<li class="dropdown <?= (($session_page == 'reportstore' || ($session_page == 'reportasset') ) ?  'active' : 'last'); ?>">
 		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <b class="caret"></b></a>
@@ -49,7 +52,7 @@
 		      	</li>
 			</ul>
 		
-			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("logout") ?>" method="post">
+			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("login/logout") ?>" method="post">
 				<ul class="nav navbar-nav navbar-right">
 					<?php  $cookie = get_cookie('username_cookie'); ?>
 					<li><label style="color: #FFFFFF; margin-top: 15px">สวัสดี &nbsp; <?= $cookie ?> &nbsp;</label></li>

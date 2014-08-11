@@ -80,10 +80,3 @@
         </form>
 	</div>
 </div>
-<script type='text/javascript'>
-    setTimeout(a, 5000);
-    function a() {
-        $("#table_form").load("<?= base_url("criticaltemp/show") ?> #table_form");
-        setTimeout(a, 5000);
-    }
-</script>

@@ -1,3 +1,30 @@
 .mouse_hover{
 	cursor: pointer;	
 }
+
+
+.alertcolor{
+	background-color: #f36c60;
+	color: #F7F7F7;
+	font-weight: bold;
+}
+
+.table-hover > tbody > tr.alertcolor:hover > td{
+	background-color: #B5191F;
+ 	color: #F7F7F7;
+ 	font-weight: bold;
+}
+
+
+.waitingcolor{
+	background-color: orange;
+	color: #F7F7F7;
+	font-weight: bold;
+}
+
+.table-hover > tbody > tr.waitingcolor:hover > td{
+	background-color: #FF6707;
+ 	color: #F7F7F7;
+ 	font-weight: bold;
+}
+

@@ -30,7 +30,7 @@ class Temp extends CI_Controller {
 		$searchTerm = $this -> input -> post('search_storeasset');
 		$search_asset = $this -> input -> post('search_assetlist');
 		$search_assettypelists = $this -> input -> post('search_assettypelist');
-
+		
 		$showTable["selection"] = $this -> temp_model -> get_assetlist($searchTerm);
 		$showTable["selectiontype"] = $this -> temp_model -> get_assettypelist($searchTerm, $search_asset);
 
@@ -52,6 +52,7 @@ class Temp extends CI_Controller {
 		$searchAsset = $in;
 		$search_asset = $type;
 		$search_assettypelists = $list;
+		
 		$searchasset["store_id"] = $this -> temp_model -> searchasset();
 		$showTable["id"] = null;
 		if (count($searchasset) > 0) {
@@ -62,6 +63,7 @@ class Temp extends CI_Controller {
 				}
 			}
 		}
+		
 		$showTable["searchTerm"] = $searchTerm;
 		$this -> view -> page_view("temp_view", $showTable, $search_asset, $search_assettypelists);
 	}

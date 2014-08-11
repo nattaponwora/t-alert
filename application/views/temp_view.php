@@ -91,7 +91,7 @@
     <div class="box" style="background-color: beige">
 
         <form id="table_form" method="post">
-            <table class="table table- -->hover table table-hover" border="0">
+            <table class="table table-hover table table-hover" border="0">
                 <thead>
                     <tr>
                         <th style="width:100px">ลำดับที่</th>
@@ -104,13 +104,27 @@
                     if ($id > 0) {
                         $i = 1;
                         foreach ($id as $r) {
-                            echo "<tr>";
-                            echo "<td>{$i}</td>";
-                            echo "<td>{$r['temp']}</td>";
-                            echo "<td>{$r['time']}</td>";
-                            $i++;
-                            echo "</tr>";
-                        }
+                        	if($r['status'] == 'ALERT') {
+	                            echo "<tr class='alertcolor'>";
+	                            echo "<td>{$i}</td>";
+	                            echo "<td>{$r['temp']}</td>";
+	                            echo "<td>{$r['time']}</td>";
+	                            echo "</tr>";
+							} else if($r['status'] == 'WAIT') {
+								echo "<tr class='waitingcolor'>";
+	                            echo "<td>{$i}</td>";
+	                            echo "<td>{$r['temp']}</td>";
+	                            echo "<td>{$r['time']}</td>";
+	                            echo "</tr>";
+							} else {
+								echo "<tr class='normalcolor'>";
+	                            echo "<td>{$i}</td>";
+	                            echo "<td>{$r['temp']}</td>";
+	                            echo "<td>{$r['time']}</td>";
+	                            echo "</tr>";
+							}
+							$i++;
+						}
                     }
                     ?>
                 </tbody>
@@ -124,7 +138,7 @@
 
 </div>
 <script type='text/javascript'>
-    setTimeout(a, 5000);
+   // setTimeout(a, 5000);
     function a() {
         $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
         setTimeout(a, 5000);

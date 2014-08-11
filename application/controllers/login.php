@@ -48,6 +48,11 @@ class Login extends CI_Controller {
 		}
 	}
 
+	public function logout() {
+		delete_cookie("username_cookie");
+		redirect('/login/', 'refresh');
+	}
+
 }
 
 /* End of file login.php */

@@ -23,10 +23,7 @@ class Logout extends CI_Controller {
 		parent::__construct();
 	}
 
-	public function index() {
-		delete_cookie("username_cookie");
-		redirect('/login/', 'refresh');
-	}
+	
 }
 
 /* End of file login.php */

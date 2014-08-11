@@ -82,10 +82,10 @@
 						<th style="width:100px">รหัสสาขา</th>
 						<th style="width:100px">ชื่อสาขา</th>
 						<th style="width:100px">อุปกรณ์</th>
+						<th style="width:100px">ชื่อย่ออุปกรณ์</th>
 						<th style="width:100px">หมายเลขบาร์โค้ด</th>
-						<th style="width:100px">อุณหภูมิ</th>
-						<th style="width:100px">ชื่อย่ออุปกรณ์</th>					
-						<th style="width:100px">เวลา</th>
+						<th style="width:100px">อุณหภูมิเฉลี่ย</th>	
+						<!-- <th style="width:100px">เวลา</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -98,10 +98,9 @@
 							echo "<td>{$r['store_id']}</td>";
 							echo "<td>{$r['store_name']}</td>";
 							echo "<td>{$r['type']}</td>";
+                            echo "<td>{$r['asset_shortname']}</td>";
 							echo "<td>{$r['asset_barcode']}</td>";
 							echo "<td>{$r['temp']}</td>";
-							echo "<td>{$r['asset_shortname']}</td>";
-							echo "<td>{$r['time']}</td>";
 							$i++;
 							echo "</tr>";
 						}

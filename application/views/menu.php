@@ -18,13 +18,13 @@
 		<div class="navbar-collapse collapse" id="navbar-main">
 			<ul class="nav navbar-nav">
 				<li class="<?= (($session_page == 'temp') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("temp") ?>">Search</a>
+					<a href="<?= base_url("temp") ?>">ตรวจสอบอุณหภูมิ</a>
 				</li>
 				<li class="<?= (($session_page == 'criticaltemp') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("criticaltemp") ?>">Critical Temperature</a>
+					<a href="<?= base_url("criticaltemp") ?>">รายการอุปกรณ์ที่ผิดปกติ</a>
 				</li>
 				<li class="<?= (($session_page == 'inserttemp') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("inserttemp") ?>">Insert Temperature</a>
+					<a href="<?= base_url("inserttemp") ?>">ตั้งค่าช่วงมาตรฐาน</a>
 				</li>
 				<li class="<?= (($session_page == 'insertasset') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("insertasset") ?>">Insert Asset</a>

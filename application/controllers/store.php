@@ -16,4 +16,9 @@ class Store extends CI_Controller {
 			redirect('/login/', 'refresh');
 		} 
     }
+	
+	public function insert() {
+		$data = $this -> input -> post();
+		$this -> store_model -> edit_store($data);
+	}
 }

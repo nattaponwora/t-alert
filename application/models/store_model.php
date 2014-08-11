@@ -16,4 +16,10 @@ class Store_model extends CI_model {
         }
         return $assets;
     }
+	
+	function edit_store($data) {
+		$this -> db -> where('store_id', $data['id']);
+		$arrays[$data['type']] = $data['editvar']; 
+		$this -> db -> update( 'store', $arrays);
+	}
 }

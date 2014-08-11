@@ -7,32 +7,30 @@
 				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 					<label class="col-sm-5 control-label">ชื่อผู้ใช้</label>
 					<div class="col-sm-4 input-group">
-				  		<input class="form-control" id="username" name="username" type="username">
+				  		<input class="form-control" id="username" name="username" type="username" required="" />
 					</div>
-					
 				</div>
 				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 					<label class="col-sm-5 control-label">รหัสผ่าน</label>
 					<div class="col-sm-4 input-group">
-				  		<input class="form-control" id="password" name="password" type="password">
+				  		<input class="form-control" id="password" name="password" type="password" required="" />
 					</div>
 				</div>
 				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
                     <label class="col-sm-5 control-label">ยืนยันรหัสผ่าน</label>
                     <div class="col-sm-4 input-group">
-                        <input class="form-control" id="repassword" name="repassword" type="password">
+                        <input class="form-control" id="repassword" name="repassword" type="password" required="" />
                     </div>
                 </div>
                 <div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
                     <label class="col-sm-5 control-label">Email</label>
                     <div class="col-sm-4 input-group">
-                        <input class="form-control" id="email" name="email">
+                        <input class="form-control" id="email" name="email" required="" />
                     </div>
                 </div>
 				<br>
 				<br>
 				<br>
-				
 				<div class="row">
 					<div class="form-group">
 						<div class="col-xs-4 col-xs-offset-3">

@@ -21,9 +21,15 @@ class Register extends CI_Controller {
 	public function regis() {
 		$regis['username'] = $this -> input -> post('username');
 		$regis['password'] = $this -> input -> post('password');
+		$regis['repassword'] = $this -> input -> post('repassword');
 		$regis['email'] = $this -> input -> post('email');
-		$this -> register_model -> regis($regis);
-		redirect('/register/', 'refresh');
+		if($regis['username'] == '' || $regis['password'] == '' || $regis['email'] == ''){
+			echo "Please fill all require.";
+		} else if ( $regis['repassword'] != $regis['password']) {
+			echo "Your password is not match";
+		} else {
+			$this -> register_model -> regis($regis);
+			redirect('/register/', 'refresh');
+		}
 	}
-
 }

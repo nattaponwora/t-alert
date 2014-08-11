@@ -1,15 +1,12 @@
-<?php 
-echo "
 <script>
   $(function() {
-  	var str = '".$storename."';
+  	var str = '<?=$storename?>';
     var availableTags = str.split(',');
     $( '#search_storeasset' ).autocomplete({
       source: availableTags
     });
   });
-</script>";
-?>
+</script>
  
 
 

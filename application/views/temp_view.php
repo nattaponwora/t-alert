@@ -138,7 +138,7 @@
 
 </div>
 <script type='text/javascript'>
-   // setTimeout(a, 5000);
+    setTimeout(a, 5000);
     function a() {
         $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
         setTimeout(a, 5000);

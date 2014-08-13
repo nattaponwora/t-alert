@@ -19,6 +19,7 @@ class Store extends CI_Controller {
 	
 	public function insert() {
 		$data = $this -> input -> post();
+		$this->view->p($data);
 		$this -> store_model -> edit_store($data);
 	}
 }

@@ -9,10 +9,11 @@ $(function () {
 			if(checkpoint_id != null) {
 				var old_id = "#" + checkpoint_id;
 				var old = $( old_id + " td[type='" + checkpoint_type + "']" );
+				$("#table_form input").remove();
+				$("#ok").remove();
 				$(old).html( checkpoint_value );
 				$(old).removeClass('cellEditing');
 				$(old).addClass("editable"); 
-				
 			}
 			$(this).removeClass("editable");
 			var element_row = $(this).parent().attr("id");
@@ -26,50 +27,46 @@ $(function () {
 			checkpoint_value = OriginalContent;
 			
 			$(this).addClass("cellEditing"); 
-			$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 
+			$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 			
 			//$(this).append("<img id='ok' src='public/images/icon/ok_icon.png' height='32px' width='32px'/>");
-			$(this).append("<input type='button' id='ok' value='OK' />");
+			$(this).append("&nbsp&nbsp<input type='image' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
+			$(this).append("<input type='image' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
 			
 			$(this).children().first().focus(); 
-			$(".editableTable").on("click", "#ok" , function(){
-				var textbox = $(this).parent().find('input').eq(0);
-				var newContent = $(textbox).val();
+			$("#ok").on("click", function(){
 				$.post("<?=base_url('technician/insert')?>",$('#table_form').serialize(),function(response){
 					$('#show').html(response);
 				});
+				var textbox = $(this).parent().find('input').eq(0);
+				var newContent = $(textbox).val();
 				$('#temp1').remove();
 				$('#temp2').remove();
 				$(textbox).parent().removeClass();
 				$(textbox).parent().addClass("editable"); 
 				$(textbox).parent().text(newContent);
+				checkpoint_id = null;
+				checkpoint_type = null;
+				checkpoint_value = null;
 			});
-
-			// $(this).children().first().keypress(function (e) { 
-				// if (e.which == 13) { 
-					// var newContent = $(this).val();
-					// $.post("<?=base_url('technician/insert')?>",$('#table_form').serialize(),function(response){ 
-						// $('#show').html(response);
-					// });
-					// $('#temp1').remove();
-					// $('#temp2').remove();
-					// $(this).parent().removeClass();
-					// $(this).parent().addClass("editable"); 
-					// $(this).parent().text(newContent);
-				// }
-			// }); 
+			
+			$("#cancel").on("click", function(){
+				$('#temp1').remove();
+				$('#temp2').remove();
+				$(this).parent().removeClass();
+				$(this).parent().addClass("editable"); 
+				$(this).parent().text(checkpoint_value);
+				
+				checkpoint_id = null;
+				checkpoint_type = null;
+				checkpoint_value = null;
+			});
 		}
-		// $(this).children().first().blur(function() { 
-			// $(this).parent().removeClass();
-			// $(this).parent().text(OriginalContent);
-		// });
-		
 	}); 
-
 });
 </script>
 
 <div class="box" style="background-color: beige	; margin-top: 60px; width: 70%">
-	<form id="table_form" name="table_form" action="base_url('technicianedit_view')" method="post">
+	<form id="table_form" name="table_form" method="post">
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover editableTable" border="0">
 			<caption style="font-size: 50px">
@@ -101,5 +98,4 @@ $(function () {
 			<div id='show'></div>
 		</div>
 	</form>
-	</ul>
 </div>

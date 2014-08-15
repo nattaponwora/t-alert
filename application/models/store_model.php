@@ -22,4 +22,11 @@ class Store_model extends CI_model {
 		$arrays[$data['type']] = $data['editvar']; 
 		$this -> db -> update( 'store', $arrays);
 	}
+	
+	function add_store($data) {
+		$this->db->set('store_id', $data["store_id_input"]);
+		$this->db->set('opt_team', $data["store_name_input"]);
+		$this->db->set('store_name', $data["opt_team_input"]);
+		$this->db->insert('store');
+	}
 }

@@ -10,51 +10,51 @@
  
 
 
-<form name="insert_form" id="insert_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
+<form class="form-signin" name="insert_form" id="insert_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 	<div class="row">
 		<div class="col-xs-6 col-xs-offset-3">
 			<div class="box" style="background-color: beige">
 				<br>
 				<br>
-				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
+				<div class="form-group">
 					<label class="col-sm-5 control-label">รหัสร้าน</label>
 					<div class="col-sm-4 input-group">
-				  		<input class="form-control" id="search_storeasset" name="search_storeasset">
+				  		<input class="form-control" id="search_storeid" name="search_storeid" required="">
 					</div>
 					
 				</div>
-				<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
+				<div class="form-group">
 					<label class="col-sm-5 control-label">ชื่อร้าน</label>
 					<div class="col-sm-4 input-group">
-				  		<input class="form-control" id="search_storeasset" name="search_storeasset">
+				  		<input class="form-control" id="search_store" name="search_store" required="">
 					</div>
 				</div>
-				<div class="form-group" id ="select_assettype_d" name="assetlist_d">
+				<div class="form-group">
 					<label class="col-sm-5 control-label">ประเภทอุปกรณ์</label>
 					<div class="col-sm-7 input-group">
-						<?php $js = 'id="select_assettype" name="select_assettype" class="btn btn-default dropdown-toggle"'; ?>
+						<?php $js = 'id="search_assettype" name="search_assettype" class="btn btn-default dropdown-toggle"'; ?>
 						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
 					</div>
 				</div>
-				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
+				<div class="form-group">
 					<label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
 					<div class="col-sm-2 input-group">
-							<span class="input-group-addon">OSC</span>
-					  		<input class="form-control" type="text" id="barcode_asset" name="barcode_asset">
+							<span class="input-group-addon"><?= $assettype ?></span>
+					  		<input class="form-control" type="text" id="search_assetshortname" name="search_assetshortname" required="">
 					</div>
 				</div>
-				<div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
+				<div class="form-group">
                     <label class="col-sm-5 control-label">หมายเลขบาร์โค๊ดอุปกรณ์</label>
                     <div class="col-sm-4 input-group">
-                        <input class="form-control" id="barcode_asset" name="barcode_asset">
+                        <input class="form-control" id="barcode_asset" name="barcode_asset"  required="">
                     </div>
                 </div>
-                <div class="form-group" id ="barcode_asset_d" name="barcode_asset_d">
+                <!-- <div class="form-group">
                     <label class="col-sm-5 control-label">หมายเลขเครื่องวัดอุณหภูมิ</label>
                     <div class="col-sm-1 input-group">
-                        <input class="form-control" id="barcode_asset" name="barcode_asset">
+                        <input class="form-control" id="barcode_asset" name="barcode_asset"  required="">
                     </div>
-                </div>
+                </div> -->
 				<br>
 				<br>
 				<br>

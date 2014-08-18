@@ -32,7 +32,6 @@ class Insertasset_model extends CI_model {
 	}
 	
 	function insert_asset( $in ) {
-		$this->db->where('id', $in["id"]);
-		$this->db->update('asset_type', $in); 
+		$this->db->insert('asset', $in);
 	}
 }

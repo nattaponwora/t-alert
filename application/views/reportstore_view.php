@@ -15,7 +15,6 @@
             defaultDate: "+1w",
             changeMonth: true,
             changeYear: true,
-            numberOfMonths: 1,
             dateFormat: ('yy-mm-dd'),
             onClose: function( selectedDate ) {
                 $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
@@ -26,7 +25,6 @@
             defaultDate: "+1w",
             changeMonth: true,
             changeYear: true,
-            numberOfMonths: 1,
             dateFormat: ('yy-mm-dd'),
             onClose: function( selectedDate ) {
                 $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
@@ -47,15 +45,15 @@
 	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("reportstore/search") ?>" method="post">
 		<label>วันที่</label>
 		<?php if ( $begindate == null ) { ?>
-        	<input class="form-control" type="text" id="begindate" name="begindate" />
+        	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
         <?php } if ( $begindate != null ) { ?>
-        	<input class="form-control" type="text" id="begindate" name="begindate" value="<?= $begindate ?>" />
+        	<input class="form-control mouse_hover" type="text" id="begindate" name="begindate"  style="cursor: pointer" readonly="readonly"  value="<?= $begindate ?>" />
         <?php } ?>
         <label>ถึง</label>
         <?php if ( $lastdate == null ) { ?>
-        	<input class="form-control" type="text" id="lastdate" name="lastdate" />
+        	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  />
         <?php } if ( $lastdate != null ) { ?>
-        	<input class="form-control" type="text" id="lastdate" name="lastdate" value="<?= $lastdate ?>" />
+        	<input class="form-control mouse_hover" type="text" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
        	<?php } ?>
 		<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 			<label class="control-label">รหัสร้าน</label>
@@ -100,7 +98,8 @@
 							echo "<td>{$r['type']}</td>";
                             echo "<td>{$r['asset_shortname']}</td>";
 							echo "<td>{$r['asset_barcode']}</td>";
-							echo "<td>{$r['temp']}</td>";
+							$avg = round($r['temp'], 2);
+							echo "<td>{$avg}</td>";
 							$i++;
 							echo "</tr>";
 						}

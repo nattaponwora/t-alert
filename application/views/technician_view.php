@@ -17,8 +17,7 @@ $(function () {
 		
 		$("#add_btntech").on("click", function () {
 			$.post("<?=base_url('technician/addval')?>",$('#table_form').serialize(),function(response){
-				alert("ASD");
-				$('#show').html(response);
+ 				$('#show').html(response);
 			});
 			
 			var textbox = $("#edition").find('td');

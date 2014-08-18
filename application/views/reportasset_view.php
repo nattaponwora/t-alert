@@ -71,7 +71,6 @@
 						<th style="width:100px">หมายเลขบาร์โค้ด</th>
 						<th style="width:100px">อุณหภูมิ</th>
 						<th style="width:100px">ชื่อย่ออุปกรณ์</th>					
-						<th style="width:100px">เวลา</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -85,9 +84,9 @@
 							echo "<td>{$r['store_name']}</td>";
 							echo "<td>{$r['type']}</td>";
 							echo "<td>{$r['asset_barcode']}</td>";
-							echo "<td>{$r['temp']}</td>";
+							$avg = round($r['temp'], 2);
+							echo "<td>{$avg}</td>";
 							echo "<td>{$r['asset_shortname']}</td>";
-							echo "<td>{$r['time']}</td>";
 							$i++;
 							echo "</tr>";
 						}

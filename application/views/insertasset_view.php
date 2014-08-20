@@ -1,11 +1,15 @@
 <script>
-  $(function() {
-  	var str = '<?=$storename?>';
-    var availableTags = str.split(',');
-    $( '#search_storeasset' ).autocomplete({
-      source: availableTags
-    });
-  });
+	$(function() {
+		var str = '<?=$storename?>';
+		var availableTags = str.split(',');
+		$( '#search_storeasset' ).autocomplete({
+			source: availableTags
+		});
+	});
+	  
+		var span1 = document.getElementById("search_assetshortname_span").innerHTML
+		alert(span1);
+	
 </script>
  
 
@@ -38,8 +42,8 @@
 				</div>
 				<div class="form-group">
 					<label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
-					<div class="col-sm-2 input-group">
-							<span class="input-group-addon"><?= $assettype ?></span>
+					<div class="col-sm-2 input-group" id="search_assetshortname_span_d">
+							<span class="input-group-addon" id="search_assetshortname_span">OSC</span>
 					  		<input class="form-control" type="text" id="search_assetshortname" name="search_assetshortname" required="">
 					</div>
 				</div>

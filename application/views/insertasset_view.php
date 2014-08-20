@@ -43,7 +43,8 @@
 				<div class="form-group">
 					<label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
 					<div class="col-sm-2 input-group" id="search_assetshortname_span_d">
-							<span class="input-group-addon" id="search_assetshortname_span">OSC</span>
+							<span class="input-group-addon">OSC</span>
+							<input type="hidden" name="hidden_search_assetshortname_span" value ="OSC">
 					  		<input class="form-control" type="text" id="search_assetshortname" name="search_assetshortname" required="">
 					</div>
 				</div>

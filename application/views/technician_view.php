@@ -136,7 +136,7 @@ $(function () {
 				</div>
 			</form>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-11"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
+				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
 			</form>
 		</div>
 	</div>

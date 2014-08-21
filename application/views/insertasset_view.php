@@ -6,9 +6,12 @@
 			source: availableTags
 		});
 	});
-	  
-		var span1 = document.getElementById("search_assetshortname_span").innerHTML
-		alert(span1);
+	
+	function change_shortname(){
+		var assettype = document['insert_form']['search_assettype'].value;		      	
+       	var url = '<?= base_url("insertasset/get_shortname") ?>/' + assettype; 
+        loadStates(url, 'search_assetshortname_span_d');  
+	}
 	
 </script>
  
@@ -36,16 +39,16 @@
 				<div class="form-group">
 					<label class="col-sm-5 control-label">ประเภทอุปกรณ์</label>
 					<div class="col-sm-7 input-group">
-						<?php $js = 'id="search_assettype" name="search_assettype" class="btn btn-default dropdown-toggle"'; ?>
+						<?php $js = 'id="search_assettype" name="search_assettype" class="btn btn-default dropdown-toggle" onchange="change_shortname()"'; ?>
 						<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
 					<div class="col-sm-2 input-group" id="search_assetshortname_span_d">
-							<span class="input-group-addon">OSC</span>
-							<input type="hidden" name="hidden_search_assetshortname_span" value ="OSC">
-					  		<input class="form-control" type="text" id="search_assetshortname" name="search_assetshortname" required="">
+						<span class="input-group-addon" id="shortname">:D</span>
+						<input type="hidden" name="hidden_search_assetshortname_span" value ="">
+						<input class="form-control" type="text" id="search_assetshortname" name="search_assetshortname" required="">
 					</div>
 				</div>
 				<div class="form-group">
@@ -80,6 +83,7 @@
 				</div>
 			</div>
 		</div>
+		<div id='show'></div>
 		<br>
 		<br>
 	</div>

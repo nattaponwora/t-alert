@@ -32,37 +32,34 @@
                         
 	                        foreach ($sorttimeASC as $c) {
 		                    	if( $c['status'] == 'ALERT') {
-		                        	foreach ($id as $r) {
-		                        		$countable['count'] = $c['id'];
-		                        		foreach ($sorttimeDESC as $d) {
-				                            echo "<tr class='alertcolor'>";
-											echo "<td>{$r['store_id']}</td>";
-				                            echo "<td>{$r['store_name']}</td>";
-											echo "<td>{$r['type']}</td>";
-				                            echo "<td>{$r['shortcode']}</td>";
-				                            echo "<td>{$r['asset_barcode']}</td>";
-				                            echo "<td>{$r['temp']}</td>";
-											$diff = DateTimeDiff( $d['time'], $c['time']);
-											echo "<td>$diff</td>";
-											echo "<td>{$d['time']}</td>";
-				                            echo "</tr>";
-											break;
+	                        		//$countable['count'] = $c['id'];
+		                        	foreach ($sorttimeDESC as $d) {
+		                        		foreach ($id as $r) {
+		                        			if($c['id'] == $d['id']) {
+					                            echo "<tr class='alertcolor'>";
+												echo "<td>{$r['store_id']}</td>";
+					                            echo "<td>{$r['store_name']}</td>";
+												echo "<td>{$r['type']}</td>";
+					                            echo "<td>{$r['shortcode']}</td>";
+					                            echo "<td>{$r['asset_barcode']}</td>";
+					                            echo "<td>{$r['temp']}</td>";
+												$diff = DateTimeDiff( $d['time'], $c['time']);
+												echo "<td>$diff</td>";
+												echo "<td>{$d['time']}</td>";
+					                            echo "</tr>";
+												break;
+											}
 										}
-										break;
 									}
 								}
 							}
-							
-							echo $countable['count'];
-	                        
+							             
 		                  	foreach ($sorttimeASC as $c) {
-		                  		if( $c['status'] == 'WAIT') {
-		                       		foreach ($id as $r) {
-		                        		foreach ($sorttimeDESC as $d) {
-		                        			?><br><?php
-		                        			echo $d['id'];
-		                        			if($c['id'] == $d['id'] && $d['id'] != $countable['count'])
-											{
+		                    	if( $c['status'] == 'WAIT') {
+	                        		//$countable['count'] = $c['id'];
+		                        	foreach ($sorttimeDESC as $d) {
+		                        		foreach ($id as $r) {
+		                        			if($c['id'] == $d['id']) {
 					                            echo "<tr class='waitingcolor'>";
 												echo "<td>{$r['store_id']}</td>";
 					                            echo "<td>{$r['store_name']}</td>";
@@ -77,7 +74,6 @@
 												break;
 											}
 										}
-										break;
 									}
 								}
 							}

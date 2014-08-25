@@ -15,8 +15,6 @@ class Criticaltemp extends CI_Controller {
 			$showTable["id"] = $this -> criticaltemp_model -> showtable();
 			$showTable["sorttimeDESC"] = $this -> criticaltemp_model -> sortingDESC();
 			$showTable["sorttimeASC"] = $this -> criticaltemp_model -> sortingASC();
-			$this->view->p($this -> criticaltemp_model -> sortingDESC());
-			$this->view->p($this -> criticaltemp_model -> sortingASC());
 			$this -> view -> page_view("criticaltemp_view", $showTable);
 		} else {
 			redirect('/login/', 'refresh');

@@ -1,42 +1,74 @@
-.mouse_hover{
-	cursor: pointer;	
+.mouse_hover {
+	cursor: pointer;
 }
 
-
-.alertcolor{
+.alertcolor {
 	background-color: #f36c60;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
-.table-hover > tbody > tr.alertcolor:hover > td{
+.table-hover > tbody > tr.alertcolor:hover > td {
 	background-color: #B5191F;
- 	color: #F7F7F7;
- 	font-weight: bold;
+	color: #F7F7F7;
+	font-weight: bold;
 }
 
-
-.waitingcolor{
+.waitingcolor {
 	background-color: orange;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
-.table-hover > tbody > tr.waitingcolor:hover > td{
+.table-hover > tbody > tr.waitingcolor:hover > td {
 	background-color: #FF6707;
- 	color: #F7F7F7;
- 	font-weight: bold;
+	color: #F7F7F7;
+	font-weight: bold;
 }
 
-.editableTable .cellEditing { 
+.editableTable .cellEditing {
 	padding: 0;
 	width: 50px;
-	height:auto;
-} 
-
-.editableTable .cellEditing input[type=text]{ 
-	width:60%;
-	height:100%; 
-	border:0; 
-	background-color:rgb(255,255,255); 
+	height: auto;
 }
+
+.editableTable .cellEditing input[type=text] {
+	width: 60%;
+	height: 100%;
+	border: 0;
+	background-color: rgb(255,255,255);
+}
+
+<style> 
+div.pagination {
+	padding: 3px;
+	margin: 3px;
+	text-align: center;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #AAAADD;
+	text-decoration: none; /* no underline */
+	color: #000099;
+}
+div.pagination a:hover, div.digg a:active {
+	border: 1px solid #000099;
+	color: #000;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #000099;
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
+}
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	color: #DDD;
+}
+</style>

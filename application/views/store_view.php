@@ -107,7 +107,6 @@ $(function () {
 		    <form  id="table_form" name="table_form" method="post">
 		        <div class="table-responsive">
 		            <table id="store_table" class="table table-striped table-bordered table-hover editableTable" border="0">
-		            	<caption style="font-size: 50px">Store</caption>
 		                <thead>
 		                    <tr>
 		                        <th style="max-width:30px; width:30px">รหัสร้าน</th>

@@ -1,4 +1,21 @@
 <script type="text/javascript">
+
+	function changePagination(pageId){
+		$(".flash").show();
+		$(".flash").fadeIn(400).html('Loading <img src="ajax-loader.gif" />');
+		var dataString = 'pageId='+ pageId;
+		$.ajax({
+	    	type: "POST",
+	   		url: "loadData.php",
+	   		data: dataString,
+	   		cache: false,
+	   		success: function(result){
+	   			$(".flash").hide();
+	     		$("#pageData").html(result);
+	   		}
+	 	});
+	}
+
     function load_asset() {
         var search_value = document['search_form']['search_storeasset'].value; 
         var url = '<?= base_url("temp/load_states") ?>/' + search_value; 

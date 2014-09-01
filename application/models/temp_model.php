@@ -32,7 +32,7 @@ class Temp_model extends CI_model {
 		$this -> db -> where('asset_typeid', $type_id);
 		$this -> db -> where('asset.id', $droptype);
 		$this -> db -> order_by('temperature.id', 'DESC');
-		//$this->db->limit(10);
+		$this->db->limit(10,0);
 		$query = $this -> db -> get();
 		$assets = array();
 		foreach ($query->result_array() as $row) {

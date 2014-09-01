@@ -1,21 +1,4 @@
 <script type="text/javascript">
-
-	function changePagination(pageId){
-		$(".flash").show();
-		$(".flash").fadeIn(400).html('Loading <img src="ajax-loader.gif" />');
-		var dataString = 'pageId='+ pageId;
-		$.ajax({
-	    	type: "POST",
-	   		url: "loadData.php",
-	   		data: dataString,
-	   		cache: false,
-	   		success: function(result){
-	   			$(".flash").hide();
-	     		$("#pageData").html(result);
-	   		}
-	 	});
-	}
-
     function load_asset() {
         var search_value = document['search_form']['search_storeasset'].value; 
         var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
@@ -105,59 +88,65 @@
     </div>    
     </div>    
     <div class="col-xs-6">
-    <div class="box" style="background-color: beige">
-
-        <form id="table_form" method="post">
-            <table class="table table-hover table table-hover" border="0">
-                <thead>
-                    <tr>
-                        <th style="width:100px">ลำดับที่</th>
-                        <th style="width:100px">อุณหภูมิ</th>
-                        <th style="width:100px">เวลา</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($id > 0) {
-                        $i = 1;
-                        foreach ($id as $r) {
-                        	if($r['status'] == 'ALERT') {
-	                            echo "<tr class='alertcolor'>";
-	                            echo "<td>{$i}</td>";
-	                            echo "<td>{$r['temp']}</td>";
-	                            echo "<td>{$r['time']}</td>";
-	                            echo "</tr>";
-							} else if($r['status'] == 'WAIT') {
-								echo "<tr class='waitingcolor'>";
-	                            echo "<td>{$i}</td>";
-	                            echo "<td>{$r['temp']}</td>";
-	                            echo "<td>{$r['time']}</td>";
-	                            echo "</tr>";
-							} else {
-								echo "<tr class='normalcolor'>";
-	                            echo "<td>{$i}</td>";
-	                            echo "<td>{$r['temp']}</td>";
-	                            echo "<td>{$r['time']}</td>";
-	                            echo "</tr>";
+	    <div class="box" style="background-color: beige">
+	
+	        <form id="table_form" method="post">
+	            <table class="table table-hover table table-hover" border="0">
+	                <thead>
+	                    <tr>
+	                        <th style="width:100px">ลำดับที่</th>
+	                        <th style="width:100px">อุณหภูมิ</th>
+	                        <th style="width:100px">เวลา</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <?php
+	                    if ($id > 0) {
+	                        $i = 1;
+	                        foreach ($id as $r) {
+	                        	if($r['status'] == 'ALERT') {
+		                            echo "<tr class='alertcolor'>";
+		                            echo "<td>{$i}</td>";
+		                            echo "<td>{$r['temp']}</td>";
+		                            echo "<td>{$r['time']}</td>";
+		                            echo "</tr>";
+								} else if($r['status'] == 'WAIT') {
+									echo "<tr class='waitingcolor'>";
+		                            echo "<td>{$i}</td>";
+		                            echo "<td>{$r['temp']}</td>";
+		                            echo "<td>{$r['time']}</td>";
+		                            echo "</tr>";
+								} else {
+									echo "<tr class='normalcolor'>";
+		                            echo "<td>{$i}</td>";
+		                            echo "<td>{$r['temp']}</td>";
+		                            echo "<td>{$r['time']}</td>";
+		                            echo "</tr>";
+								}
+								$i++;
 							}
-							$i++;
-						}
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </form>
-</ul>
-</div>
+	                    }
+	                    ?>
+	                </tbody>
+	            </table>
+	            <div class="col-md-offset-4">
+	            <ul class="pagination">
+					<li class="<?= $selectpage == 1 ? 'active' : '' ?>" id="fristpage"><a href="#">1</a></li>
+					<li class="<?= $selectpage == 2 ? 'active' : '' ?>" id="second"><a href="#">2</a></li>
+					<li class="<?= $selectpage == 3 ? 'active' : '' ?>" id="third"><a href="#">3</a></li>
+					<li class="<?= $selectpage == 4 ? 'active' : '' ?>" id="forth"><a href="#">4</a></li>
+					<li class="<?= $selectpage == 5 ? 'active' : '' ?>" id="fifth"><a href="#">5</a></li>
+				</ul>
+				</div>
+	        </form>		
+		</div>
+	</div>
 </div>
 
-
-
-</div>
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
     setTimeout(a, 5000);
     function a() {
         $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
         setTimeout(a, 5000);
     }
-</script>
+</script> -->

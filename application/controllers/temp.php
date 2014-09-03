@@ -88,5 +88,9 @@ class Temp extends CI_Controller {
 			echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
 		}
 	}
-
+	
+	public function sendpage($pagenum) {
+		$showTable["selectpage"] = $pagenum;
+		//$this -> view -> page_view("temp_view", $showTable);
+	}
 }

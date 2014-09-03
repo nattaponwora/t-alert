@@ -31,7 +31,13 @@
             },
             monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
-    });
+        
+        $("#export_pdf").on("click", function () { 	
+			$.post("<?=base_url('reportstore/exporttopdf')?>",$('#table_form').serialize(),function(response){
+	 			//$('#show').html(response);
+			});
+		}); 
+	});
         
 
 	function load_assettype() {
@@ -121,8 +127,8 @@
 		</form>
 		
 		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('report/exportpdf') ?>" role="form">
-			<button class="btn btn-danger" type="button" style="width: 100%;margin: 0px auto 0px auto" onclick="">
+		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportstore/exportopdf') ?>" role="form">
+			<button class="btn btn-danger" type="submit" style="width: 100%;margin: 0px auto 0px auto" onclick="">
 				Export to PDF
 			</button>
 		</form>

@@ -146,6 +146,6 @@ class Reportstore_model extends CI_model {
 			$pdf->Cell( 45  , $boxh , iconv('UTF-8', 'cp874', $avg), 'LRB' );
 			$pdf->setXY( $x, $y+= $space  );
 		}
-		$pdf -> Output('storereport.pdf', 'F');
+		$pdf -> Output('storereport.pdf', 'D');
 	}
 }

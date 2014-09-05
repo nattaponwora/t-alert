@@ -9,24 +9,22 @@
     function load_assettype() {
         var search_value = document['search_form']['search_storeasset'].value; 
         var search_valuelist = document['search_form']['search_assetlist'].value; 
-        
-        //alert(search_valuelist);
-        var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
+                var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
         loadStates(url, 'assettypelist');      
     }
     
-    $(function () {
-		$(".pagec").on("click", function () { 	
-			var current_page = $(this).text();
-			alert(current_page);
-			<?php $selectpage ?> = current_page;
-			$.post("<?= base_url('temp/sendpage')?>/" + current_page, $('#table_form').serialize(), 
-				function(response){
-	 				
-				}
-			);
-		}); 
-	});
+    // $(function () {
+		// $(".pagec").on("click", function () { 	
+			// var current_page = $(this).text();
+			// alert(current_page);
+			// <?php $selectpage ?> = current_page;
+			// $.post("<?= base_url('temp/sendpage')?>/" + current_page, $('#table_form').serialize(), 
+				// function(response){
+// 	 				
+				// }
+			// );
+		// }); 
+	// });
 </script>
     
 <div class="container box" style="background-color: beige">
@@ -143,7 +141,7 @@
 	                </tbody>
 	            </table>
 	            
-	            <div class="col-md-offset-4">
+	            <!-- <div class="col-md-offset-4">
 	            	
 		            <ul class="pagination" id="pagination">
 						<li class="<?= $selectpage == 1 ? 'active' : 'last' ?> pagec"><a>1</a></li>
@@ -153,17 +151,17 @@
 						<li class="<?= $selectpage == 5 ? 'active' : 'last' ?> pagec"><a>5</a></li>
 					</ul>
 					<div id='show'></div>
-					<!-- <?php echo $selectpage; ?> -->
-				</div>
+					<?php echo $selectpage; ?>
+				</div> -->
 	        </form>		
 		</div>
 	</div>
 </div>
 
-<!-- <script type='text/javascript'>
+<script type='text/javascript'>
     setTimeout(a, 5000);
     function a() {
         $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
         setTimeout(a, 5000);
     }
-</script> -->
+</script>

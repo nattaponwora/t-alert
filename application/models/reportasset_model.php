@@ -190,20 +190,8 @@ class Reportasset_model extends CI_model {
 			$pdf->Cell( 36  , $boxh , iconv('UTF-8', 'cp874', $r["asset_shortname"]), 'LRB' );
 			$pdf->setXY( $x, $y+= $space  );
 		}
-		// $pdf->setXY( $x, $y+= ($space*2)  );
-		// $pdf->SetFont('cordia','B',$font_size);
-		// $pdf->Cell( 180  , $boxh , iconv('UTF-8', 'cp874', "ตาราง" ) , 1, 0 , 'C', TRUE);
-		// $pdf->setXY( $x, $y+= $space  );
-		// $pdf->SetFont('cordia','B',$font_size);
-		// $pdf->Cell( 45  , $boxh , iconv('UTF-8', 'cp874', "อุปกรณ์" ) ,'TLB', 0, 'C' );
-		// $pdf->SetFont('cordia','B',$font_size);
-		// $pdf->Cell( 45  , $boxh , iconv('UTF-8', 'cp874', "ชื่อย่ออุปกรณ์" ) ,'TLB', 0, 'C' );
-		// $pdf->SetFont('cordia','B',$font_size);
-		// $pdf->Cell( 45  , $boxh , iconv('UTF-8', 'cp874', "หมายเลขบาร์โค๊ด" ) ,'TLB', 0, 'C' );
-		// $pdf->SetFont('cordia','B',$font_size);
-		// $pdf->Cell( 45  , $boxh , iconv('UTF-8', 'cp874', "อุณหภูมิ" ) ,'TLRB', 0, 'C' );
 		
-		$pdf -> Output('assetreport.pdf', 'F');
+		$pdf -> Output('assetreport.pdf', 'D');
 	}
 
 	function set_excel(){

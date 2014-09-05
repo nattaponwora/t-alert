@@ -36,10 +36,8 @@ class Temp extends CI_Controller {
 		$showTable["selection"] = $this -> temp_model -> get_assetlist($searchTerm);
 		$showTable["selectiontype"] = $this -> temp_model -> get_assettypelist($searchTerm, $search_asset);
 
-		//$searchasset["store_id"] = $this->temp_model->searchasset();   //ไม่ได้ใช้
 		$showTable["id"] = $this -> temp_model -> showtable($searchTerm, $search_asset, $search_assettypelists);
 		$showTable["infomation"] = $this -> temp_model -> get_infomation($searchTerm, $search_asset, $search_assettypelists);
-		//$showTable[""]
 		if ($showTable["id"] == null) {
 
 		}

@@ -38,8 +38,16 @@
 			});
 		}); 
 	});
+	
+	$(document).ready(function () {
+        $("#export_excel").click(function () {
+            $("#table_export").btechco_excelexport({
+                containerid: "table_export"
+               , datatype: $datatype.Table
+            });
+        });
+    });
         
-
 	function load_assettype() {
 		var search_valuelist = document['search_form']['search_assetlist'].value;
 
@@ -64,7 +72,12 @@
 		<div class="form-group" id ="select_assettype_d" name="select_assettype_d">
 			<label class="control-label">รหัสร้าน</label>
 			<div class="form-group">
-		  		<input class="form-control" id="search_storeasset" name="search_storeasset">
+				<?php if($searchTerm == null) { ?>
+		  		<input class="form-control" id="search_storeasset" name="search_storeasset" type="text" />
+		  		<?php } ?>
+            	<?php if($searchTerm != null) { ?>
+            	<input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" />
+            	<?php } ?>
 			</div>
 		</div>
 
@@ -79,7 +92,7 @@
 	<div class="container box" style="background-color: beige">
 
 		<form id="table_form" method="post">
-			<table class="table table- -->hover table table-hover" border="0">
+			<table id="table_export" class="table table- -->hover table table-hover" border="0">
 				<thead>
 					<tr>
 						<th style="width:100px">ลำดับที่</th>
@@ -120,15 +133,31 @@
 	<div class="form-inline" style="width: 25%;margin: 0px auto 0px auto">
 		<br>
 		<br>
-		<form id="export_excel" name="export_excel" class="form-group" role="form">
-			<button class="btn btn-success btn-block" type="button" style="width: 100%;margin: 0px auto 0px auto">
+		<form class="form-group" role="form">
+			<button id="export_excel" class="btn btn-success btn-block" type="button" style="width: 100%;margin: 0px auto 0px auto">
 				Export to Excel
 			</button>
 		</form>
 		
 		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportstore/exportopdf') ?>" role="form">
-			<button class="btn btn-danger" type="submit" style="width: 100%;margin: 0px auto 0px auto" onclick="">
+		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportstore/exporttopdf') ?>" role="form" method="post">
+			<?php if($searchTerm == null) { ?>
+	  		<input class="form-control" id="search_storeasset" name="search_storeasset" type="hidden" />
+	  		<?php } ?>
+        	<?php if($searchTerm != null) { ?>
+        	<input class="form-control" id="search_storeasset" name="search_storeasset" type="hidden" value="<?= $searchTerm ?>" />
+        	<?php } ?>
+        	<?php if ( $begindate == null ) { ?>
+        	<input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
+	        <?php } if ( $begindate != null ) { ?>
+	        <input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate"  style="cursor: pointer" readonly="readonly"  value="<?= $begindate ?>" />
+	        <?php } ?>
+	        <?php if ( $lastdate == null ) { ?>
+	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  />
+	        <?php } if ( $lastdate != null ) { ?>
+	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
+	       	<?php } ?>
+			<button class="btn btn-danger" type="submit" style="width: 100%;margin: 0px auto 0px auto">
 				Export to PDF
 			</button>
 		</form>

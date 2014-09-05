@@ -21,6 +21,15 @@
             monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
     });
+
+	$(document).ready(function () {
+        $("#export_excel").click(function () {
+            $("#table_export").btechco_excelexport({
+                containerid: "table_export"
+               , datatype: $datatype.Table
+            });
+        });
+    });
         
 
 	function load_assettype() {
@@ -61,7 +70,7 @@
 	<div class="container box" style="background-color: beige">
 
 		<form id="table_form" method="post">
-			<table class="table table- -->hover table table-hover" border="0">
+			<table id="table_export" class="table table- -->hover table table-hover" border="0">
 				<thead>
 					<tr>
 						<th style="width:100px">ลำดับที่</th>
@@ -69,7 +78,7 @@
 						<th style="width:100px">ชื่อสาขา</th>
 						<th style="width:100px">อุปกรณ์</th>
 						<th style="width:100px">หมายเลขบาร์โค้ด</th>
-						<th style="width:100px">อุณหภูมิ</th>
+						<th style="width:100px">อุณหภูมิเฉลี่ย</th>
 						<th style="width:100px">ชื่อย่ออุปกรณ์</th>					
 					</tr>
 				</thead>
@@ -101,15 +110,26 @@
 	<div class="form-inline" style="width: 25%;margin: 0px auto 0px auto">
 		<br>
 		<br>
-		<form id="export_excel" name="export_excel" class="form-group" role="form">
-			<button class="btn btn-success btn-block" type="button" style="width: 100%;margin: 0px auto 0px auto">
+		<form class="form-group" role="form" >
+			<button id="export_excel" class="btn btn-success btn-block" type="button" style="width: 100%;margin: 0px auto 0px auto">
 				Export to Excel
 			</button>
 		</form>
 		
 		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('report/exportpdf') ?>" role="form">
-			<button class="btn btn-danger" type="button" style="width: 100%;margin: 0px auto 0px auto" onclick="">
+		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportasset/exporttopdf') ?>" role="form" method="post">
+			<?php if ( $begindate == null ) { ?>
+        	<input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
+	        <?php } if ( $begindate != null ) { ?>
+	        <input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate"  style="cursor: pointer" readonly="readonly"  value="<?= $begindate ?>" />
+	        <?php } ?>
+	        <?php if ( $lastdate == null ) { ?>
+	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  />
+	        <?php } if ( $lastdate != null ) { ?>
+	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
+	       	<?php } ?>
+	       	<input class="form-control mouse_hover" type="hidden" id="set_search_asset" name="set_search_asset" value="<?= $search_asset ?>" />
+			<button class="btn btn-danger" type="submit" style="width: 100%;margin: 0px auto 0px auto" onclick="">
 				Export to PDF
 			</button>
 		</form>

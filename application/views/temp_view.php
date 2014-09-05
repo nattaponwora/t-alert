@@ -153,7 +153,7 @@
 						<li class="<?= $selectpage == 5 ? 'active' : 'last' ?> pagec"><a>5</a></li>
 					</ul>
 					<div id='show'></div>
-					<?php echo $selectpage; ?>
+					<!-- <?php echo $selectpage; ?> -->
 				</div>
 	        </form>		
 		</div>

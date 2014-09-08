@@ -13,18 +13,17 @@
         loadStates(url, 'assettypelist');      
     }
     
-    // $(function () {
-		// $(".pagec").on("click", function () { 	
-			// var current_page = $(this).text();
-			// alert(current_page);
-			// <?php $selectpage ?> = current_page;
-			// $.post("<?= base_url('temp/sendpage')?>/" + current_page, $('#table_form').serialize(), 
-				// function(response){
-// 	 				
-				// }
-			// );
-		// }); 
-	// });
+    $(function () {
+    	$('#table_page').dataTable( {
+        	"pagingType": "full_numbers"
+    	} );
+	});
+	
+	var table = $('#table_page').DataTable( {
+	    ajax: "data.json"
+	});
+	 
+	
 </script>
     
 <div class="container box" style="background-color: beige">
@@ -100,9 +99,8 @@
     </div>    
     <div class="col-xs-6">
 	    <div class="box" style="background-color: beige">
-	
-	        <form id="table_form" method="post">
-	            <table class="table table-hover table table-hover" border="0">
+	   		<form id="table_form" method="post">
+	            <table id="table_page" class="table table-striped table-hover " cellspacing="0" width="100%" border="0">
 	                <thead>
 	                    <tr>
 	                        <th style="width:100px">ลำดับที่</th>
@@ -122,7 +120,7 @@
 		                            echo "<td>{$r['time']}</td>";
 		                            echo "</tr>";
 								} else if($r['status'] == 'WAIT') {
-									echo "<tr class='waitingcolor'>";
+									echo "<tr class='waitcolor'>";
 		                            echo "<td>{$i}</td>";
 		                            echo "<td>{$r['temp']}</td>";
 		                            echo "<td>{$r['time']}</td>";
@@ -140,28 +138,18 @@
 	                    ?>
 	                </tbody>
 	            </table>
-	            
-	            <!-- <div class="col-md-offset-4">
-	            	
-		            <ul class="pagination" id="pagination">
-						<li class="<?= $selectpage == 1 ? 'active' : 'last' ?> pagec"><a>1</a></li>
-						<li class="<?= $selectpage == 2 ? 'active' : 'last' ?> pagec"><a>2</a></li>
-						<li class="<?= $selectpage == 3 ? 'active' : 'last' ?> pagec"><a>3</a></li>
-						<li class="<?= $selectpage == 4 ? 'active' : 'last' ?> pagec"><a>4</a></li>
-						<li class="<?= $selectpage == 5 ? 'active' : 'last' ?> pagec"><a>5</a></li>
-					</ul>
-					<div id='show'></div>
-					<?php echo $selectpage; ?>
-				</div> -->
 	        </form>		
 		</div>
 	</div>
 </div>
 
 <script type='text/javascript'>
-    setTimeout(a, 5000);
-    function a() {
-        $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
-        setTimeout(a, 5000);
-    }
+    // setTimeout(a, 5000);
+    // function a() {
+        // $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
+        // setTimeout(a, 5000);
+    // }
+    setInterval( function () {
+	    table.ajax.reload();
+	}, 5000 );
 </script>

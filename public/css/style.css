@@ -4,7 +4,7 @@
 
 .alertcolor {
 	background-color: #f36c60;
-	color: #F7F7F7;
+	/*color: #F7F7F7;*/
 	font-weight: bold;
 }
 
@@ -14,13 +14,13 @@
 	font-weight: bold;
 }
 
-.waitingcolor {
+.waitcolor {
 	background-color: orange;
-	color: #F7F7F7;
+	/*color: #F7F7F7;*/
 	font-weight: bold;
 }
 
-.table-hover > tbody > tr.waitingcolor:hover > td {
+.table-hover > tbody > tr.waitcolor:hover > td {
 	background-color: #FF6707;
 	color: #F7F7F7;
 	font-weight: bold;

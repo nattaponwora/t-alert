@@ -87,8 +87,8 @@ class Temp extends CI_Controller {
 		}
 	}
 	
-	public function sendpage($pagenum) {
-		$showTable["selectpage"] = $pagenum;
-		//$this -> view -> page_view("temp_view", $showTable);
+	public function sendpage($getpage) {
+		$showTable["selectpage"] = $getpage;
+		$this -> view -> page_view("temp_view", $showTable);
 	}
 }

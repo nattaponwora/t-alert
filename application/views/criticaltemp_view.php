@@ -59,7 +59,7 @@
 		                    if( $c['status'] == 'WAIT') {
 	                        	foreach ($id as $r) {
 	                        		if($c['id'] == $r['id']) {
-			                            echo "<tr class='waitingcolor'>";	
+			                            echo "<tr class='waitcolor'>";	
 										echo "<td>{$r['store_id']}</td>";
 			                            echo "<td>{$r['store_name']}</td>";
 										echo "<td>{$r['type']}</td>";

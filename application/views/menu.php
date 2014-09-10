@@ -35,9 +35,9 @@
 				<li class="<?= (($session_page == 'store') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("store") ?>">Store</a>
 				</li>
-				<li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
+				<!-- <li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("register") ?>">Register</a>
-				</li>
+				</li> -->
 				
 				<li class="dropdown <?= (($session_page == 'reportstore' || ($session_page == 'reportasset') ) ?  'active' : 'last'); ?>">
 		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <b class="caret"></b></a>

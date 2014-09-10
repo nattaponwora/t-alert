@@ -13,8 +13,9 @@ $(function () {
 					  
 		$('#store_table').append(new_row);		
 		$('#add_icon').hide();
-		$('#add_form').append("<img class='col-xs-offset-11' id='add_btn' name='add_btn' src='public/images/icon/save_icon.png' height='32px' width='32px' />");
-		
+		$('#add_form').append("<img class='col-xs-offset-10' id='add_btn' name='add_btn' src='public/images/icon/save_icon.png' height='32px' width='32px' />");				
+		$('#add_form').append("<img class='col-xs-offset-1' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
+
 		$("#add_btn").on("click", function () {
 			$.post("<?=base_url('store/addval')?>",$('#table_form').serialize(),function(response){
 				$('#show').html(response);
@@ -35,6 +36,27 @@ $(function () {
 			$(tr).attr('id', $(textbox[0]).text());
 			$('#add_icon').show();
 			$("#add_btn").remove();
+			$("#cancel_btn").remove();
+		});
+		
+		$("#cancel_btn").on("click", function () {
+			var textbox = $("#edition").find('td');
+			for(i=0; i<textbox.length; i++) {
+				var newContent = $(textbox[i]).children().val();
+				$(textbox[i]).removeClass();
+				$(textbox[i]).addClass("editable"); 
+				$(textbox[i]).text(newContent);				
+				checkpoint_id = null;
+				checkpoint_type = null;
+				checkpoint_value = null;
+			}
+			
+			var tr = $("#edition");
+			$(tr).attr('id', $(textbox[0]).text());
+			$('#add_icon').show();
+			$("#add_btn").remove();
+			$("#cancel_btn").remove();
+			$("#new_row").remove();
 		});
 	}); 
 	
@@ -134,7 +156,7 @@ $(function () {
 		        </div>
 			</form>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
+				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>	
 			</form>
 		</div>
 	</div>

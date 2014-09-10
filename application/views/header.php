@@ -8,7 +8,6 @@
     <?php
         echo link_tag( "public/bootstrap/css/bootstrap.css" , 'stylesheet');
         echo link_tag( "public/jquery/ui/1.10.3/themes/smoothness/jquery-ui.css" , 'stylesheet');
-		// echo link_tag( "public/dataTables.bootstrap.css" , 'stylesheet');
 		echo link_tag( "public/jquery.dataTables.css" , 'stylesheet');
         echo link_tag( "public/css/style.css" , 'stylesheet');
     ?>
@@ -23,3 +22,5 @@
     <script type="text/javascript" src="<?= base_url("public/jquery.battatech.excelexport.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/dataTables.bootstrap.js") ?>"></script>
     <script type="text/javascript" src="<?= base_url("public/jquery.dataTables.min.js") ?>"></script>
+    <script type="text/javascript" src="<?= base_url("public/fnReloadAjax.js") ?>"></script>
+    <script type="text/javascript" src="<?= base_url("public/sum().js") ?>"></script>

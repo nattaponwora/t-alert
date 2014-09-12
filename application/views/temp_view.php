@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 	var count = 0;
     function load_asset() {
@@ -15,13 +14,31 @@
         loadStates(url, 'assettypelist');      
     }
     $(function () {
+    	
+    	$( "#dialog" ).dialog({
+		    modal: true,
+		    autoOpen: false,
+		   	buttons: {
+		    	OK: function() {
+		    		$( this ).dialog( "close" );
+		        }
+		    },
+		    show: {
+		    	effect: "blind",
+		    	duration: 500
+		  	}
+		});
+		
     	$('#table_page').dataTable( {
         	"pagingType": "full_numbers",
         	"order": [ 3, 'desc' ],
+        	"sort" : false,
+        	"searching": false,
+        	"info": false,
         	"columnDefs": [{
         		"targets": [0],
             	"visible": false,
-            	"searchable": false
+            	"searchable": false,	
             }]
     	});
    	});
@@ -47,7 +64,10 @@
         		
         		t.column(3).order( 'desc' );
         		
-        		if(arrayItem.status == 'ALERT'){$( rowNode ).addClass('alertcolor first');}
+        		if(arrayItem.status == 'ALERT'){
+        			$( "#dialog" ).dialog( "open" );
+        			$( rowNode ).addClass('alertcolor first');
+        		}
         		else if(arrayItem.status == 'WAIT'){$( rowNode ).addClass('waitcolor first');};
         		//else if(arrayItem.status == 'NORMAL'){$( rowNode ).addClass('normalcolor');};
         		$(rowNode).attr('order', order - 1);
@@ -57,6 +77,10 @@
 	 }	
 </script>
     
+<div id="dialog" title="Alert">
+	<p>อุณหภูมิผิดปรกติ</p>
+</div>
+
 <div class="container box" style="background-color: beige">
     <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
         <label>รหัสร้าน</label>
@@ -136,7 +160,7 @@
 	                    <tr>
 	                    	<th class="hidden" style="width:100px">id</th>
 	                    	<th style="width:100px">อุณหภูมิ</th>
-	                        <th style="width:100px">เวลาที่เกิดขึ้น(นาที)</th>
+	                        <th style="width:100px">เวลาที่เกินมาตรฐาน(นาที)</th>
 	                        <th style="width:100px">เวลา</th>
 	                    </tr>
 	                </thead>

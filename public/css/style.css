@@ -40,6 +40,11 @@
 }
 
 <style> 
+.dialog-title{
+	background-color: #ffe7cf;
+	color:#f48000;
+}
+
 div.pagination {
 	padding: 3px;
 	margin: 3px;

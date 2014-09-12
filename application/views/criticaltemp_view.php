@@ -1,4 +1,3 @@
-
 <div class="row">  
     <div class="box" style="width: 80%; background-color: beige">
         <form id="table_form" method="post">

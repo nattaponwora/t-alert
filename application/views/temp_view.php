@@ -44,16 +44,10 @@
    	});
 	
 	function test() {
-	 	//alert("in");
-	 	
-	 	//t.fnReloadAjax();
-	 	// count = 0;
 	 	$.getJSON('<?= base_url("temp/show") ?>', function(data) {
       		$.each(data, function(k, arrayItem) {	
       			var t = $('#table_page').DataTable();
-        		//alert(arrayItem.id + " " + arrayItem.temp + " " + arrayItem.status + " " + arrayItem.time + " " + arrayItem.abnormal_period);
         		var order = $('.first').attr('order');
-        		//alert(order + ' ' + (order-1));
         		$('.first').removeClass('first');
         		var rowNode = t.row.add( [
         			(count--),
@@ -69,7 +63,6 @@
         			$( rowNode ).addClass('alertcolor first');
         		}
         		else if(arrayItem.status == 'WAIT'){$( rowNode ).addClass('waitcolor first');};
-        		//else if(arrayItem.status == 'NORMAL'){$( rowNode ).addClass('normalcolor');};
         		$(rowNode).attr('order', order - 1);
       		});
 	 	});
@@ -156,7 +149,7 @@
 	    <div class="box" style="background-color: beige">
 	   		<form id="table_form" method="post">
 	            <table id="table_page" class="table table-hover " cellspacing="0" width="100%" border="0">
-	                <thead>
+	                <thead class="center">
 	                    <tr>
 	                    	<th class="hidden" style="width:100px">id</th>
 	                    	<th style="width:100px">อุณหภูมิ</th>

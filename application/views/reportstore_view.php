@@ -134,7 +134,7 @@
 		<br>
 		<br>
 		<form class="form-group" role="form">
-			<button id="export_excel" class="btn btn-success btn-block" type="button" style="width: 100%;margin: 0px auto 0px auto">
+			<button id="export_excel" class="button green medium" type="button" style="width: 100%;margin: 0px auto 0px auto">
 				Export to Excel
 			</button>
 		</form>
@@ -157,7 +157,7 @@
 	        <?php } if ( $lastdate != null ) { ?>
 	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
 	       	<?php } ?>
-			<button class="btn btn-danger" type="submit" style="width: 100%;margin: 0px auto 0px auto">
+			<button class="button orange medium" type="submit" style="width: 100%;margin: 0px auto 0px auto">
 				Export to PDF
 			</button>
 		</form>

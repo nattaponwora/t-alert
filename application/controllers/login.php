@@ -41,7 +41,7 @@ class Login extends CI_Controller {
 							'path'   => '/',
 			);
 			$this -> input -> set_cookie($cookie);
-			redirect('/index/', 'refresh');
+			redirect('/temp/', 'refresh');
 		} else {
 			delete_cookie("username_cookie");
 			redirect('/login/', 'refresh');

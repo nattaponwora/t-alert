@@ -1,5 +1,5 @@
 <div class="row">  
-    <div class="box" style="width: 80%; background-color: beige">
+    <div class=" box" style="width: 80%; background-color: beige">
         <form id="table_form" method="post">
             <table class="table table- -->hover table table-hover" border="0">
                 <thead>

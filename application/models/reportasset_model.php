@@ -13,7 +13,7 @@ class Reportasset_model extends CI_model {
         $this->db->from('asset');
         $this->db->join('temperature', 'temperature.asset_id = asset.id');
         $this->db->join('asset_type', 'asset_type.id = asset.asset_typeid');
-        $this->db->where('asset_typeid', $type_id);
+		if($type_id != 0) $this->db->where('asset_typeid', $type_id);
         $this->db->where('temperature.time >=', $begindate);
 		$this->db->where('temperature.time <=', $lastdate);
 		$this->db->group_by(array('asset.store_id', 'asset.store_name', 'asset.asset_barcode', 'asset.asset_shortname', 'asset_type.type'));
@@ -97,7 +97,7 @@ class Reportasset_model extends CI_model {
 	function get_type($in) {
 		$this->db->select('asset_type.type');
 		$this->db->from('asset_type');
-		$this->db->where('asset_type.id', $in);
+		if($in != 0 )$this->db->where('asset_type.id', $in);
 		$query = $this->db->get();
 		$assets[] = null;
 		foreach ($query->result_array() as $row) {

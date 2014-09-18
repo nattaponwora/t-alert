@@ -27,7 +27,7 @@ class Reportasset extends CI_Controller {
 		$search_asset = $this -> input -> post('search_assetlist');
 		$begindate = $this -> input -> post('begindate');
 		$lastdate = $this -> input -> post('lastdate');
-
+		
 		$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
 		$showTable["id"] = $this -> reportasset_model -> showtable($search_asset, $begindate, $lastdate);
 		if ($showTable["id"] == null) {

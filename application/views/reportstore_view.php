@@ -81,7 +81,7 @@
 			</div>
 		</div>
 
-		<button id="search" name="search" type="submit" class="btn btn-primary">
+		<button id="search" name="search" type="submit" class="button blue small">
 			Search
 		</button>
 	</form>
@@ -139,7 +139,7 @@
 			</button>
 		</form>
 		
-		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		&nbsp&nbsp&nbsp
 		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportstore/exporttopdf') ?>" role="form" method="post">
 			<?php if($searchTerm == null) { ?>
 	  		<input class="form-control" id="search_storeasset" name="search_storeasset" type="hidden" />

@@ -53,9 +53,10 @@ $(function () {
 			var tr = $("#edition");
 			$(tr).attr('id', $(textbox[0]).text());
 			$('#add_icon').show();
-			$("#add_btn").remove();
+			$("#add_btntech").remove();
 			$("#cancel_btn").remove();
-			$("#new_row").remove();
+			$(tr).remove();
+			
 		});
 	}); 
 	
@@ -128,7 +129,7 @@ $(function () {
 				<div class="table-responsive">
 					<table id="teachnical_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 						<thead>
-							<tr>
+							<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef;">
 								<th style="max-width:30px; width: 30px">ทีม</th>
 								<th style="max-width:50px; width: 50px">หัวหน้าแผนก</th>
 								<th style="max-width:50px; width: 50px">เบอร์โทร</th>

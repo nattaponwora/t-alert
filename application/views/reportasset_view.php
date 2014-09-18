@@ -59,7 +59,7 @@
 			<?= form_dropdown('search_assetlist', $selection, $search_asset, $js2); ?>
 		</div>
 
-		<button id="search" name="search" type="submit" class="btn btn-primary">
+		<button id="search" name="search" type="submit" class="button blue small">
 			Search
 		</button>
 	</form>
@@ -116,7 +116,7 @@
 			</button>
 		</form>
 		
-		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		&nbsp&nbsp&nbsp
 		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportasset/exporttopdf') ?>" role="form" method="post">
 			<?php if ( $begindate == null ) { ?>
         	<input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />

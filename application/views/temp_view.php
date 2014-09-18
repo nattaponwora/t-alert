@@ -10,7 +10,7 @@
     function load_assettype() {
         var search_value = document['search_form']['search_storeasset'].value; 
         var search_valuelist = document['search_form']['search_assetlist'].value; 
-                var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
+        var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
         loadStates(url, 'assettypelist');      
     }
     $(function () {
@@ -32,7 +32,7 @@
     	$('#table_page').dataTable( {
         	"pagingType": "full_numbers",
         	"order": [ 3, 'desc' ],
-        	"sort" : false,
+        	"sort" : true,
         	"searching": false,
         	"info": false,
         	"columnDefs": [{
@@ -50,7 +50,7 @@
         		var order = $('.first').attr('order');
         		$('.first').removeClass('first');
         		var rowNode = t.row.add( [
-        			(count--),
+        			count,
         			arrayItem.temp,
         			arrayItem.abnormal_period,
             		arrayItem.time
@@ -64,6 +64,7 @@
         		}
         		else if(arrayItem.status == 'WAIT'){$( rowNode ).addClass('waitcolor first');};
         		$(rowNode).attr('order', order - 1);
+        		count--;
       		});
 	 	});
 	 	setTimeout(test, 3000);
@@ -71,7 +72,7 @@
 </script>
     
 <div id="dialog" title="Alert">
-	<p>อุณหภูมิผิดปรกติ</p>
+	<p>อุณหภูมิผิดปกติ</p>
 </div>
 
 <div class="container box" style="background-color: beige">
@@ -99,7 +100,7 @@
             <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
         </div>
         
-        <button id="search" name="search" type="submit" class="btn btn-primary">
+        <button id="search" name="search" type="submit" class="button blue small">
             Search
         </button>
     </form>
@@ -148,9 +149,9 @@
     <div class="col-xs-6">
 	    <div class="box" style="background-color: beige">
 	   		<form id="table_form" method="post">
-	            <table id="table_page" class="table table-hover " cellspacing="0" width="100%" border="0">
+	            <table id="table_page" class="table table-hover flat-table" cellspacing="0" width="100%" border="0">
 	                <thead class="center">
-	                    <tr>
+	                    <tr style="background-color: #004276; color: white;">
 	                    	<th class="hidden" style="width:100px">id</th>
 	                    	<th style="width:100px">อุณหภูมิ</th>
 	                        <th style="width:100px">เวลาที่เกินมาตรฐาน(นาที)</th>
@@ -202,9 +203,4 @@
 
 <script type='text/javascript'>
     setTimeout(test, 5000);
-   // function a() {
-        //$("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
-        //setTimeout(a, 5000);
-    //}
-    
 </script>

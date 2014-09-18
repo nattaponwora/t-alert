@@ -55,7 +55,6 @@ class Temp extends CI_Controller {
 		$old_searchterm = $current_tempview["searchTerm"];
 		$search_asset = $current_tempview["search_asset"];
 		$search_assettypelists = $current_tempview["search_assettypelists"];
-
 		$new_id = $this -> temp_model -> get_newid($old_id, $old_searchterm, $search_asset, $search_assettypelists);
 
 		if (sizeof($new_id) > 0) {

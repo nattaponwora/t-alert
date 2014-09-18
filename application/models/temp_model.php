@@ -94,15 +94,15 @@ class Temp_model extends CI_model {
 	}
 
 	function get_newid($old_id, $old_searchterm, $search_asset, $search_assettypelists) {
-		$this -> db -> select('temperature.id, temperature.temp, temperature.status, temperature.time, temperature.abnormal_period');
+		$this -> db -> select('asset.id, temperature.id, temperature.temp, temperature.status, temperature.time, temperature.abnormal_period');
 		$this -> db -> from('asset');
 		$this -> db -> join('temperature', 'temperature.asset_id = asset.id');
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
 		$this -> db -> where('temperature.id >', $old_id);
 		$this -> db -> where('asset.store_id', $old_searchterm);
 		$this -> db -> where('asset.asset_typeid', $search_asset);
-		$this -> db -> where('asset_type.id', $search_assettypelists);
-		$this -> db -> order_by('temperature.id', 'ASC');
+		$this -> db -> where('asset.id', $search_assettypelists);
+		//$this -> db -> order_by('temperature.id', 'ASC');
 		$query = $this -> db -> get();
 		$assets = array();
 		foreach ($query->result_array() as $row) {

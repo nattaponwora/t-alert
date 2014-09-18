@@ -3,25 +3,25 @@
 }
 
 .alertcolor {
-	background-color: #f36c60;
+	background-color: #dd191d;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
 .table-hover > tbody > tr.alertcolor:hover > td {
-	background-color: #B5191F;
+	background-color: #b0120a;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
 .waitcolor {
-	background-color: orange;
+	background-color: #ffa000;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
 .table-hover > tbody > tr.waitcolor:hover > td {
-	background-color: #FF6707;
+	background-color: #ff6f00;
 	color: #F7F7F7;
 	font-weight: bold;
 }
@@ -40,7 +40,7 @@
 }
 
 .button{
-	font:15px Calibri, Arial, sans-serif;
+	/*font:15px Calibri, Arial, sans-serif;*/
 
 	/* A semi-transparent text shadow */
 	text-shadow:1px 1px 0 rgba(255,255,255,0.4);
@@ -222,8 +222,26 @@
     border-radius:25px
 }
 
+
+/* Different colors */
+header.blue { background: #40B9D5; }
+header.green { background: #8BD540; }
+header.red { background: #D5405E; }
+header.purple { background: #C140D5; }
+header.dblue { background: #4058D5; }
+header.orange { background: #D56640; }
+
+ul a {
+		border-radius: 20px;
+}
+ul a:hover {
+	background: rgba(0,0,0,0.2);
+}
+ul a:active, ul a.active {
+	background: rgba(0,0,0,0.3);
+}
+
 <style>
- 
 .dialog-title {
 	background-color: #ffe7cf;
 	color: #f48000;

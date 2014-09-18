@@ -37,6 +37,7 @@ $(function () {
 			$('#add_icon').show();
 			$("#add_btn").remove();
 			$("#cancel_btn").remove();
+			
 		});
 		
 		$("#cancel_btn").on("click", function () {
@@ -57,6 +58,7 @@ $(function () {
 			$("#add_btn").remove();
 			$("#cancel_btn").remove();
 			$("#new_row").remove();
+			$(tr).remove();
 		});
 	}); 
 	
@@ -130,7 +132,7 @@ $(function () {
 		        <div class="table-responsive">
 		            <table id="store_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 		                <thead>
-		                    <tr>
+		                    <tr style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef;">
 		                        <th style="max-width:30px; width:30px">รหัสร้าน</th>
 		                        <th style="max-width:30px; width:30px">ชื้อร้าน</th>
 		                        <th style="max-width:30px; width:30px">เขต</th>

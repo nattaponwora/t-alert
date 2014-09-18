@@ -40,21 +40,32 @@ class Insertasset extends CI_Controller {
 	}
 
 	public function get_shortname($get_shortnameid) {
-		//$get_shortnameid = $this -> input -> post('assettype');
 		$assettype = $this -> insertasset_model -> get_assetshortname($get_shortnameid);
 		$states = '';
-		//document.getElementById(".$assettype.").innerHTM
 		if($get_shortnameid != 0) {
 			foreach($assettype as $r) {
 				echo "<span class='input-group-addon' id='shortname'>{$r}</span>";
-				echo "<input type='hidden' name='hidden_search_assetshortname_span' value =$r>";
+				echo "<input type='hidden' name='hidden_search_assetshortname_span' value ='$r'>";
 				echo "<input type='hidden' name='asset_typeid_d' value =$get_shortnameid>";
 				echo "<input class='form-control' type='text' id='search_assetshortname' name='search_assetshortname' required=''>";
 			}
 		}
 		else {
-			echo "<span class='input-group-addon' id='shortname'>:D</span>";
+			echo "<span class='input-group-addon' id='shortname'></span>";
 			echo "<input class='form-control' type='text' id='search_assetshortname' name='search_assetshortname' required=''>";
+		}
+	}
+	
+	public function get_storename($get_storenameid) {
+		$storename = $this -> insertasset_model -> get_storename($get_storenameid);
+		$states = '';
+		if($storename != null) {
+			foreach($storename as $r) {
+				echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='$r' required=''>";
+			}
+		}
+		else {
+			echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='' required=''>";
 		}
 	}
 }

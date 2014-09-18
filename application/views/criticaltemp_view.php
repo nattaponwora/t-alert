@@ -1,9 +1,32 @@
+<script>
+ $(function () {
+	
+	$( "#dialog" ).dialog({
+	    modal: true,
+	    autoOpen: false,
+	   	buttons: {
+	    	OK: function() {
+	    		$( this ).dialog( "close" );
+	        }
+	    },
+	    show: {
+	    	effect: "blind",
+	    	duration: 500
+	  	}
+	});
+});
+</script>
+
+<div id="dialog" title="Alert">
+	<p>อุณหภูมิผิดปกติ</p>
+</div>
+
 <div class="row">  
     <div class=" box" style="width: 80%; background-color: beige">
         <form id="table_form" method="post">
-            <table class="table table- -->hover table table-hover" border="0">
+            <table class="table table- -->hover table table-hover rwd-table" border="0">
                 <thead>
-                    <tr>
+                    <tr style="background-color: firebrick; color: white">
                     	<th style="width:100px">รหัสสาขา</th>
                         <th style="width:100px">ชื่อสาขา</th>
                         <th style="width:100px">อุปกรณ์</th>
@@ -11,7 +34,7 @@
                         <th style="width:100px">หมายเลขบาร์โค้ด</th>
                         <th style="width:100px">อุณหภูมิ</th>
                         <th style="width:100px">ระยะเวลา (hh:mm:ss)</th>
-                        <th style="width:100px">เวลาเริ่ม</th>
+                        <th style="width:150px">เวลาเริ่ม</th>
                     </tr>
                 </thead>
                 <tbody>

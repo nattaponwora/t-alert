@@ -48,5 +48,17 @@ class Insertasset_model extends CI_model {
 		}
 		return $assets;
 	}
+	
+	function get_storename($in) {
+		$this -> db -> select('store_id, store_name');
+		$this -> db -> from('store');
+		$this -> db -> where('store_id', $in);
+		$query = $this -> db -> get();
+		$assets = array();
+		foreach ($query->result_array() as $row) {
+			$assets[$row['store_id']] = $row['store_name'];
+		}
+		return $assets;
+	}
 
 }

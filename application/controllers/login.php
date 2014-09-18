@@ -36,11 +36,18 @@ class Login extends CI_Controller {
 
 		if ($data["id"] != null) {
 			$cookie = array('name' => 'username_cookie', 
-							'value' => 'username', 
+							'value' => 'username2', 
+							'expire' => '86500',
+							'path'   => '/',
+			);
+			
+			$log_user = array('name' => 'log_cookie', 
+							'value' => $username, 
 							'expire' => '86500',
 							'path'   => '/',
 			);
 			$this -> input -> set_cookie($cookie);
+			$this -> input -> set_cookie($log_user);
 			redirect('/temp/', 'refresh');
 		} else {
 			delete_cookie("username_cookie");
@@ -50,6 +57,7 @@ class Login extends CI_Controller {
 
 	public function logout() {
 		delete_cookie("username_cookie");
+		delete_cookie("log_cookie");
 		redirect('/login/', 'refresh');
 	}
 

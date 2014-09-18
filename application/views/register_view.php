@@ -29,17 +29,16 @@
                     </div>
                 </div>
 				<br>
-				<br>
-				<br>
+				
 				<div class="row">
 					<div class="form-group">
 						<div class="col-xs-4 col-xs-offset-3">
-							<button id="search" name="search" type="submit" class="btn btn-success btn-lg btn-block">
+							<button id="search" name="search" type="submit" class="button green big">
 								Submit
 							</button>
 						</div>
 						<div class="">
-							<button id="search" name="search" type="reset" class="btn btn-danger btn-lg ">
+							<button id="search" name="search" type="reset" class="button orange big">
 								Reset
 							</button>
 						</div>

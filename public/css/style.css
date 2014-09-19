@@ -241,7 +241,6 @@ ul a:active, ul a.active {
 	background: rgba(0,0,0,0.3);
 }
 
-<style>
 .dialog-title {
 	background-color: #ffe7cf;
 	color: #f48000;
@@ -298,4 +297,14 @@ div.pagination span.disabled {
 }
 /* End of Your Generated css
  |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-</style>
+
+.margin_center_no_okay {
+	position: absolute;
+    margin-left: 22px;
+    margin-top: 5px;
+}
+
+.margin_center_okay {
+	position: absolute;
+    margin-top: 5px;
+}

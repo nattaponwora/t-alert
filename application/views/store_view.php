@@ -13,8 +13,8 @@ $(function () {
 					  
 		$('#store_table').append(new_row);		
 		$('#add_icon').hide();
-		$('#add_form').append("<img class='col-xs-offset-10' id='add_btn' name='add_btn' src='public/images/icon/save_icon.png' height='32px' width='32px' />");				
-		$('#add_form').append("<img class='col-xs-offset-1' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
+		$('#add_form').append("<img class='col-xs-offset-10 mouse_hover' id='add_btn' name='add_btn' src='public/images/icon/save_icon.png' height='32px' width='32px' />");				
+		$('#add_form').append("<img class='col-xs-offset-1 mouse_hover' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
 
 		$("#add_btn").on("click", function () {
 			$.post("<?=base_url('store/addval')?>",$('#table_form').serialize(),function(response){
@@ -87,8 +87,8 @@ $(function () {
 			
 			$(this).addClass("cellEditing"); 
 			$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 			
-			$(this).append("&nbsp&nbsp<input type='image' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
-			$(this).append("<input type='image' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
+			$(this).append("&nbsp&nbsp<input class='margin_center_okay' type='image' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
+			$(this).append("<input class='margin_center_no_okay' type='image' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
 			
 			$(this).children().first().focus(); 
 			$("#ok").on("click", function(){
@@ -120,8 +120,9 @@ $(function () {
 			});
 		}
 	}); 
-	
-	
+	$(function() {
+		$('#store_table').dataTable();
+	});
 });
 </script>
 
@@ -157,6 +158,7 @@ $(function () {
 		            <div id='show'></div>
 		        </div>
 			</form>
+			<br>
 			<form id="add_form" name="add_form" method="post">
 				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>	
 			</form>

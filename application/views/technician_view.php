@@ -13,8 +13,8 @@ $(function () {
 					  
 		$('#teachnical_table').append(new_row);		
 		$('#add_icon').hide();
-		$('#add_form').append("<img class='col-xs-offset-10' id='add_btntech' name='add_btntech' src='public/images/icon/save_icon.png' height='32px' width='32px' />");
-		$('#add_form').append("<img class='col-xs-offset-1' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
+		$('#add_form').append("<img class='col-xs-offset-10 mouse_hover' id='add_btntech' name='add_btntech' src='public/images/icon/save_icon.png' height='32px' width='32px' />");
+		$('#add_form').append("<img class='col-xs-offset-1 mouse_hover' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
 		
 		$("#add_btntech").on("click", function () {
 			$.post("<?=base_url('technician/addval')?>",$('#table_form').serialize(),function(response){
@@ -36,6 +36,7 @@ $(function () {
 			$(tr).attr('id', $(textbox[0]).text());
 			$('#add_icon').show();
 			$("#add_btntech").remove();
+			$("#cancel_btn").remove();
 		});
 		
 		$("#cancel_btn").on("click", function () {
@@ -119,6 +120,10 @@ $(function () {
 			});
 		}
 	}); 
+	
+	$(function() {
+		$('#teachnical_table').dataTable();
+	});
 });
 </script>
 
@@ -127,7 +132,7 @@ $(function () {
 		<div class="form-group">
 			<form id="table_form" name="table_form" method="post">
 				<div class="table-responsive">
-					<table id="teachnical_table" class="table table-striped table-bordered table-hover editableTable" border="0">
+					<table id="teachnical_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 						<thead>
 							<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef;">
 								<th style="max-width:30px; width: 30px">ทีม</th>
@@ -154,6 +159,7 @@ $(function () {
 					<div id='show'></div>
 				</div>
 			</form>
+			<br>
 			<form id="add_form" name="add_form" method="post">
 				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
 			</form>

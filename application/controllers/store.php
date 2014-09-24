@@ -27,11 +27,6 @@ class Store extends CI_Controller {
 
 	public function addval() {
 		$data = $this -> input -> post();
-		// $this->view->p($data);
-		// $this->load->library('form_validation');
-		// $this->form_validation->set_rules('store_id_input', 'store_id_input', 'required');
-		// $this->form_validation->set_rules('store_name_input', 'store_name_input', 'required');
-		// $this->form_validation->set_rules('opt_team_input', 'opt_team_input', 'required');
 		$this -> store_model -> add_store($data);
 	}
 

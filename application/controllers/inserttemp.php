@@ -10,20 +10,20 @@ class Inserttemp extends CI_Controller {
     public function index() {
     	$cookie = get_cookie('username_cookie');
 		if( $cookie != null) {
-        	$data["assettype"] = $this -> inserttemp_model -> get_assettype();
-        	$this->view->page_view("inserttemp_view", $data);
+			$data["id"] = $this -> inserttemp_model -> get_asset();        	
+			$this->view->page_view("inserttemp_view", $data);
 		} else {
 			redirect('/login/', 'refresh');
 		} 
     }
-	
-	public function added() {
-		$insert["id"] = $this->input->post('select_assettype');
-		$insert["min_temp"] = $this->input->post('min_temp');
-		$insert["max_temp"] = $this->input->post('max_temp');
-		$insert["std_time"] = $this->input->post('std_time');
-		
-		$this->inserttemp_model->insert_asset($insert); 
-		redirect('/inserttemp/', 'refresh');
+
+	public function insert() {
+		$data = $this -> input -> post();
+		$this -> inserttemp_model -> edit_store($data);
+	}
+
+	public function addval() {
+		$data = $this -> input -> post();
+		$this -> inserttemp_model -> add_store($data);
 	}
 }

@@ -87,8 +87,8 @@ $(function () {
 			$(this).addClass("cellEditing"); 
 			$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 			
 			//$(this).append("<img id='ok' src='public/images/icon/ok_icon.png' height='32px' width='32px'/>");
-			$(this).append("&nbsp&nbsp<input type='image' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
-			$(this).append("<input type='image' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
+			$(this).append("&nbsp&nbsp<input type='image' class='margin_center_okay' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
+			$(this).append("<input type='image' class='margin_center_no_okay' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
 			
 			$(this).children().first().focus(); 
 			$("#ok").on("click", function(){

@@ -23,33 +23,44 @@
 				<li class="<?= (($session_page == 'criticaltemp') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("criticaltemp") ?>">รายการอุปกรณ์ที่ผิดปกติ</a>
 				</li>
-				<li class="<?= (($session_page == 'inserttemp') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("inserttemp") ?>">ตั้งค่าช่วงมาตรฐาน</a>
-				</li>
-				<li class="<?= (($session_page == 'insertasset') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("insertasset") ?>">Insert Asset</a>
-				</li>
-				<li class="<?= (($session_page == 'technician') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("technician") ?>">Technician</a>
-				</li>
-				<li class="<?= (($session_page == 'store') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("store") ?>">Store</a>
-				</li>
+				
 				<!-- <li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
 					<a href="<?= base_url("register") ?>">Register</a>
 				</li> -->
-				
+				<li class="dropdown <?= (($session_page == 'inserttemp' || ($session_page == 'insertasset') || ($session_page == 'technician' || ($session_page == 'store')) ) ?  'active' : 'last'); ?>">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">แก้ไขข้อมูล<b class="caret"></b></a>
+		        	<ul class="dropdown-menu">
+						<li class="<?= (($session_page == 'insertasset') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("insertasset") ?>">เพิ่มอุปกรณ์</a>
+						</li>
+						<li class="<?= (($session_page == 'insertmeter') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("insertmeter") ?>">อุปกรณ์ตรวจจับอุณหภูมิ</a>
+						</li>
+						<li class="<?= (($session_page == 'inserttemp') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("inserttemp") ?>">ตั้งค่าช่วงมาตรฐาน</a>
+						</li>
+						<li class="<?= (($session_page == 'technician') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("technician") ?>">เบอร์โทรศัพท์ทีมช่าง</a>
+						</li>
+						<li class="<?= (($session_page == 'store') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("store") ?>">สาขา 7-11</a>
+						</li>
+			        </ul>
+			 	</li>
+			 	
 				<li class="dropdown <?= (($session_page == 'reportstore' || ($session_page == 'reportasset') ) ?  'active' : 'last'); ?>">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Report <b class="caret"></b></a>
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">รายงาน<b class="caret"></b></a>
 		        	<ul class="dropdown-menu">
 			          	<li class="<?= (($session_page == 'reportasset') ?  'active' : 'last'); ?>">
-							<a href="<?= base_url("reportasset") ?>">Report Asset</a>
+							<a href="<?= base_url("reportasset") ?>">รายงานเฉพาะอุปกรณ์</a>
 						</li>
 			          	<li class="<?= (($session_page == 'reportstore') ?  'active' : 'last'); ?>">
-			          		<a href="<?= base_url("reportstore") ?>">Report Store</a>
+			          		<a href="<?= base_url("reportstore") ?>">รายงานเฉพาะร้าน</a>
 			       		</li>
 		        	</ul>
 		      	</li>
+		      	
+				
 			</ul>
 		
 			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("login/logout") ?>" method="post">

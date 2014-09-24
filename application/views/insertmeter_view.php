@@ -1,49 +1,57 @@
 <script>
 	$(function() {
-		var str = '<?=$storename?>';
-		var availableTags = str.split(',');
-		$( '#search_storeasset' ).autocomplete({
-			source: availableTags
-		});
-		
-		$('#insertasset_table').dataTable();
+		$('#insertmeter_table').dataTable();
 		
 		$("#add_icon").on("click", function () { 	
-			document.getElementById('dialog').style.display = "block";
-			$( "#dialog" ).bPopup({
+			document.getElementById('dialog2').style.display = "block";
+			$( "#dialog2" ).bPopup({
 				modalClose: true,
 	            opacity: 0.6,
-	            positionStyle: 'fixed' //'fixed' or 'absolute'
+	            positionStyle: 'absolute' //'fixed' or 'absolute'
 			});
 		});
 	});
 	
-	function change_shortname(){
-		var assettype = document['insert_form']['search_assettype'].value;		      	
-       	var url = '<?= base_url("insertasset/get_shortname") ?>/' + assettype; 
-        loadStates(url, 'search_assetshortname_span_d');  
-	}
-	
-	function change_storename(){
-		var storename = document['insert_form']['search_storeid'].value;		
-       	var url = '<?= base_url("insertasset/get_storename") ?>/' + storename; 
+	function load_asset() {
+		var search_value = document['insert_form']['search_storeasset'].value; 
+        var url = '<?= base_url("insertmeter/load_states") ?>/' + search_value; 
+        loadStates(url, 'assetlist'); 
+        
+		
+		var storename = document['insert_form']['search_storeasset'].value;		
+       	var url = '<?= base_url("insertmeter/get_storename") ?>/' + storename; 
         loadStates(url, 'search_storename_span_d');  
-	}
+        
+    	load_assettype(); 
+    }
+    
+    function load_assettype() {
+        var search_value = document['insert_form']['search_storeasset'].value; 
+        var search_valuelist = document['insert_form']['search_assetlist'].value; 
+        var url = '<?= base_url("insertmeter/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
+        loadStates(url, 'assettypelist');      
+    }
 </script>
+ 
 
-<div id="dialog" title="Insert Asset" style="display: none">
-	<form class="form-signin" name="insert_form" id="insert_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
+<div id="dialog2" title="Insert Meter" style="display: none; min-width: 500px">
+	<form class="form-signin" name="insert_form" id="insert_form" action= "<?= base_url("insertmeter/added") ?>" role="form" method="post">
 		<div class="row">
-			<div class="col-xs-6 col-xs-offset-3">
+			<div class="">
 				<div class="box" style="background-color: beige">
 					<br>
 					<br>
 					<div class="form-group">
+						<label class="col-sm-5 control-label">หมายเลขเครื่องวัด</label>
+						<div class="col-sm-4 input-group">
+					  		<input class="form-control" id="search_meterid" name="search_meterid" required="">
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-sm-5 control-label">รหัสร้าน</label>
 						<div class="col-sm-4 input-group">
-					  		<input class="form-control" id="search_storeid" name="search_storeid" required="" onchange="change_storename()">
-						</div>
-						
+					  		<input class="form-control" id="search_storeasset" name="search_storeasset" required="" onchange="load_asset()">
+						</div>			
 					</div>
 					<div class="form-group">
 						<label class="col-sm-5 control-label">ชื่อร้าน</label>
@@ -53,32 +61,20 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-5 control-label">ประเภทอุปกรณ์</label>
-						<div class="col-sm-7 input-group">
-							<?php $js = 'id="search_assettype" name="search_assettype" class="btn btn-default dropdown-toggle" onchange="change_shortname()"'; ?>
-							<?= form_dropdown('select_assettype', $assettype, null, $js); ?>
-						</div>
+						<div class="col-sm-7 input-group" id ="assetlist">            
+				            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+				            <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
+				        </div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
-						<div class="col-sm-2 input-group" id="search_assetshortname_span_d">
-							<span class="input-group-addon" id="shortname"></span>
-							<input type="hidden" name="hidden_search_assetshortname_span" value ="">
-							<input class="form-control" type="text" id="search_assetshortname" name="search_assetshortname" required="">
-						</div>
+						<div class="col-sm-2 input-group" id ="assettypelist">
+							<?php $js2 = 'id="search_assettypelist" name="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
+				            <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
+				        </div>
 					</div>
-					<div class="form-group">
-	                    <label class="col-sm-5 control-label">หมายเลขบาร์โค๊ดอุปกรณ์</label>
-	                    <div class="col-sm-4 input-group">
-	                        <input class="form-control" id="barcode_asset" name="barcode_asset"  required="">
-	                    </div>
-	                </div>
-	                <!-- <div class="form-group">
-	                    <label class="col-sm-5 control-label">หมายเลขเครื่องวัดอุณหภูมิ</label>
-	                    <div class="col-sm-1 input-group">
-	                        <input class="form-control" id="barcode_asset" name="barcode_asset"  required="">
-	                    </div>
-	                </div> -->
 					<br>
+					
 					<div class="row">
 						<div class="form-group">
 							<div class="col-xs-3 col-xs-offset-4">
@@ -93,31 +89,29 @@
 							</div>
 						</div>
 					</div>
-					
 				</div>
-				
 			</div>
 			<div id='show'></div>
 			<br>
 			<br>
 		</div>
 	</form>
-</div> 
- 
+</div>
+
 <form class="form-signin" name="table_form" id="table_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 	<div class="box" style="background-color: beige	; margin-top: 60px; width: 70%">
 		<div class="row">
 			<div class="form-group">
 				<form id="table_form" name="table_form" method="post">
 					<div class="table-responsive">
-						<table id="insertasset_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
+						<table id="insertmeter_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 							<thead>
 								<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef;">
+									<th style="max-width:30px; width: 30px">หมายเลขเครื่องวัด</th>
 									<th style="max-width:30px; width: 30px">รหัสร้าน</th>
 									<th style="max-width:50px; width: 50px">ชื่อร้าน</th>
 									<th style="max-width:50px; width: 50px">ประเภทอุปกรณ์</th>
 									<th style="max-width:50px; width: 50px">ชื่อย่ออุปกรณ์</th>
-									<th style="max-width:50px; width: 50px">หมายเลขบาร์โค๊ดอุปกรณ์</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -125,11 +119,11 @@
 								if ($data_table > 0) {
 									foreach ($data_table as $r) {
 										echo "<tr id='".$r['id']."'>";
+										echo "<td style='max-width:30px; width: 30px'>{$r['meter_id']}</td>";
 										echo "<td style='max-width:30px; width: 30px'>{$r['store_id']}</td>";
 										echo "<td style='max-width:50px; width: 50px'>{$r['store_name']}</td>";
 										echo "<td style='max-width:50px; width: 50px'>{$r['type']}</td>";
 										echo "<td style='max-width:50px; width: 50px'>{$r['asset_shortname']}</td>";
-										echo "<td style='max-width:50px; width: 50px'>{$r['asset_barcode']}</td>";
 										// echo ("<td><a href=\"edit_form.php?id=$row[employees_number]\">Edit</a></td></tr>");
 										//echo "<td><a href='".base_url('technician')."/".$count . "'>"."<img src='public/images/icon/edit_icon.png' height='32px' width='32px'></a></td>";
 										echo "</tr>";
@@ -149,4 +143,3 @@
 		</div>
 	</div>
 </form>
-

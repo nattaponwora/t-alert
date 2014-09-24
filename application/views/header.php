@@ -16,13 +16,15 @@
 	</head>
 	<body>
 		<script type="text/javascript" src="<?= base_url("public/jquery/jquery-1.11.1.min.js") ?>"></script>
-		<script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
 		<script type="text/javascript" src="<?= base_url("public/jquery/ui/1.11.1/jquery-ui.js") ?>"></script>
+		<script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
+		
 		<script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>
-
+		
 		<script type="text/javascript" src="<?= base_url("public/jquery.battatech.excelexport.js") ?>"></script>
 
 		
 		<script type="text/javascript" src="<?= base_url("public/jquery.dataTables.min.js") ?>"></script>
+		<script type="text/javascript" src="<?= base_url("public/bpopup.js") ?>"></script>
 		<!-- <script type="text/javascript" src="<?= base_url("public/dataTables.bootstrap.js") ?>"></script> -->
 

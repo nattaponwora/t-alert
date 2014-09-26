@@ -15,8 +15,10 @@ class Send_model extends CI_model {
         $result = $this -> db -> get();
         
         foreach( $result->result_array() as $row ){
-            return $row;
+            $this->view->p($row);
+            $r = $row;
         }
+        return $r;
     }
     
     function get_history($id) {

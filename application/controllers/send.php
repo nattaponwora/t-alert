@@ -15,7 +15,7 @@ class Send extends CI_Controller {
 	    $history = $this -> send_model -> get_history($asset_id);
         $wait_time = $type['std_time'];
         echo $period = strtotime('now') - strtotime($history['time']);
-        $this -> view -> p($type);
+        //$this -> view -> p($type);
         
         $last_status = $history['status'];
         $min = $type['min_temp'];

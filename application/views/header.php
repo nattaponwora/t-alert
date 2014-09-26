@@ -16,7 +16,9 @@
 	</head>
 	<body>
 		<script type="text/javascript" src="<?= base_url("public/jquery/jquery-1.11.1.min.js") ?>"></script>
+		<script type="text/javascript" src="<?= base_url("public/jquery/jquery-2.1.1.js") ?>"></script>
 		<script type="text/javascript" src="<?= base_url("public/jquery/ui/1.11.1/jquery-ui.js") ?>"></script>
+		
 		<script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
 		
 		<script type="text/javascript" src="<?= base_url("public/dynamic_dropdown.js") ?>"></script>

@@ -8,14 +8,7 @@
 		
 		$('#insertasset_table').dataTable();
 		
-		$("#add_icon").on("click", function () { 	
-			document.getElementById('dialog').style.display = "block";
-			$( "#dialog" ).bPopup({
-				modalClose: true,
-	            opacity: 0.6,
-	            positionStyle: 'fixed' //'fixed' or 'absolute'
-			});
-		});
+
 	});
 	
 	function change_shortname(){
@@ -31,11 +24,15 @@
 	}
 </script>
 
-<div id="dialog" title="Insert Asset" style="display: none">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  style="max-width: 500px; position: absolute; left: 0; right: 0; margin: 0 auto; overflow: hidden" >
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h4 class="modal-title" id="myModalLabel">Insert Asset</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
 	<form class="form-signin" name="insert_form" id="insert_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
-		<div class="row">
-			<div class="col-xs-6 col-xs-offset-3">
-				<div class="box" style="background-color: beige">
 					<br>
 					<br>
 					<div class="form-group">
@@ -92,18 +89,16 @@
 								</button>
 							</div>
 						</div>
-					</div>
-					
-				</div>
-				
-			</div>
+
 			<div id='show'></div>
 			<br>
 			<br>
 		</div>
 	</form>
+</div>
+  </div>
+</div>
 </div> 
- 
 <form class="form-signin" name="table_form" id="table_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 	<div class="box" style="background-color: beige	; margin-top: 60px; width: 70%">
 		<div class="row">
@@ -143,7 +138,7 @@
 				</form>
 				<br>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
+				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover" data-toggle="modal" data-target="#myModal"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
 			</form>
 			</div>
 		</div>

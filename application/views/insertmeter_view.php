@@ -1,15 +1,6 @@
 <script>
 	$(function() {
 		$('#insertmeter_table').dataTable();
-		
-		$("#add_icon").on("click", function () { 	
-			document.getElementById('dialog2').style.display = "block";
-			$( "#dialog2" ).bPopup({
-				modalClose: true,
-	            opacity: 0.6,
-	            positionStyle: 'absolute' //'fixed' or 'absolute'
-			});
-		});
 	});
 	
 	function load_asset() {
@@ -32,13 +23,17 @@
         loadStates(url, 'assettypelist');      
     }
 </script>
- 
 
-<div id="dialog2" title="Insert Meter" style="display: none; min-width: 500px">
-	<form class="form-signin" name="insert_form" id="insert_form" action= "<?= base_url("insertmeter/added") ?>" role="form" method="post">
-		<div class="row">
-			<div class="">
-				<div class="box" style="background-color: beige">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="max-width: 500px; position: absolute; left: 0; right: 0; margin: 0 auto; overflow: hidden" >
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h4 class="modal-title" id="myModalLabel">Insert Meter</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" name="insert_form" id="insert_form" action= "<?= base_url("insertmeter/added") ?>" role="form" method="post">
+
 					<br>
 					<br>
 					<div class="form-group">
@@ -90,13 +85,14 @@
 						</div>
 					</div>
 				</div>
-			</div>
 			<div id='show'></div>
 			<br>
 			<br>
-		</div>
-	</form>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <form class="form-signin" name="table_form" id="table_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 	<div class="box" style="background-color: beige	; margin-top: 60px; width: 70%">
@@ -137,9 +133,13 @@
 				</form>
 				<br>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
+				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover" data-toggle="modal" data-target="#myModal"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
 			</form>
 			</div>
 		</div>
 	</div>
 </form>
+
+<div id="dialog2" title="Insert Meter" style="display: none; min-width: 500px">
+	
+</div>

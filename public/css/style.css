@@ -1,41 +1,310 @@
-.mouse_hover{
-	cursor: pointer;	
+.mouse_hover {
+	cursor: pointer;
 }
 
-
-.alertcolor{
-	background-color: #f36c60;
+.alertcolor {
+	background-color: #dd191d;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
-.table-hover > tbody > tr.alertcolor:hover > td{
-	background-color: #B5191F;
- 	color: #F7F7F7;
- 	font-weight: bold;
-}
-
-
-.waitingcolor{
-	background-color: orange;
+.table-hover > tbody > tr.alertcolor:hover > td {
+	background-color: #b0120a;
 	color: #F7F7F7;
 	font-weight: bold;
 }
 
-.table-hover > tbody > tr.waitingcolor:hover > td{
-	background-color: #FF6707;
- 	color: #F7F7F7;
- 	font-weight: bold;
+.waitcolor {
+	background-color: #ffa000;
+	color: #F7F7F7;
+	font-weight: bold;
 }
 
-.editableTable .cellEditing { 
+.table-hover > tbody > tr.waitcolor:hover > td {
+	background-color: #ff6f00;
+	color: #F7F7F7;
+	font-weight: bold;
+}
+
+.editableTable .cellEditing {
 	padding: 0;
 	width: 50px;
-} 
+	height: auto;
+}
 
-.editableTable .cellEditing input[type=text]{ 
-	width:50%;
-	height:100%; 
-	border:0; 
-	background-color:rgb(255,255,255); 
+.editableTable .cellEditing input[type=text] {
+	width: 60%;
+	height: 100%;
+	border: 0;
+	background-color: rgb(255,255,255);
+}
+
+.button{
+	/*font:15px Calibri, Arial, sans-serif;*/
+
+	/* A semi-transparent text shadow */
+	text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+	
+	/* Overriding the default underline styling of the links */
+	text-decoration:none !important;
+	white-space:nowrap;
+	
+	display:inline-block;
+	vertical-align:baseline;
+	position:relative;
+	cursor:pointer;
+	padding:10px 20px;
+	
+	background-repeat:no-repeat;
+
+	/* The following two rules are fallbacks, in case
+	   the browser does not support multiple backgrounds. */
+
+	background-position:bottom left;
+	background-image:url('button_bg.png');
+	
+	/* Multiple backgrounds version. The background images
+	   are defined individually in color classes */
+	
+	background-position:bottom left, top right, 0 0, 0 0;
+	background-clip:border-box;
+	
+	/* Applying a default border raidus of 8px */
+	
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	
+	/* A 1px highlight inside of the button */
+	
+	-moz-box-shadow:0 0 1px #fff inset;
+	-webkit-box-shadow:0 0 1px #fff inset;
+	box-shadow:0 0 1px #fff inset;
+	
+	/* Animating the background positions with CSS3 */
+	/* Currently works only in Safari/Chrome */
+	
+	-webkit-transition:background-position 1s;
+	-moz-transition:background-position 1s;
+	transition:background-position 1s;
+}
+
+.button:hover{
+	
+	/* The first rule is a fallback, in case the browser
+	   does not support multiple backgrounds
+	*/
+	
+	background-position:top left;
+	background-position:top left, bottom right, 0 0, 0 0;
+}
+
+.button:active{
+	/* Moving the button 1px to the bottom when clicked */
+	bottom:-1px;
+}
+
+/* The three buttons sizes */
+
+.button.big		{ font-size:30px;}
+.button.medium	{ font-size:18px;}
+.button.small	{ font-size:13px;}
+
+/* A more rounded button */
+
+.button.rounded{
+	-moz-border-radius:4em;
+	-webkit-border-radius:4em;
+	border-radius:4em;
+}
+
+
+/* Defining four button colors */
+
+
+/* BlueButton */
+
+.blue.button{
+	color:#0f4b6d !important;
+	
+	border:1px solid #84acc3 !important;
+	
+	/* A fallback background color */
+	background-color: #48b5f2;
+	
+	/* Specifying a version with gradients according to */
+	
+	background-image:	url('button_bg.png'), url('button_bg.png'),
+						-moz-radial-gradient(	center bottom, circle,
+												rgba(89,208,244,1) 0,rgba(89,208,244,0) 100px),
+						-moz-linear-gradient(#4fbbf7, #3faeeb);
+
+	background-image:	url('button_bg.png'), url('button_bg.png'),
+						-webkit-gradient(	radial, 50% 100%, 0, 50% 100%, 100,
+											from(rgba(89,208,244,1)), to(rgba(89,208,244,0))),
+						-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4fbbf7), to(#3faeeb));
+}
+
+.blue.button:hover{
+	background-color:#63c7fe;
+	
+	background-image:	url('button_bg.png'), url('button_bg.png'),
+						-moz-radial-gradient(	center bottom, circle,
+												rgba(109,217,250,1) 0,rgba(109,217,250,0) 100px),
+						-moz-linear-gradient(#63c7fe, #58bef7);
+						
+	background-image:	url('button_bg.png'), url('button_bg.png'),
+						-webkit-gradient(	radial, 50% 100%, 0, 50% 100%, 100,
+											from(rgba(109,217,250,1)), to(rgba(109,217,250,0))),
+						-webkit-gradient(linear, 0% 0%, 0% 100%, from(#63c7fe), to(#58bef7));
+}
+
+/* Green Button */
+
+.green.button{
+	color:#345903 !important;
+	border:1px solid #96a37b !important;	
+	background-color: #79be1e;
+	
+	background-image:url('button_bg.png'), url('button_bg.png'), -moz-radial-gradient(center bottom, circle, rgba(162,211,30,1) 0,rgba(162,211,30,0) 100px),-moz-linear-gradient(#82cc27, #74b317);
+	background-image:url('button_bg.png'), url('button_bg.png'), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(162,211,30,1)), to(rgba(162,211,30,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#82cc27), to(#74b317));
+}
+
+.green.button:hover{
+	background-color:#89d228;
+	
+	background-image:url('button_bg.png'), url('button_bg.png'), -moz-radial-gradient(center bottom, circle, rgba(183,229,45,1) 0,rgba(183,229,45,0) 100px),-moz-linear-gradient(#90de31, #7fc01e);
+	background-image:url('button_bg.png'), url('button_bg.png'), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(183,229,45,1)), to(rgba(183,229,45,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#90de31), to(#7fc01e));
+}
+
+/* Orange Button */
+
+.orange.button{
+	color:#693e0a !important;
+	border:1px solid #bea280 !important;	
+	background-color: #e38d27;
+	
+	background-image:url('button_bg.png'), url('button_bg.png'), -moz-radial-gradient(center bottom, circle, rgba(232,189,45,1) 0,rgba(232,189,45,0) 100px),-moz-linear-gradient(#f1982f, #d4821f);
+	background-image:url('button_bg.png'), url('button_bg.png'), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(232,189,45,1)), to(rgba(232,189,45,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1982f), to(#d4821f));
+}
+
+.orange.button:hover{
+	background-color:#ec9732;
+	
+	background-image:url('button_bg.png'), url('button_bg.png'), -moz-radial-gradient(center bottom, circle, rgba(241,192,52,1) 0,rgba(241,192,52,0) 100px),-moz-linear-gradient(#f9a746, #e18f2b);
+	background-image:url('button_bg.png'), url('button_bg.png'), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(241,192,52,1)), to(rgba(241,192,52,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#f9a746), to(#e18f2b));
+}
+
+.gray.button{
+	color:#525252 !important;
+	border:1px solid #a5a5a5 !important;	
+	background-color: #a9adb1;
+	
+	background-image:url('button_bg.png'), url('button_bg.png'), -moz-radial-gradient(center bottom, circle, rgba(197,199,202,1) 0,rgba(197,199,202,0) 100px),-moz-linear-gradient(#c5c7ca, #92989c);
+	background-image:url('button_bg.png'), url('button_bg.png'), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(197,199,202,1)), to(rgba(197,199,202,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#c5c7ca), to(#92989c));
+}
+
+.gray.button:hover{
+	background-color:#b6bbc0;
+	
+	background-image:url('button_bg.png'), url('button_bg.png'), -moz-radial-gradient(center bottom, circle, rgba(202,205,208,1) 0,rgba(202,205,208,0) 100px),-moz-linear-gradient(#d1d3d6, #9fa5a9);
+	background-image:url('button_bg.png'), url('button_bg.png'), -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 100, from(rgba(202,205,208,1)), to(rgba(202,205,208,0))),-webkit-gradient(linear, 0% 0%, 0% 100%, from(#d1d3d6), to(#9fa5a9));
+}
+
+.box{
+    margin: 20px auto 10px;
+    padding: 15px 29px 0px;
+    border: 1px solid #e5e5e5;
+    background-color: #E5E5E5;
+    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5)
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(85, 126, 83, 1);
+    border-radius:25px
+}
+
+
+/* Different colors */
+header.blue { background: #40B9D5; }
+header.green { background: #8BD540; }
+header.red { background: #D5405E; }
+header.purple { background: #C140D5; }
+header.dblue { background: #4058D5; }
+header.orange { background: #D56640; }
+
+ul a {
+		border-radius: 20px;
+}
+ul a:hover {
+	background: rgba(0,0,0,0.2);
+}
+ul a:active, ul a.active {
+	background: rgba(0,0,0,0.3);
+}
+
+.dialog-title {
+	background-color: #ffe7cf;
+	color: #f48000;
+}
+
+div.pagination {
+	padding: 3px;
+	margin: 3px;
+	text-align: center;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #AAAADD;
+	text-decoration: none; /* no underline */
+	color: #000099;
+}
+div.pagination a:hover, div.digg a:active {
+	border: 1px solid #000099;
+	color: #000;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #000099;
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
+}
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	color: #DDD;
+}
+
+.boxshadow1 {
+	border: solid 1px #2d2d2d;
+	text-align: center;
+	background: #575757;
+	/*padding: 100px 50px 100px 50px;*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+/* =Your Generated css
+ |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+.boxshadow2 {
+	-moz-box-shadow: 10px 10px 5px #000000;
+	-webkit-box-shadow: 10px 10px 5px #000000;
+	box-shadow: 10px 10px 5px #000000;
+}
+/* End of Your Generated css
+ |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+
+.margin_center_no_okay {
+	position: absolute;
+    margin-left: 22px;
+    margin-top: 5px;
+}
+
+.margin_center_okay {
+	position: absolute;
+    margin-top: 5px;
 }

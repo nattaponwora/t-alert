@@ -25,5 +25,12 @@ class Technician_model extends CI_model {
 		$arrays[$data['type']] = $data['editvar']; 
 		$this -> db -> update( 'optteam', $arrays);
 	}
+	
+	function add_technical($data) {
+		$this->db->set('team', $data["team_input"]);
+		$this->db->set('supervisor_name', $data["supervisor_name_input"]);
+		$this->db->set('tel', $data["tel_input"]);
+		$this->db->insert('optteam');
+	}
 
 }

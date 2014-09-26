@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 class Reportasset extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->session->set_userdata('session_page', 'reportasset');
+		$this -> session -> set_userdata('session_page', 'reportasset');
 		$this -> load -> model("reportasset_model");
 	}
 
@@ -25,9 +25,9 @@ class Reportasset extends CI_Controller {
 
 	public function search() {
 		$search_asset = $this -> input -> post('search_assetlist');
-		$begindate = $_POST['begindate'];
-		$lastdate = $_POST['lastdate'];
-
+		$begindate = $this -> input -> post('begindate');
+		$lastdate = $this -> input -> post('lastdate');
+		
 		$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
 		$showTable["id"] = $this -> reportasset_model -> showtable($search_asset, $begindate, $lastdate);
 		if ($showTable["id"] == null) {
@@ -40,10 +40,24 @@ class Reportasset extends CI_Controller {
 		$this -> view -> page_view("reportasset_view", $showTable);
 	}
 
-	public function exportpdf() {
+	public function exporttopdf() {
+		$search_asset = $this -> input -> post('set_search_asset');
+		$begindate = $this -> input -> post('begindate');
+		$lastdate = $this -> input -> post('lastdate');
 
+		$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
+		$showTable["id"] = $this -> reportasset_model -> showtable($search_asset, $begindate, $lastdate);
+		$showTable["search_asset"] = $this -> reportasset_model -> get_type($search_asset);
+
+		$showTable["begindate"] = $begindate;
+		$showTable["lastdate"] = $lastdate;
+		$this -> reportasset_model -> set_pdf($showTable);
+		redirect('/reportasset/', 'refresh');
 	}
 
+	public function exporttoexcel() {
+		
+	}
 }
 
 /* End of file login.php */

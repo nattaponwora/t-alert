@@ -1,4 +1,5 @@
 <script type="text/javascript">
+	var count = 0;
     function load_asset() {
         var search_value = document['search_form']['search_storeasset'].value; 
         var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
@@ -9,13 +10,78 @@
     function load_assettype() {
         var search_value = document['search_form']['search_storeasset'].value; 
         var search_valuelist = document['search_form']['search_assetlist'].value; 
-        
-        //alert(search_valuelist);
         var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
         loadStates(url, 'assettypelist');      
     }
+    $(function () {
+    	
+    	$( "#dialog" ).dialog({
+		    modal: true,
+		    autoOpen: false,
+		   	buttons: {
+		    	OK: function() {
+		    		$( this ).dialog( "close" );
+		        }
+		    },
+		    show: {
+		    	effect: "blind",
+		    	duration: 500
+		  	}
+		});
+		
+    	$('#table_page').dataTable( {
+        	"pagingType": "full_numbers",
+        	"order": [ 3, 'desc' ],
+        	"sort" : true,
+        	"searching": false,
+        	"info": false,
+        	"columnDefs": [{
+        		"targets": [0],
+            	"visible": false,
+            	"searchable": false,	
+            }],
+            "language": {
+	            "lengthMenu": "Display _MENU_ records per page",
+	            "zeroRecords": "ไม่มีข้อมูลที่ค้นหา",
+	            "info": "Showing page _PAGE_ of _PAGES_",
+	            "infoEmpty": "No records available",
+	            "infoFiltered": "(filtered from _MAX_ total records)"
+        	}
+    	});
+   	});
+	
+	function test() {
+	 	$.getJSON('<?= base_url("temp/show") ?>', function(data) {
+      		$.each(data, function(k, arrayItem) {	
+      			var t = $('#table_page').DataTable();
+        		var order = $('.first').attr('order');
+        		$('.first').removeClass('first');
+        		var rowNode = t.row.add( [
+        			count,
+        			arrayItem.temp,
+        			arrayItem.abnormal_period,
+            		arrayItem.time
+        		] ).draw().node();
+        		
+        		t.column(3).order( 'desc' );
+        		
+        		if(arrayItem.status == 'ALERT'){
+        			$( "#dialog" ).dialog( "open" );
+        			$( rowNode ).addClass('alertcolor first');
+        		}
+        		else if(arrayItem.status == 'WAIT'){$( rowNode ).addClass('waitcolor first');};
+        		$(rowNode).attr('order', order - 1);
+        		count--;
+      		});
+	 	});
+	 	setTimeout(test, 3000);
+	 }	
 </script>
     
+<div id="dialog" title="Alert">
+	<p>อุณหภูมิผิดปกติ</p>
+</div>
+
 <div class="container box" style="background-color: beige">
     <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
         <label>รหัสร้าน</label>
@@ -41,7 +107,7 @@
             <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
         </div>
         
-        <button id="search" name="search" type="submit" class="btn btn-primary">
+        <button id="search" name="search" type="submit" class="button blue small">
             Search
         </button>
     </form>
@@ -88,59 +154,60 @@
     </div>    
     </div>    
     <div class="col-xs-6">
-    <div class="box" style="background-color: beige">
-
-        <form id="table_form" method="post">
-            <table class="table table-hover table table-hover" border="0">
-                <thead>
-                    <tr>
-                        <th style="width:100px">ลำดับที่</th>
-                        <th style="width:100px">อุณหภูมิ</th>
-                        <th style="width:100px">เวลา</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($id > 0) {
-                        $i = 1;
-                        foreach ($id as $r) {
-                        	if($r['status'] == 'ALERT') {
-	                            echo "<tr class='alertcolor'>";
-	                            echo "<td>{$i}</td>";
-	                            echo "<td>{$r['temp']}</td>";
-	                            echo "<td>{$r['time']}</td>";
-	                            echo "</tr>";
-							} else if($r['status'] == 'WAIT') {
-								echo "<tr class='waitingcolor'>";
-	                            echo "<td>{$i}</td>";
-	                            echo "<td>{$r['temp']}</td>";
-	                            echo "<td>{$r['time']}</td>";
-	                            echo "</tr>";
-							} else {
-								echo "<tr class='normalcolor'>";
-	                            echo "<td>{$i}</td>";
-	                            echo "<td>{$r['temp']}</td>";
-	                            echo "<td>{$r['time']}</td>";
-	                            echo "</tr>";
+	    <div class="box" style="background-color: beige">
+	   		<form id="table_form" method="post">
+	            <table id="table_page" class="table table-hover flat-table" cellspacing="0" width="100%" border="0">
+	                <thead class="center">
+	                    <tr style="background-color: #004276; color: white;">
+	                    	<th class="hidden" style="width:100px">id</th>
+	                    	<th style="width:100px">อุณหภูมิ</th>
+	                        <th style="width:100px">เวลาที่เกินมาตรฐาน(นาที)</th>
+	                        <th style="width:100px">เวลา</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <?php
+	                    if ($id > 0) {
+	                        $i = 1;
+	                        foreach ($id as $r) {
+	                        	if($i==1){
+	                        		$first = " first";
+	                        	} else {
+									$first = "";
+								}
+	                        	if($r['status'] == 'ALERT') {
+		                            echo "<tr class='alertcolor$first' order=$i >";
+									echo "<td class='hidden'>{$i}</td>";
+		                            echo "<td>{$r['temp']}</td>";
+		                            echo "<td>{$r['abnormal_period']}</td>";
+		                            echo "<td>{$r['time']}</td>";
+		                            echo "</tr>";
+								} else if($r['status'] == 'WAIT') {
+									echo "<tr class='waitcolor$first' order=$i >";
+									echo "<td class='hidden'>{$i}</td>";
+		                            echo "<td>{$r['temp']}</td>";
+		                            echo "<td>{$r['abnormal_period']}</td>";
+		                            echo "<td>{$r['time']}</td>";
+		                            echo "</tr>";
+								} else {
+									echo "<tr class='normalcolor$first' order=$i >";
+									echo "<td class='hidden'>{$i}</td>";
+		                            echo "<td>{$r['temp']}</td>";
+		                            echo "<td>{$r['abnormal_period']}</td>";
+		                            echo "<td>{$r['time']}</td>";
+		                            echo "</tr>";
+								}
+								$i++;
 							}
-							$i++;
-						}
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </form>
-</ul>
-</div>
+	                    }
+	                    ?>
+	                </tbody>
+	            </table>
+	        </form>		
+		</div>
+	</div>
 </div>
 
-
-
-</div>
 <script type='text/javascript'>
-   // setTimeout(a, 5000);
-    function a() {
-        $("#table_form").load("<?= base_url("temp/show/$searchTerm/$search_asset/$search_assettypelists") ?> #table_form");
-        setTimeout(a, 5000);
-    }
+    setTimeout(test, 5000);
 </script>

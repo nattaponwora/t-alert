@@ -3,7 +3,7 @@
 		background-image: url("public/images/background.png");
 	}
 </style>
-<img class="img-responsive" alt="Responsive image" src=<?= base_url('public/images/logo.png') ?> style="max-height: 20%;margin: 0 auto;margin-top: 40px">
+<img alt="Responsive image" src=<?= base_url('public/images/logo.png') ?> style="max-height: 20%;margin: 0 auto;margin-top: 40px;position: absolute; right: 0; left: 0;">
 <div class="boxshadow1 boxshadow2" style="width: 500px; height: 300px;position:absolute; left: 50%;  top: 65%;margin-left: -250px;margin-top: -225px;">
 	<form id="login_form" name="login_form" class="form-signin" action="<?= base_url('login/check') ?>" role="form" method="post">
 		<center>

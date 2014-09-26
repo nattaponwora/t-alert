@@ -308,3 +308,11 @@ div.pagination span.disabled {
 	position: absolute;
     margin-top: 5px;
 }
+
+.imgloadinghidden {
+	display: none;
+}
+
+.imgloadingshow {
+	display: inline;
+}

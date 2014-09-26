@@ -14,6 +14,7 @@ class Insertasset extends CI_Controller {
 		if ($cookie != null) {
 			$data["assettype"] = $this -> insertasset_model -> get_assettype();
 			$data["store"] = $this -> insertasset_model -> get_store();
+			$data["data_table"] = $this -> insertasset_model -> get_table();
 			$storename = "";
 
 			for ($i = 0; $i < count($data["store"]); $i++) {

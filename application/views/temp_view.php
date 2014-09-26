@@ -1,17 +1,21 @@
 <script type="text/javascript">
 	var count = 0;
     function load_asset() {
+    	$('#loading_gif').attr('class', 'imgloadingshow');
         var search_value = document['search_form']['search_storeasset'].value; 
         var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
         loadStates(url, 'assetlist'); 
-        load_assettype();     
+        load_assettype();
+        $('#loading_gif').attr('class', 'imgloadinghidden');
     }
     
     function load_assettype() {
+    	$('#loading_gif').attr('class', 'imgloadingshow');
         var search_value = document['search_form']['search_storeasset'].value; 
         var search_valuelist = document['search_form']['search_assetlist'].value; 
         var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
-        loadStates(url, 'assettypelist');      
+        loadStates(url, 'assettypelist');    
+        $('#loading_gif').attr('class', 'imgloadinghidden');  
     }
     $(function () {
     	
@@ -82,6 +86,7 @@
 	<p>อุณหภูมิผิดปกติ</p>
 </div>
 
+
 <div class="container box" style="background-color: beige">
     <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
         <label>รหัสร้าน</label>
@@ -99,7 +104,7 @@
             <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
             <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
         </div>
-        
+		<img class="imgloadinghidden" id="loading_gif" style="max-height: 20px; max-width: 20px" src='<?= base_url("public/images/loading.gif")?>' />
         
         <label>หมายเลขอุปกรณ์</label>
         <div class="form-group" id ="assettypelist" name="assettypelist">

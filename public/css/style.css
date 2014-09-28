@@ -2,7 +2,7 @@
 	cursor: pointer;
 }
 
-.alertcolor {
+table tbody tr.alertcolor  {
 	background-color: #dd191d;
 	color: #F7F7F7;
 	font-weight: bold;
@@ -14,7 +14,7 @@
 	font-weight: bold;
 }
 
-.waitcolor {
+table tbody tr.waitcolor {
 	background-color: #ffa000;
 	color: #F7F7F7;
 	font-weight: bold;

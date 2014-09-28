@@ -86,6 +86,7 @@ class Insertmeter_model extends CI_model {
 	function get_table() {
 		$this -> db -> from('asset');
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
+		$this -> db -> join('store', 'asset.store_id = store.store_id');
 		$this -> db -> join('meter', 'meter.asset_id = asset.id');
 		$query = $this -> db -> get();
 		$assets = array();

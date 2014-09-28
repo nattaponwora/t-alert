@@ -10,10 +10,11 @@ class Temp_model extends CI_model {
 	}
 
 	function get_infomation($in, $type_id, $droptype) {
-		$this -> db -> select('asset.store_id, asset.store_name, asset.asset_barcode, asset.asset_shortname, asset_type.type');
+		$this -> db -> select('asset.store_id, store.store_name, asset.asset_barcode, asset.asset_shortname, asset_type.type');
 		$this -> db -> from('asset');
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
-		$this -> db -> where('asset.store_id', $in);
+		$this -> db -> join('store', 'asset.store_id = store.store_id');
+		$this -> db -> where('store.store_id', $in);
 		$this -> db -> where('asset_typeid', $type_id);
 		$this -> db -> where('asset.id', $droptype);
 		$query = $this -> db -> get();

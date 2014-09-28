@@ -25,8 +25,8 @@ class Store_model extends CI_model {
 	
 	function add_store($data) {
 		$this->db->set('store_id', $data["store_id_input"]);
-		$this->db->set('opt_team', $data["store_name_input"]);
-		$this->db->set('store_name', $data["opt_team_input"]);
+		$this->db->set('store_name', $data["store_name_input"]);
+		$this->db->set('opt_team', $data["opt_team_input"]);
 		$this->db->insert('store');
 	}
 }

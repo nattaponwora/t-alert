@@ -31,7 +31,6 @@ class Insertasset extends CI_Controller {
 
 	public function added() {
 		$data["store_id"] = $this -> input -> post('search_storeid');
-		$data["store_name"] = $this -> input -> post('search_store');
 		$data["asset_shortname"] = $this -> input -> post('hidden_search_assetshortname_span') . " " . $this -> input -> post('search_assetshortname');
 		$data["asset_barcode"] = $this -> input -> post('barcode_asset');
 		$data["asset_typeid"] = $this -> input -> post('asset_typeid_d');

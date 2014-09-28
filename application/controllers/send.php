@@ -15,7 +15,7 @@ class Send extends CI_Controller {
 	    $history = $this -> send_model -> get_history($asset_id);
         $wait_time = $type['std_time'];
         echo $period = strtotime('now') - strtotime($history['time']);
-        //$this -> view -> p($type);
+        $this -> view -> p($history);
         
         $last_status = $history['status'];
         $min = $type['min_temp'];
@@ -23,10 +23,16 @@ class Send extends CI_Controller {
         
         // Temp Abnormal
         if( $temp > $max || $temp < $min ){
-            $new_period = ( $history['abnormal_period'] + $period );
+        	if( isset($history)) {
+        		$new_period = ( $history['abnormal_period'] + $period );
+        	} else{
+				$new_period = 0;
+				$last_status = 'NORMAL';	
+			}
+			
             if( $last_status == 'NORMAL' ){
                 $status = 'WAIT';
-            }elseif( $last_status == 'WAIT' ){
+            } elseif( $last_status == 'WAIT' ){
                 echo ( $new_period  ). "   " . $wait_time * 60;
                 if( $new_period  >= $wait_time * 60 ){
                     $status = 'ALERT';
@@ -36,7 +42,6 @@ class Send extends CI_Controller {
             }elseif( $last_status == 'ALERT' ){
                 $status = 'ALERT';
             }
-            
         }else{
             $new_period = 0;
             $status = 'NORMAL';

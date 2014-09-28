@@ -27,7 +27,7 @@ class Inserttemp_model extends CI_model {
 
 	function add_store($data) {
 		
-		$this -> db -> set('type', $data["type_data_input"]);
+		$this -> db -> set('type', $data["type_input"]);
 		$this -> db -> set('shortcode', $data["shortcode_input"]);
 		$this -> db -> set('min_temp', $data["min_temp_input"]);
 		$this -> db -> set('max_temp', $data["max_temp_input"]);

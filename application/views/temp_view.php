@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	var count = 0;
+	var first_alert = false;
     function load_asset() {
     	$('#loading_gif').attr('class', 'imgloadingshow');
         var search_value = document['search_form']['search_storeasset'].value; 
@@ -70,10 +71,14 @@
         		t.column(3).order( 'desc' );
         		
         		if(arrayItem.status == 'ALERT'){
-        			$( "#dialog" ).dialog( "open" );
+        			if(first_alert == false) {
+        				$( "#dialog" ).dialog( "open" );
+        				first_alert = true;
+        			}
         			$( rowNode ).addClass('alertcolor first');
         		}
-        		else if(arrayItem.status == 'WAIT'){$( rowNode ).addClass('waitcolor first');};
+        		else if(arrayItem.status == 'WAIT'){$( rowNode ).addClass('waitcolor first');}
+        		else if(arrayItem.status == 'NORMAL'){first_alert = false;}
         		$(rowNode).attr('order', order - 1);
         		count--;
       		});

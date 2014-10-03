@@ -8,7 +8,6 @@ class Temp extends CI_Controller {
 		$this -> session -> set_userdata('session_page', 'temp');
 		$this -> load -> model("temp_model");
 		
-		$this -> session -> sess_destroy();
 		$cookie = get_cookie('username_cookie');
 		if ($cookie == null) {
 			redirect('/login/', 'refresh');
@@ -17,7 +16,7 @@ class Temp extends CI_Controller {
 
 	public function index() {
 		
-			
+		$this -> session -> unset_userdata("current_tempview");
 		$showTable["id"] = 0;
 		$showTable["infomation"] = 0;
 		$showTable["searchTerm"] = null;

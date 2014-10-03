@@ -20,10 +20,6 @@
         $('#loading_gif').attr('class', 'imgloadinghidden');  
     }
     
-	$(window).load(function(){
-	  $('#dvLoading').fadeOut(2000);
-	});
-    
     $(function () {
     	$( "#dialog" ).dialog({
 		    modal: true,

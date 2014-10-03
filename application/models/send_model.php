@@ -40,5 +40,19 @@ class Send_model extends CI_model {
         
         $query = $this->db->insert("temperature", $data );  
     }
+	
+	function get_asset_data($asset_id){
+		
+		$this->db->select('asset.asset_shortname, store.store_name, optteam.tel');
+		$this->db->from('asset');
+		$this->db->join('store', 'asset.store_id = store.store_id');
+		$this->db->join('optteam', 'store.opt_team = optteam.team');
+		$this->db->where('asset.id', $asset_id);
+		$rs= $this->db->get();
+		echo $this->db->last_query();
+		foreach ($rs->result_array() as $row) {
+			return $row;
+		}
+	}
 
 }

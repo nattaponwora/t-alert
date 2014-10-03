@@ -45,6 +45,7 @@ class Send extends CI_Controller {
 	                echo ( $new_period  ). "   " . $wait_time * 60;
 	                if( $new_period  >= $wait_time * 60 ){
 	                    $status = 'ALERT';
+                        $this->sms();
 	                }else{
 	                    $status = 'WAIT';;
 	                }    
@@ -59,6 +60,51 @@ class Send extends CI_Controller {
 	        $data = array('asset_id' => $asset_id, 'temp' => $temp, 'status' => $status, 'abnormal_period' => $new_period );
 			$this -> send_model -> inserttemp($data);
 		}	
+	}
+
+	private function sms(){
+	    $url = "http://www.thaibulksms.com/sms_api.php"; 
+        $username="0869682150";
+        $password="793358"; 
+        
+        //$url = "http://www.thaibulksms.com/sms_api_test.php"; 
+        //$username="thaibulksms";
+        //$password="thisispassword"; 
+        
+        $msisdn="0869682150"; 
+        $message="test";
+        $sender="SMS";
+        $ScheduledDelivery="1410031555"; 
+        $SMStype="standard";
+     
+        echo $data_string = 
+        "username=$username&password=$password&msisdn=$msisdn&message=$message&sender=$sender&ScheduledDelivery=$ScheduledDelivery&force=$SMStype"; 
+         
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+         
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url); 
+        curl_setopt($ch, CURLOPT_USERAGENT, $agent); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string); 
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); 
+        $result = curl_exec ($ch); 
+        echo "<br />";
+        echo $result;
+        
+        $simple = "<para><note>simple note</note></para>";
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $result, $vals, $index);
+        xml_parser_free($p);
+        
+        echo "Index array\n";
+        echo "<pre>";
+        print_r($index);
+        echo "</pre><pre>";
+        echo "\nVals array\n";
+        print_r($vals);
+        echo "</pre>";
+        curl_close ($ch);
 	}
 
 }

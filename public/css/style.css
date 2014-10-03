@@ -316,3 +316,7 @@ div.pagination span.disabled {
 .imgloadingshow {
 	display: inline;
 }
+
+.ui-dialog .ui-dialog-title {
+	color: aliceblue;
+}

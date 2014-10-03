@@ -1,6 +1,7 @@
 <script type="text/javascript">
 	var count = 0;
 	var first_alert = false;
+	
     function load_asset() {
     	$('#loading_gif').attr('class', 'imgloadingshow');
         var search_value = document['search_form']['search_storeasset'].value; 
@@ -18,8 +19,8 @@
         loadStates(url, 'assettypelist');    
         $('#loading_gif').attr('class', 'imgloadinghidden');  
     }
+    
     $(function () {
-    	
     	$( "#dialog" ).dialog({
 		    modal: true,
 		    autoOpen: false,
@@ -61,10 +62,11 @@
       			var t = $('#table_page').DataTable();
         		var order = $('.first').attr('order');
         		$('.first').removeClass('first');
+        		
         		var rowNode = t.row.add( [
         			count,
         			arrayItem.temp,
-        			arrayItem.abnormal_period,
+        			secondsToString(arrayItem.abnormal_period),
             		arrayItem.time
         		] ).draw().node();
         		
@@ -72,6 +74,7 @@
         		
         		if(arrayItem.status == 'ALERT'){
         			if(first_alert == false) {
+        				$( "#time_alert").text(secondsToString(arrayItem.abnormal_period));
         				$( "#dialog" ).dialog( "open" );
         				first_alert = true;
         			}
@@ -85,10 +88,33 @@
 	 	});
 	 	setTimeout(test, 3000);
 	 }	
+	 
+	 function secondsToString(seconds)
+	 {
+		var numhours = Math.floor(seconds / 3600);
+		var numminutes = Math.floor((seconds % 3600) / 60);
+		var numseconds = (seconds % 3600) % 60;
+		
+		if(numhours < 10) { numhours = "0" + (numhours); } 
+		if(numminutes < 10) { numminutes = "0" + (numminutes); } 
+		if(numseconds < 10) { numseconds = "0" + (numseconds); } 
+		return numhours + ":" + numminutes + ":" + numseconds;
+	 }
 </script>
     
-<div id="dialog" title="Alert">
-	<p>อุณหภูมิผิดปกติ</p>
+<div id="dialog" title="Alert" style="font: white">
+	<p><b>อุณหภูมิมีความผิดปกติเกินจากมาตราฐานมา</b> <span id='time_alert'></span> <b>ชั่วโมง</b></p>
+	<?php
+		foreach($infomation as $r) {
+	?>
+			<p><b>รหัสร้าน</b> : <?= $r['store_id'] ?></p>
+			<p><b>ชื่อสาขา</b> : <?= $r['store_name'] ?></p>
+			<p><b>อุปกรณ์ </b> : <?= $r['type'] ?></p>
+			<p><b>ชื่อย่ออุปกรณ์</b> : <?= $r['asset_shortname'] ?></p>
+	<?php	 	
+			break;
+		}
+	?>
 </div>
 
 
@@ -170,13 +196,13 @@
 	                <thead class="center">
 	                    <tr style="background-color: #004276; color: white;">
 	                    	<th class="hidden" style="width:100px">id</th>
-	                    	<th style="width:100px">อุณหภูมิ</th>
-	                        <th style="width:100px">เวลาที่เกินมาตรฐาน(นาที)</th>
+	                    	<th style="width:100px">อุณหภูมิ(เซลเซียส)</th>
+	                        <th style="width:100px">เวลาที่เกินมาตรฐาน(ชั่วโมง)</th>
 	                        <th style="width:100px">เวลา</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <?php
+	                    <?php	                    	
 	                    if ($id > 0) {
 	                        $i = 1;
 	                        foreach ($id as $r) {
@@ -189,21 +215,21 @@
 		                            echo "<tr class='alertcolor$first' order=$i >";
 									echo "<td class='hidden'>{$i}</td>";
 		                            echo "<td>{$r['temp']}</td>";
-		                            echo "<td>{$r['abnormal_period']}</td>";
+								    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
 		                            echo "<td>{$r['time']}</td>";
 		                            echo "</tr>";
 								} else if($r['status'] == 'WAIT') {
 									echo "<tr class='waitcolor$first' order=$i >";
 									echo "<td class='hidden'>{$i}</td>";
 		                            echo "<td>{$r['temp']}</td>";
-		                            echo "<td>{$r['abnormal_period']}</td>";
+								    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
 		                            echo "<td>{$r['time']}</td>";
 		                            echo "</tr>";
 								} else {
 									echo "<tr class='normalcolor$first' order=$i >";
 									echo "<td class='hidden'>{$i}</td>";
 		                            echo "<td>{$r['temp']}</td>";
-		                            echo "<td>{$r['abnormal_period']}</td>";
+								    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
 		                            echo "<td>{$r['time']}</td>";
 		                            echo "</tr>";
 								}

@@ -95,4 +95,10 @@ class Insertmeter_model extends CI_model {
 		}
 		return $assets;
 	}
+
+	function edit_meter($data) {
+		$this -> db -> where('meter_id', $data['id']);
+		$arrays[$data['type']] = $data['editvar']; 
+		$this -> db -> update( 'meter', $arrays);
+	}
 }

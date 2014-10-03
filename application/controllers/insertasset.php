@@ -68,4 +68,9 @@ class Insertasset extends CI_Controller {
 			echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='' required=''>";
 		}
 	}
+	
+	public function insert() {
+		$data = $this -> input -> post();
+		$this -> insertasset_model -> edit_asset($data);
+	}
 }

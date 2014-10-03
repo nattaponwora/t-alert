@@ -145,7 +145,7 @@ $(function () {
 		                    	$id_row = 0;
 		                        foreach ($id as $r) {
 		                            echo "<tr id=".$r['store_id'].">";
-		                            echo "<td type='store_id' style='max-width:30px; width:30px'>{$r['store_id']}</td>";
+		                            echo "<td class='editable' type='store_id' style='max-width:30px; width:30px'>{$r['store_id']}</td>";
 		                            echo "<td class='editable' type='store_name' style='max-width:30px; width:30px'>{$r['store_name']}</td>";
 		                            echo "<td class='editable' type='opt_team' style='max-width:30px; width:30px'>{$r['opt_team']}</td>";
 		                            echo "</tr>";

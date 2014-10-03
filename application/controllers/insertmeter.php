@@ -91,4 +91,9 @@ class Insertmeter extends CI_Controller {
 			echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
 		}
 	}
+	
+	public function insert() {
+		$data = $this -> input -> post();
+		$this -> insertmeter_model -> edit_meter($data);
+	}
 }

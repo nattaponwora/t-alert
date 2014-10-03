@@ -1,14 +1,74 @@
 <script>
 	$(function() {
+		var checkpoint_id = null;
+		var checkpoint_type = null;
+		var checkpoint_value = null;
 		var str = '<?=$storename?>';
 		var availableTags = str.split(',');
 		$( '#search_storeasset' ).autocomplete({
 			source: availableTags
 		});
 		
-		$('#insertasset_table').dataTable();
+		$(".editableTable").on("dblclick", ".editable", function () {
+			if($(this).hasClass( "editable" ))
+			{
+				if(checkpoint_id != null) {
+					var old_id = "#" + checkpoint_id;
+					var old = $( old_id + " td[type='" + checkpoint_type + "']" );
+					$("#table_form input").remove();
+					$("#ok").remove();
+					$(old).html( checkpoint_value );
+					$(old).removeClass('cellEditing');
+					$(old).addClass("editable"); 
+				}
+				$(this).removeClass("editable");
+				var element_row = $(this).parent().attr("id");
+				var element_col = $(this).attr("type");
+				checkpoint_id = element_row;
+				checkpoint_type = element_col;
+				$('#table_form').append("<input type='hidden' id='temp1' name='id'  value='"  + element_row + "' />");
+				$('#table_form').append("<input type='hidden' id='temp2' name='type'  value='"  + element_col + "' />");
+				
+				var OriginalContent = $(this).text();
+				checkpoint_value = OriginalContent;
+				
+				$(this).addClass("cellEditing"); 
+				$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 			
+				$(this).append("&nbsp&nbsp<input type='image' class='margin_center_okay' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
+				$(this).append("<input type='image' class='margin_center_no_okay' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
+				
+				$(this).children().first().focus(); 
+				$("#ok").on("click", function(){
+					$.post("<?=base_url('insertasset/insert')?>",$('#table_form').serialize(),function(response){
+						$('#show').html(response);
+					});
+					var textbox = $(this).parent().find('input').eq(0);
+					var newContent = $(textbox).val();
+					$('#temp1').remove();
+					$('#temp2').remove();
+					$(textbox).parent().removeClass();
+					$(textbox).parent().addClass("editable"); 
+					$(textbox).parent().text(newContent);
+					checkpoint_id = null;
+					checkpoint_type = null;
+					checkpoint_value = null;
+				});
+				
+				$("#cancel").on("click", function(){
+					$('#temp1').remove();
+					$('#temp2').remove();
+					$(this).parent().removeClass();
+					$(this).parent().addClass("editable"); 
+					$(this).parent().text(checkpoint_value);
+					
+					checkpoint_id = null;
+					checkpoint_type = null;
+					checkpoint_value = null;
+				});
+			}
+		}); 
 		
-
+		$('#insertasset_table').dataTable();
 	});
 	
 	function change_shortname(){
@@ -22,10 +82,11 @@
        	var url = '<?= base_url("insertasset/get_storename") ?>/' + storename; 
         loadStates(url, 'search_storename_span_d');  
 	}
+	
+	
 </script>
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog"  style="max-width: 500px; position: absolute; left: 0; right: 0; margin: 0 auto; overflow: hidden" >
+  <div class="modal-dialog"  style="max-width: 500px; overflow: hidden" >
     <div class="modal-content">
       <div class="modal-header">
       	<h4 class="modal-title" id="myModalLabel">Insert Asset</h4>
@@ -96,9 +157,10 @@
 		</div>
 	</form>
 </div>
-  </div>
+</div>
 </div>
 </div> 
+
 <form class="form-signin" name="table_form" id="table_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 	<div class="box" style="background-color: beige	; margin-top: 60px; width: 70%">
 		<div class="row">
@@ -118,16 +180,17 @@
 							<tbody>
 								<?php
 								if ($data_table > 0) {
+									$i = 1;
 									foreach ($data_table as $r) {
+										$r['id'] = $i;
 										echo "<tr id='".$r['id']."'>";
-										echo "<td style='max-width:30px; width: 30px'>{$r['store_id']}</td>";
-										echo "<td style='max-width:50px; width: 50px'>{$r['store_name']}</td>";
-										echo "<td style='max-width:50px; width: 50px'>{$r['type']}</td>";
-										echo "<td style='max-width:50px; width: 50px'>{$r['asset_shortname']}</td>";
-										echo "<td style='max-width:50px; width: 50px'>{$r['asset_barcode']}</td>";
-										// echo ("<td><a href=\"edit_form.php?id=$row[employees_number]\">Edit</a></td></tr>");
-										//echo "<td><a href='".base_url('technician')."/".$count . "'>"."<img src='public/images/icon/edit_icon.png' height='32px' width='32px'></a></td>";
+										echo "<td class='editable' type='store_id'  style='max-width:30px; width: 30px'>{$r['store_id']}</td>";
+										echo "<td type='store_name'  style='max-width:50px; width: 50px'>{$r['store_name']}</td>";
+										echo "<td type='type'  style='max-width:50px; width: 50px'>{$r['type']}</td>";
+										echo "<td class='editable' type='asset_shortname'  style='max-width:50px; width: 50px'>{$r['asset_shortname']}</td>";
+										echo "<td class='editable' type='asset_barcode'  style='max-width:50px; width: 50px'>{$r['asset_barcode']}</td>";
 										echo "</tr>";
+										$i++;
 									}
 								}
 								?>

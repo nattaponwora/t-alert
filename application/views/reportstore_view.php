@@ -34,7 +34,7 @@
         
         $("#export_pdf").on("click", function () { 	
 			$.post("<?=base_url('reportstore/exporttopdf')?>",$('#table_form').serialize(),function(response){
-	 			//$('#show').html(response);
+	 			//('#show').html(response);
 			});
 		}); 
 	});
@@ -42,8 +42,8 @@
 	$(document).ready(function () {
         $("#export_excel").click(function () {
             $("#table_export").btechco_excelexport({
-                containerid: "table_export"
-               , datatype: $datatype.Table
+                containerid: "store report", 
+                datatype: $datatype.Table
             });
         });
     });

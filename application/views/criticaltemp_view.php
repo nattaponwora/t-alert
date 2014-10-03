@@ -97,22 +97,6 @@
 								}	
 							}
 						}
-						
-						
-						// foreach ($id as $r) {
-                        	// if( $r['status'] == 'NORMAL') {
-	                            // echo "<tr class='normalcolor'>";
-								// echo "<td>{$r['store_id']}</td>";
-	                            // echo "<td>{$r['store_name']}</td>";
-								// echo "<td>{$r['type']}</td>";
-	                            // echo "<td>{$r['shortcode']}</td>";
-	                            // echo "<td>{$r['asset_barcode']}</td>";
-	                            // echo "<td>{$r['temp']}</td>";
-								// echo "<td>".round(abs($r['time']) / 60,2)."</td>";
-								// echo "<td>{$r['time']}</td>";
-	                            // echo "</tr>";
-							// }
-                        // }
                     }
                     ?>
                 </tbody>

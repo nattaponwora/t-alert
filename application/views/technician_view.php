@@ -145,7 +145,7 @@ $(function () {
 							if ($id > 0) {
 								foreach ($id as $r) {
 									echo "<tr id='".$r['id']."'>";
-									echo "<td type='team' style='max-width:30px; width: 30px'>{$r['team']}</td>";
+									echo "<td class='editable' type='team' style='max-width:30px; width: 30px'>{$r['team']}</td>";
 									echo "<td class='editable' type='supervisor_name' style='max-width:50px; width: 50px'>{$r['supervisor_name']}</td>";
 									echo "<td class='editable' type='tel' style='max-width:50px; width: 50px'>{$r['tel']}</td>";
 									// echo ("<td><a href=\"edit_form.php?id=$row[employees_number]\">Edit</a></td></tr>");

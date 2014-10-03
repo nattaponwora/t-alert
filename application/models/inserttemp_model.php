@@ -19,10 +19,10 @@ class Inserttemp_model extends CI_model {
 		return $assets;
 	}
 
-	function edit_store($data) {
-		$this -> db -> where('id', $data['id']);
-		$arrays[$data['type']] = $data['editvar'];
-		$this -> db -> update('asset_type', $arrays);
+	function edit_meter($data) {
+		$this -> db -> where('asset.id', $data['id']);
+		$arrays[$data['type']] = $data['editvar']; 
+		$this -> db -> update( 'meter', $arrays);
 	}
 
 	function add_store($data) {

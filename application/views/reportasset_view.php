@@ -25,7 +25,7 @@
 	$(document).ready(function () {
         $("#export_excel").click(function () {
             $("#table_export").btechco_excelexport({
-                containerid: "table_export"
+                containerid: "asset report"
                , datatype: $datatype.Table
             });
         });

@@ -4,6 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="public/images/Image001.ico">
 		<title>Temperature Detection and Alertion</title>
 		<?php
 		echo link_tag("public/bootstrap/css/bootstrap.css", 'stylesheet');
@@ -24,7 +25,5 @@
 		
 		<script type="text/javascript" src="<?= base_url("public/jquery.battatech.excelexport.js") ?>"></script>
 
-		
 		<script type="text/javascript" src="<?= base_url("public/dataTables-1.10.2/media/js/jquery.dataTables.min.js") ?>"></script>
 		<!-- <script type="text/javascript" src="<?= base_url("public/dataTables.bootstrap.js") ?>"></script> -->
-

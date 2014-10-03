@@ -73,4 +73,9 @@ class Insertasset_model extends CI_model {
 		return $assets;
 	}
 
+	function edit_asset($data) {
+		$this -> db -> where('asset.id', $data['id']);
+		$arrays[$data['type']] = $data['editvar']; 
+		$this -> db -> update( 'asset', $arrays);
+	}
 }

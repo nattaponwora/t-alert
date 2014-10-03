@@ -7,26 +7,26 @@ class Insertasset extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'insertasset');
 		$this -> load -> model("insertasset_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$data["assettype"] = $this -> insertasset_model -> get_assettype();
-			$data["store"] = $this -> insertasset_model -> get_store();
-			$data["data_table"] = $this -> insertasset_model -> get_table();
-			$storename = "";
+		$data["assettype"] = $this -> insertasset_model -> get_assettype();
+		$data["store"] = $this -> insertasset_model -> get_store();
+		$data["data_table"] = $this -> insertasset_model -> get_table();
+		$storename = "";
 
-			for ($i = 0; $i < count($data["store"]); $i++) {
-				$storename = $storename . $data["store"][$i] . ",";
-			}
-
-			$data["storename"] = $storename;
-			
-			$this -> view -> page_view("insertasset_view", $data);
-		} else {
-			redirect('/login/', 'refresh');
+		for ($i = 0; $i < count($data["store"]); $i++) {
+			$storename = $storename . $data["store"][$i] . ",";
 		}
+
+		$data["storename"] = $storename;
+		
+		$this -> view -> page_view("insertasset_view", $data);
 	}
 
 	public function added() {

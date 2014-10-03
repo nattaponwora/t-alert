@@ -7,20 +7,20 @@ class Criticaltemp extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'criticaltemp');
 		$this -> load -> model("criticaltemp_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$showTable["id"] = $this -> criticaltemp_model -> showtable();
-			$showTable["sorttime"] = $this -> criticaltemp_model -> sorting();
-			$showTable["getstart"] = $this -> criticaltemp_model -> getstart();
+		$showTable["id"] = $this -> criticaltemp_model -> showtable();
+		$showTable["sorttime"] = $this -> criticaltemp_model -> sorting();
+		$showTable["getstart"] = $this -> criticaltemp_model -> getstart();
 
-			//$this -> view -> p($this -> criticaltemp_model -> sorting());
-			$this -> view -> page_view("criticaltemp_view", $showTable);
-		} else {
-			redirect('/login/', 'refresh');
-		}
+		//$this -> view -> p($this -> criticaltemp_model -> sorting());
+		$this -> view -> page_view("criticaltemp_view", $showTable);
 	}
 
 	public function show($in, $type, $list) {

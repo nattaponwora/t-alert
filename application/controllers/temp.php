@@ -7,24 +7,27 @@ class Temp extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'temp');
 		$this -> load -> model("temp_model");
+		
+		$this -> session -> sess_destroy();
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$showTable["id"] = 0;
-			$showTable["infomation"] = 0;
-			$showTable["searchTerm"] = null;
-			$showTable["search_asset"] = null;
-			$showTable["search_assettypelists"] = null;
-			$showTable["selectpage"] = 1;
-			$showTable["selection"] = array("โปรดเลือก");
-			$showTable["selectiontype"] = array("โปรดเลือก");
+		
+			
+		$showTable["id"] = 0;
+		$showTable["infomation"] = 0;
+		$showTable["searchTerm"] = null;
+		$showTable["search_asset"] = null;
+		$showTable["search_assettypelists"] = null;
+		$showTable["selectpage"] = 1;
+		$showTable["selection"] = array("โปรดเลือก");
+		$showTable["selectiontype"] = array("โปรดเลือก");
 
-			$this -> view -> page_view("temp_view", $showTable);
-		} else {
-			redirect('/login/', 'refresh');
-		}
+		$this -> view -> page_view("temp_view", $showTable);
 	}
 
 	public function search() {

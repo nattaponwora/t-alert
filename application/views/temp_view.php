@@ -20,6 +20,10 @@
         $('#loading_gif').attr('class', 'imgloadinghidden');  
     }
     
+	$(window).load(function(){
+	  $('#dvLoading').fadeOut(2000);
+	});
+    
     $(function () {
     	$( "#dialog" ).dialog({
 		    modal: true,
@@ -100,8 +104,8 @@
 		if(numseconds < 10) { numseconds = "0" + (numseconds); } 
 		return numhours + ":" + numminutes + ":" + numseconds;
 	 }
-</script>
-    
+</script>  
+
 <div id="dialog" title="Alert" style="font: white">
 	<p><b>อุณหภูมิมีความผิดปกติเกินจากมาตราฐานมา</b> <span id='time_alert'></span> <b>ชั่วโมง</b></p>
 	<?php

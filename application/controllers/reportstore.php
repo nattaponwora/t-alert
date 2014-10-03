@@ -7,28 +7,28 @@ class Reportstore extends CI_Controller {
 		parent::__construct();
 		$this->session->set_userdata('session_page', 'reportstore');
 		$this -> load -> model("reportstore_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$showTable["id"] = 0;
-			$showTable["search_asset"] = null;
-			$showTable["begindate"] = null;
-			$showTable["lastdate"] = null;
-			$showTable["searchTerm"] = null;
-			$showTable["store"] = $this -> reportstore_model -> get_store();
-			$storename = "";
-			
-			for ($i=0; $i < count($showTable["store"]); $i++) {
-				$storename = $storename . $showTable["store"][$i] . ",";
-			}
-			
-			$showTable["storename"] = $storename;
-			$this -> view -> page_view('reportstore_view', $showTable);
-		} else {
-			redirect('/login/', 'refresh');
+		$showTable["id"] = 0;
+		$showTable["search_asset"] = null;
+		$showTable["begindate"] = null;
+		$showTable["lastdate"] = null;
+		$showTable["searchTerm"] = null;
+		$showTable["store"] = $this -> reportstore_model -> get_store();
+		$storename = "";
+		
+		for ($i=0; $i < count($showTable["store"]); $i++) {
+			$storename = $storename . $showTable["store"][$i] . ",";
 		}
+		
+		$showTable["storename"] = $storename;
+		$this -> view -> page_view('reportstore_view', $showTable);
 	}
 
 	public function search() {

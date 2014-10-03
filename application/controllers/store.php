@@ -7,17 +7,16 @@ class Store extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'store');
 		$this -> load -> model("store_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$data["id"] = $this -> store_model -> get_store();
-			$this -> view -> page_view("store_view", $data);
-
-		} else {
-			redirect('/login/', 'refresh');
-		}
+		$data["id"] = $this -> store_model -> get_store();
+		$this -> view -> page_view("store_view", $data);
 	}
 
 	public function insert() {

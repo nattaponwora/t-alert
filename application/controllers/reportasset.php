@@ -7,20 +7,20 @@ class Reportasset extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'reportasset');
 		$this -> load -> model("reportasset_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$showTable["id"] = 0;
-			$showTable["search_asset"] = null;
-			$showTable["begindate"] = null;
-			$showTable["lastdate"] = null;
-			$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
-			$this -> view -> page_view('reportasset_view', $showTable);
-		} else {
-			redirect('/login/', 'refresh');
-		}
+		$showTable["id"] = 0;
+		$showTable["search_asset"] = null;
+		$showTable["begindate"] = null;
+		$showTable["lastdate"] = null;
+		$showTable["selection"] = $this -> reportasset_model -> get_assetlist();
+		$this -> view -> page_view('reportasset_view', $showTable);
 	}
 
 	public function search() {

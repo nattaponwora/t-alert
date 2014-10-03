@@ -7,16 +7,16 @@ class Technician extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'technician');
 		$this -> load -> model("technician_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$data["id"] = $this -> technician_model -> get_technician();
-			$this -> view -> page_view("technician_view", $data);
-		} else {
-			redirect('/login/', 'refresh');
-		}
+		$data["id"] = $this -> technician_model -> get_technician();
+		$this -> view -> page_view("technician_view", $data);
 	}
 
 	public function insert() {

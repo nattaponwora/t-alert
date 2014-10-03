@@ -7,15 +7,15 @@ class Register extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'register');
 		$this -> load -> model("register_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$this -> view -> page_view("register_view");
-		} else {
-			redirect('/login/', 'refresh');
-		}
+		$this -> view -> page_view("register_view");
 	}
 
 	public function regis() {

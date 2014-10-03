@@ -5,16 +5,16 @@ class Inserttemp extends CI_Controller {
         parent::__construct();
 		$this->session->set_userdata('session_page', 'inserttemp');
         $this->load->model("inserttemp_model");  
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
     }
     
     public function index() {
-    	$cookie = get_cookie('username_cookie');
-		if( $cookie != null) {
-			$data["id"] = $this -> inserttemp_model -> get_asset();        	
-			$this->view->page_view("inserttemp_view", $data);
-		} else {
-			redirect('/login/', 'refresh');
-		} 
+		$data["id"] = $this -> inserttemp_model -> get_asset();        	
+		$this->view->page_view("inserttemp_view", $data);
     }
 
 	public function insert() {

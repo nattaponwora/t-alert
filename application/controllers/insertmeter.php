@@ -7,32 +7,32 @@ class Insertmeter extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'insertmeter');
 		$this -> load -> model("insertmeter_model");
+		
+		$cookie = get_cookie('username_cookie');
+		if ($cookie == null) {
+			redirect('/login/', 'refresh');
+		}
 	}
 
 	public function index() {
-		$cookie = get_cookie('username_cookie');
-		if ($cookie != null) {
-			$data["id"] = 0;
-			$data["infomation"] = 0;
-			$data["searchTerm"] = null;
-			$data["search_asset"] = null;
-			$data["search_assettypelists"] = null;
-			$data["selection"] = array("โปรดเลือก");
-			$data["selectiontype"] = array("โปรดเลือก");
-			$data["store"] = $this -> insertmeter_model -> get_store();
-			$data["data_table"] = $this -> insertmeter_model -> get_table();
-			$storename = "";
+		$data["id"] = 0;
+		$data["infomation"] = 0;
+		$data["searchTerm"] = null;
+		$data["search_asset"] = null;
+		$data["search_assettypelists"] = null;
+		$data["selection"] = array("โปรดเลือก");
+		$data["selectiontype"] = array("โปรดเลือก");
+		$data["store"] = $this -> insertmeter_model -> get_store();
+		$data["data_table"] = $this -> insertmeter_model -> get_table();
+		$storename = "";
 
-			for ($i = 0; $i < count($data["store"]); $i++) {
-				$storename = $storename . $data["store"][$i] . ",";
-			}
-
-			$data["storename"] = $storename;
-			
-			$this -> view -> page_view("insertmeter_view", $data);
-		} else {
-			redirect('/login/', 'refresh');
+		for ($i = 0; $i < count($data["store"]); $i++) {
+			$storename = $storename . $data["store"][$i] . ",";
 		}
+
+		$data["storename"] = $storename;
+		
+		$this -> view -> page_view("insertmeter_view", $data);
 	}
 
 	public function added() {

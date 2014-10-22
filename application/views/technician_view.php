@@ -13,7 +13,7 @@ $(function () {
 					  
 		$('#teachnical_table').append(new_row);		
 		$('#add_icon').hide();
-		$('#add_form').append("<img class='col-xs-offset-10 mouse_hover' id='add_btntech' name='add_btntech' src='public/images/icon/save_icon.png' height='32px' width='32px' />");
+		$('#add_form').append("<img class='col-xs-offset-9 mouse_hover' id='add_btntech' name='add_btntech' src='public/images/icon/save_icon.png' height='32px' width='32px' />");
 		$('#add_form').append("<img class='col-xs-offset-1 mouse_hover' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
 		
 		$("#add_btntech").on("click", function () {
@@ -86,7 +86,6 @@ $(function () {
 			
 			$(this).addClass("cellEditing"); 
 			$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 			
-			//$(this).append("<img id='ok' src='public/images/icon/ok_icon.png' height='32px' width='32px'/>");
 			$(this).append("&nbsp&nbsp<input type='image' class='margin_center_okay' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
 			$(this).append("<input type='image' class='margin_center_no_okay' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
 			
@@ -127,27 +126,28 @@ $(function () {
 });
 </script>
 
-<div class="box" style="background-color: beige	; margin-top: 60px; width: 70%">
-	<div class="row">
+
+<div class="row">
+	<div class="box col-sm-6 col-sm-push-3" style="background-color: beige">
 		<div class="form-group">
 			<form id="table_form" name="table_form" method="post">
 				<div class="table-responsive">
 					<table id="teachnical_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 						<thead>
-							<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef;">
-								<th style="max-width:30px; width: 30px">ทีม</th>
-								<th style="max-width:50px; width: 50px">หัวหน้าแผนก</th>
-								<th style="max-width:50px; width: 50px">เบอร์โทร</th>
+							<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; white-space: nowrap">
+								<th class='text-overflow' style="max-width:300px; width: 30px">ทีม</th>
+								<th class='text-overflow' style="max-width:500px; width: 50px">หัวหน้าแผนก</th>
+								<th class='text-overflow' style="max-width:500px; width: 50px">เบอร์โทร</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							if ($id > 0) {
 								foreach ($id as $r) {
-									echo "<tr id='".$r['id']."'>";
-									echo "<td class='editable' type='team' style='max-width:30px; width: 30px'>{$r['team']}</td>";
-									echo "<td class='editable' type='supervisor_name' style='max-width:50px; width: 50px'>{$r['supervisor_name']}</td>";
-									echo "<td class='editable' type='tel' style='max-width:50px; width: 50px'>{$r['tel']}</td>";
+									echo "<tr style='white-space: nowrap' id='".$r['id']."'>";
+									echo "<td class='editable text-overflow' type='team' style='max-width:300px; width: 30px'>{$r['team']}</td>";
+									echo "<td class='editable text-overflow' type='supervisor_name' style='max-width:500px; width: 50px'>{$r['supervisor_name']}</td>";
+									echo "<td class='editable text-overflow' type='tel' style='max-width:500px; width: 50px'>{$r['tel']}</td>";
 									// echo ("<td><a href=\"edit_form.php?id=$row[employees_number]\">Edit</a></td></tr>");
 									//echo "<td><a href='".base_url('technician')."/".$count . "'>"."<img src='public/images/icon/edit_icon.png' height='32px' width='32px'></a></td>";
 									echo "</tr>";
@@ -161,7 +161,7 @@ $(function () {
 			</form>
 			<br>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>				
+				<a id="add_icon" name="add_icon" class="col-xs-offset-10 mouse_hover"> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>				
 			</form>
 		</div>
 	</div>

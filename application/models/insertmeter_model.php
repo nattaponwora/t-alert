@@ -101,4 +101,19 @@ class Insertmeter_model extends CI_model {
 		$arrays[$data['type']] = $data['editvar']; 
 		$this -> db -> update( 'meter', $arrays);
 	}
+
+	
+	// function get_dropdown_typelist($shortname) {
+		// $this -> db -> select('asset.asset_typeid');
+		// $this -> db -> from('asset');
+		// //$this -> db -> where('asset.store_id', $store_id);
+		// $this -> db -> where('asset_shortname', $shortname);
+		// $query = $this -> db -> get();
+		// $assets = array();
+		// foreach ($query->result_array() as $row) {
+			// $assets[] = $row;
+		// }
+		// $this->view->p($assets);
+		// return $assets;
+	// }
 }

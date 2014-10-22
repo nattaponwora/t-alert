@@ -1,38 +1,34 @@
 <script>
-  $(function() {
-  	var str = '<?=$storename?>';
-    var availableTags = str.split(',');
-    $( '#search_storeasset' ).autocomplete({
-      source: availableTags
-    });
-  });
-</script>
- 
-
-<script type="text/javascript">
-    $(function() {
-        $( "#begindate" ).datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: ('yy-mm-dd'),
-            onClose: function( selectedDate ) {
-                $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
-            },
-            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
-        });
-        $( "#lastdate" ).datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: ('yy-mm-dd'),
-            onClose: function( selectedDate ) {
-                $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
-            },
-            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
-        });
-        
-        $("#export_pdf").on("click", function () { 	
+	$(function() {
+	  	var str = '<?=$storename?>';
+	    var availableTags = str.split(',');
+	    $( '#search_storeasset' ).autocomplete({
+	      source: availableTags
+	    });
+	    
+	    $('#table_export').dataTable();
+	    $( "#begindate" ).datepicker({
+	        defaultDate: "+1w",
+	        changeMonth: true,
+	        changeYear: true,
+	        dateFormat: ('yy-mm-dd'),
+	        onClose: function( selectedDate ) {
+	            $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
+	        },
+	        monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
+	    });
+	    $( "#lastdate" ).datepicker({
+	        defaultDate: "+1w",
+	        changeMonth: true,
+	        changeYear: true,
+	        dateFormat: ('yy-mm-dd'),
+	        onClose: function( selectedDate ) {
+	            $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
+	        },
+	        monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
+	    });
+	    
+	    $("#export_pdf").on("click", function () { 	
 			$.post("<?=base_url('reportstore/exporttopdf')?>",$('#table_form').serialize(),function(response){
 	 			//('#show').html(response);
 			});
@@ -89,12 +85,13 @@
 </div>
 
 <div class="row"></div>
-	<div class="container box" style="background-color: beige">
+	<div class="box container" style="background-color: beige">
 
 		<form id="table_form" method="post">
-			<table id="table_export" class="table table- -->hover table table-hover" border="0">
+			<div class='table-responsive'>
+			<table id="table_export" class="table table table-hover table-bordered" border="0">
 				<thead>
-					<tr>
+					<tr style="white-space: nowrap">
 						<th style="width:100px">ลำดับที่</th>
 						<th style="width:100px">รหัสสาขา</th>
 						<th style="width:100px">ชื่อสาขา</th>
@@ -110,7 +107,7 @@
 					if ($id > 0) {
 						$i = 1;
 						foreach ($id as $r) {
-							echo "<tr>";
+							echo "<tr style='white-space: nowrap'>";
 							echo "<td>{$i}</td>";
 							echo "<td>{$r['store_id']}</td>";
 							echo "<td>{$r['store_name']}</td>";
@@ -126,6 +123,7 @@
 					?>
 				</tbody>
 			</table>
+			</div>
 		</form>
 		</ul>
 	</div>
@@ -134,7 +132,7 @@
 		<br>
 		<br>
 		<form class="form-group" role="form">
-			<button id="export_excel" class="button green medium" type="button" style="width: 100%;margin: 0px auto 0px auto">
+			<button id="export_excel" class="button green medium" type="button">
 				Export to Excel
 			</button>
 		</form>
@@ -157,7 +155,7 @@
 	        <?php } if ( $lastdate != null ) { ?>
 	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
 	       	<?php } ?>
-			<button class="button orange medium" type="submit" style="width: 100%;margin: 0px auto 0px auto">
+			<button class="button orange medium" type="submit" >
 				Export to PDF
 			</button>
 		</form>

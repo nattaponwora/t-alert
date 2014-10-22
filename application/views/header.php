@@ -26,4 +26,5 @@
 		<script type="text/javascript" src="<?= base_url("public/jquery.battatech.excelexport.js") ?>"></script>
 
 		<script type="text/javascript" src="<?= base_url("public/dataTables-1.10.2/media/js/jquery.dataTables.min.js") ?>"></script>
+		
 		<!-- <script type="text/javascript" src="<?= base_url("public/dataTables.bootstrap.js") ?>"></script> -->

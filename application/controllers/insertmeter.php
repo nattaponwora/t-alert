@@ -7,7 +7,7 @@ class Insertmeter extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'insertmeter');
 		$this -> load -> model("insertmeter_model");
-		
+
 		$cookie = get_cookie('username_cookie');
 		if ($cookie == null) {
 			redirect('/login/', 'refresh');
@@ -31,7 +31,7 @@ class Insertmeter extends CI_Controller {
 		}
 
 		$data["storename"] = $storename;
-		
+
 		$this -> view -> page_view("insertmeter_view", $data);
 	}
 
@@ -47,53 +47,75 @@ class Insertmeter extends CI_Controller {
 	public function get_shortname($get_shortnameid) {
 		$assettype = $this -> insertmeter_model -> get_assetshortname($get_shortnameid);
 		$states = '';
-		if($get_shortnameid != 0) {
-			foreach($assettype as $r) {
+		if ($get_shortnameid != 0) {
+			foreach ($assettype as $r) {
 				echo "<span class='input-group-addon' id='shortname'>{$r}</span>";
 				echo "<input type='hidden' name='hidden_search_assetshortname_span' value ='$r'>";
 				echo "<input type='hidden' name='asset_typeid_d' value =$get_shortnameid>";
 				echo "<input class='form-control' type='text' id='search_assetshortname' name='search_assetshortname' required=''>";
 			}
-		}
-		else {
+		} else {
 			echo "<span class='input-group-addon' id='shortname'></span>";
 			echo "<input class='form-control' type='text' id='search_assetshortname' name='search_assetshortname' required=''>";
 		}
 	}
-	
-	public function get_storename($get_storenameid) {
+
+	public function get_storename($get_storenameid, $wchange) {
 		$storename = $this -> insertmeter_model -> get_storename($get_storenameid);
 		$states = '';
-		if($storename != null) {
-			foreach($storename as $r) {
-				echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='$r' required=''>";
+		if ($wchange == 'insert_form') {
+			if ($storename != null) {
+				foreach ($storename as $r) {
+					echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='$r' required=''>";
+				}
+			} else {
+				echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='' required=''>";
 			}
 		}
-		else {
-			echo "<input class='form-control' readonly='readonly' id='search_store' name='search_store' value='' required=''>";
-		}
+		else if ($wchange == 'edit_form') {
+			if ($storename != null) {
+				foreach ($storename as $r) {
+					echo "<input class='form-control' readonly='readonly' id='edit_store' name='edit_store' value='$r' required=''>";
+				} 
+			} else {
+				echo "<input class='form-control' readonly='readonly' id='edit_store' name='edit_store' value='' required=''>";
+			}
+		}	
 	}
-	
-	public function load_states($store_id) {
+
+	public function load_states($store_id, $wchange, $type_id) {
 		if (isset($store_id)) {
 			$assetlist = $this -> insertmeter_model -> get_assetlist($store_id);
 			$states = '';
-			$js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"';
-			echo form_dropdown('search_assetlist', $assetlist, 0, $js);
+			if ($wchange == 'insert_form') {
+				$js = 'id="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype(\'insert_form\')"';
+				echo form_dropdown('search_assetlist', $assetlist, 0, $js);
+			}
+			else if ($wchange == 'edit_form') {
+				$js = 'id="edit_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype(\'edit_form\')"';
+				echo form_dropdown('edit_assetlist', $assetlist, $type_id, $js); 
+			}
 		}
 	}
 
-	public function load_statestype($store_id, $asset_list) {
+	public function load_statestype($store_id, $asset_list, $wchange) {
 		if (isset($store_id) && isset($asset_list)) {
 			$assetlist2 = $this -> insertmeter_model -> get_assettypelist($store_id, $asset_list);
 			$states = '';
-			$js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
-			echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
+			if ($wchange == 'insert_form') {
+				$js2 = 'id="search_assettypelist" class="btn btn-default dropdown-toggle"';
+				echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
+			}
+			else if($wchange == 'edit_form') {
+				$js2 = 'id="edit_assettypelist" class="btn btn-default dropdown-toggle"';
+				echo form_dropdown('edit_assettypelist', $assetlist2, 0, $js2);
+			}
 		}
 	}
-	
+
 	public function insert() {
 		$data = $this -> input -> post();
 		$this -> insertmeter_model -> edit_meter($data);
 	}
+
 }

@@ -15,7 +15,7 @@ $(function () {
 					  
 		$('#temp_table').append(new_row);		
 		$('#add_icon').hide();
-		$('#add_form').append("<img class='col-xs-offset-10 mouse_hover' id='add_btn' name='add_btn' src='public/images/icon/save_icon.png' height='32px' width='32px' />");				
+		$('#add_form').append("<img class='col-xs-offset-9 mouse_hover' id='add_btn' name='add_btn' src='public/images/icon/save_icon.png' height='32px' width='32px' />");				
 		$('#add_form').append("<img class='col-xs-offset-1 mouse_hover' id='cancel_btn' name='cancel_btn' src='public/images/icon/cancel_icon.png' height='32px' width='32px' />");				
 
 		$("#add_btn").on("click", function () {
@@ -128,14 +128,15 @@ $(function () {
 });
 </script>
 
-<div class="box" style="background-color: beige	; margin-top: 60px; width: 60%">
-	<div class="row">
+
+<div class="row">
+	<div class="box col-sm-6 col-sm-push-3" style="background-color: beige">
 		<div class="form-group">
 		    <form  id="table_form" name="table_form" method="post">
 		        <div class="table-responsive">
 		            <table id="temp_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 		                <thead>
-		                    <tr style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef;">
+		                    <tr class='text-overflow' style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
 		                        <th rowspan="2" style="text-align: center;">ประเภทอุปกรณ์</th>
 		                        <th rowspan="2" style="text-align: center;">ชื่อย่ออุปกรณ์</th>
 		                        <th colspan="2" style="text-align: center;">อุณหภูมิมาตราฐาน(องศาเซลเซียส)</th>
@@ -151,9 +152,9 @@ $(function () {
 		                    if ($id > 0) {
 		                    	$id_row = 0;
 		                        foreach ($id as $r) {
-		                        	echo "<tr id=".$r['id'].">";
-		                            echo "<td class='editable' type='type' style='max-width:30px; width:30px'>{$r['type']}</td>";
-									echo "<td class='editable' type='shortcode' style='max-width:30px; width:20px'>{$r['shortcode']}</td>";	
+		                        	echo "<tr style='white-space: nowrap' id=".$r['id'].">";
+		                            echo "<td type='type' style='max-width:30px; width:30px'>{$r['type']}</td>";
+									echo "<td type='shortcode' style='max-width:30px; width:20px'>{$r['shortcode']}</td>";	
 		                            echo "<td class='editable' type='min_temp' style='max-width:30px; width:30px'>{$r['min_temp']}</td>";
 		                            echo "<td class='editable' type='max_temp' style='max-width:30px; width:30px'>{$r['max_temp']}</td>";
 									echo "<td class='editable' type='std_time' style='max-width:30px; width:30px'>{$r['std_time']}</td>";
@@ -169,8 +170,9 @@ $(function () {
 			</form>
 			<br>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-11 mouse_hover"> <img src='public/images/icon/add_icon.png' height='32px' width='32px'></a>	
+				<a id="add_icon" name="add_icon" class="col-xs-offset-10 mouse_hover"> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>	
 			</form>
+			
 		</div>
 	</div>
 </div>

@@ -2,6 +2,18 @@
 	cursor: pointer;
 }
 
+table tbody tr.startcolor  {
+	background-color: #82CC27;
+	color: #F7F7F7;
+	font-weight: bold;
+}
+
+.table-hover > tbody > tr.startcolor:hover > td {
+	background-color: #345903;
+	color: #F7F7F7;
+	font-weight: bold;
+}
+
 table tbody tr.alertcolor  {
 	background-color: #dd191d;
 	color: #F7F7F7;
@@ -288,15 +300,11 @@ div.pagination span.disabled {
 	border-radius: 5px;
 }
 
-/* =Your Generated css
- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 .boxshadow2 {
 	-moz-box-shadow: 10px 10px 5px #000000;
 	-webkit-box-shadow: 10px 10px 5px #000000;
 	box-shadow: 10px 10px 5px #000000;
 }
-/* End of Your Generated css
- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 
 .margin_center_no_okay {
 	position: absolute;
@@ -309,15 +317,26 @@ div.pagination span.disabled {
     margin-top: 5px;
 }
 
-.imgloadinghidden {
-	display: none;
-}
-
 .imgloadingshow {
 	display: inline;
 	
 }
 
+.imgloadinghidden { 
+	display : none;
+}
+
 .ui-dialog .ui-dialog-title {
 	color: aliceblue;
+}
+
+.col-center-block {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centert th {
+	text-align: center;
 }

@@ -59,10 +59,11 @@
 			       		</li>
 		        	</ul>
 		      	</li>
-		      	
-				
+		      	<li class="<?= (($session_page == 'config') ?  'active' : 'last'); ?> ">
+					<a href="<?= base_url("config") ?>">ตั้งค่า</a>
+				</li>
 			</ul>
-		
+			
 			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("login/logout") ?>" method="post">
 				<ul class="nav navbar-nav navbar-right">
 					<?php  $log_user = get_cookie('log_cookie'); ?>

@@ -3,8 +3,13 @@
 		background-image: url("public/images/background.png");
 	}
 </style>
-<img alt="Responsive image" src=<?= base_url('public/images/logo.png') ?> style="max-height: 20%;margin: 0 auto;margin-top: 40px;position: absolute; right: 0; left: 0;">
-<div class="boxshadow1 boxshadow2" style="width: 500px; height: 300px;position:absolute; left: 50%;  top: 65%;margin-left: -250px;margin-top: -225px;">
+<br><br>
+<div class="row">
+<img class="col-sm-2 col-sm-push-5 col-xs-12" alt="Responsive image" src=<?= base_url('public/images/logo.png') ?> style="max-height: 20%;">
+</div>
+<br><br><br>
+<div class="row">
+<div class="boxshadow1 boxshadow2 col-sm-4 col-sm-push-4 col-xs-12">
 	<form id="login_form" name="login_form" class="form-signin" action="<?= base_url('login/check') ?>" role="form" method="post">
 		<center>
 			<h2 class="form-signin-heading" style="color: white">Sign in</h2>
@@ -25,5 +30,6 @@
 		</button>
 	</form>
 	<br>
+</div>
 </div>
 <!-- /container -->

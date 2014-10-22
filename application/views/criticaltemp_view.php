@@ -22,11 +22,12 @@
 </div>
 
 <div class="row">  
-    <div class=" box" style="width: 80%; background-color: beige">
+    <div class="container box" style="background-color: beige">
         <form id="table_form" method="post">
+        	<div class="table-responsive">
             <table class="table table- -->hover table table-hover rwd-table" border="0">
                 <thead>
-                    <tr style="background-color: firebrick; color: white">
+                    <tr style="background-color: firebrick; color: white; white-space: nowrap">
                     	<th style="width:100px">รหัสสาขา</th>
                         <th style="width:100px">ชื่อสาขา</th>
                         <th style="width:100px">อุปกรณ์</th>
@@ -59,7 +60,7 @@
                         		foreach ($getstart as $g) {
 	                        		foreach ($id as $r) {
 	                        			if($c['id'] == $r['id'] && $g['id'] == $c['id']) {
-				                            echo "<tr class='alertcolor'>";	
+				                            echo "<tr style='white-space: nowrap;' class='alertcolor'>";	
 											echo "<td>{$r['store_id']}</td>";
 				                            echo "<td>{$r['store_name']}</td>";
 											echo "<td>{$r['type']}</td>";
@@ -81,7 +82,7 @@
 		                    if( $c['status'] == 'WAIT') {
 	                        	foreach ($id as $r) {
 	                        		if($c['id'] == $r['id']) {
-			                            echo "<tr class='waitcolor'>";	
+			                            echo "<tr style='white-space: nowrap;' class='waitcolor'>";	
 										echo "<td>{$r['store_id']}</td>";
 			                            echo "<td>{$r['store_name']}</td>";
 										echo "<td>{$r['type']}</td>";
@@ -101,6 +102,7 @@
                     ?>
                 </tbody>
             </table>
+            </div>
         </form>
 	</div>
 </div>

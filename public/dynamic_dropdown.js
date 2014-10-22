@@ -17,7 +17,11 @@ function loadStates(url, change){
     
 function insertStates(xhr, change){
     if(xhr.status == 200){
-        document.getElementById(change).innerHTML = xhr.responseText;  ////
+    	try {
+        	document.getElementById(change).innerHTML = xhr.responseText;  ////
+    	} catch(err) {
+    		//document.getElementById(change).innerHTML = xhr.responseText;
+		}
     }else 
         throw new Error('Server has encountered an error\n'+
                          'Error code = '+xhr.status);

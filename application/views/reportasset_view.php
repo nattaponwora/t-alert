@@ -20,6 +20,8 @@
             },
             monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
         });
+        
+        $('#table_export').dataTable();
     });
 
 	$(document).ready(function () {
@@ -68,18 +70,18 @@
 
 <div class="row"></div>
 	<div class="container box" style="background-color: beige">
-
 		<form id="table_form" method="post">
+			<div class='table-responsive'>
 			<table id="table_export" class="table table- -->hover table table-hover" border="0">
 				<thead>
-					<tr>
-						<th style="width:100px">ลำดับที่</th>
-						<th style="width:100px">รหัสสาขา</th>
-						<th style="width:100px">ชื่อสาขา</th>
-						<th style="width:100px">อุปกรณ์</th>
-						<th style="width:100px">หมายเลขบาร์โค้ด</th>
-						<th style="width:100px">อุณหภูมิเฉลี่ย</th>
-						<th style="width:100px">ชื่อย่ออุปกรณ์</th>					
+					<tr class='text-overflow'>
+						<th style="width:100px; white-space: nowrap">ลำดับที่</th>
+						<th style="width:100px; white-space: nowrap">รหัสสาขา</th>
+						<th style="width:100px; white-space: nowrap">ชื่อสาขา</th>
+						<th style="width:100px; white-space: nowrap">อุปกรณ์</th>
+						<th style="width:100px; white-space: nowrap">หมายเลขบาร์โค้ด</th>
+						<th style="width:100px; white-space: nowrap">อุณหภูมิเฉลี่ย</th>
+						<th style="width:100px; white-space: nowrap">ชื่อย่ออุปกรณ์</th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -87,7 +89,7 @@
 					if ($id > 0) {
 						$i = 1;
 						foreach ($id as $r) {
-							echo "<tr>";
+							echo "<tr style='white-space: nowrap'>";
 							echo "<td>{$i}</td>";
 							echo "<td>{$r['store_id']}</td>";
 							echo "<td>{$r['store_name']}</td>";
@@ -103,6 +105,7 @@
 					?>
 				</tbody>
 			</table>
+			</div>
 		</form>
 		</ul>
 	</div>
@@ -111,7 +114,7 @@
 		<br>
 		<br>
 		<form class="form-group" role="form" >
-			<button id="export_excel" class="button green medium" type="button" style="width: 100%;margin: 0px auto 0px auto">
+			<button id="export_excel" class="button green medium" type="button">
 				Export to Excel
 			</button>
 		</form>
@@ -129,7 +132,7 @@
 	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
 	       	<?php } ?>
 	       	<input class="form-control mouse_hover" type="hidden" id="set_search_asset" name="set_search_asset" value="<?= $search_asset ?>" />
-			<button class="button orange medium" type="submit" style="width: 100%;margin: 0px auto 0px auto" onclick="">
+			<button class="button orange medium" type="submit">
 				Export to PDF
 			</button>
 		</form>

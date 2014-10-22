@@ -3,21 +3,21 @@
 	var first_alert = false;
 	
     function load_asset() {
-    	$('#loading_gif').attr('class', 'imgloadingshow');
+    	$('#loading_gif').attr('class', 'imgloadingshow').fadeIn('500');
         var search_value = document['search_form']['search_storeasset'].value; 
         var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
         loadStates(url, 'assetlist'); 
         load_assettype();
-        $('#loading_gif').attr('class', 'imgloadinghidden');
+        $('#loading_gif').attr('class', 'imgloadingshow').fadeOut('2000');
     }
     
     function load_assettype() {
-    	$('#loading_gif').attr('class', 'imgloadingshow');
+    	$('#loading_gif2').attr('class', 'imgloadingshow').fadeIn('500');
         var search_value = document['search_form']['search_storeasset'].value; 
         var search_valuelist = document['search_form']['search_assetlist'].value; 
         var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
         loadStates(url, 'assettypelist');    
-        $('#loading_gif').attr('class', 'imgloadinghidden');  
+        $('#loading_gif2').attr('class', 'imgloadingshow').fadeOut('2000');
     }
     
     $(function () {
@@ -63,18 +63,30 @@
         		var order = $('.first').attr('order');
         		$('.first').removeClass('first');
         		
-        		var rowNode = t.row.add( [
-        			count,
-        			arrayItem.temp,
-        			secondsToString(arrayItem.abnormal_period),
-            		arrayItem.time
-        		] ).draw().node();
-        		
-        		t.column(3).order( 'desc' );
-        		
-        		if(arrayItem.status == 'ALERT'){
+        		if(arrayItem.temp != '85')  {
+	        		var rowNode = t.row.add( [
+	        			count,
+	        			arrayItem.temp,
+	        			secondsToString(arrayItem.abnormal_period),
+	            		arrayItem.time
+	        		] ).draw().node();
+	        		
+	        		t.column(3).order( 'desc' );
+        		}
+        		if(arrayItem.temp == '85')  {
+        			rowNode = t.row.add( [
+	        			count,
+	        			' ',
+	        			'Start',
+	            		arrayItem.time
+	        		] ).draw().node();
+	        		t.column(3).order( 'desc' );
+        			$( rowNode ).addClass('startcolor first');
+        		} 
+        		else if(arrayItem.status == 'ALERT') {
         			if(first_alert == false) {
         				$( "#time_alert").text(secondsToString(arrayItem.abnormal_period));
+        				$( "#temp_alert").text(arrayItem.temp);
         				$( "#dialog" ).dialog( "open" );
         				first_alert = true;
         			}
@@ -100,10 +112,11 @@
 		if(numseconds < 10) { numseconds = "0" + (numseconds); } 
 		return numhours + ":" + numminutes + ":" + numseconds;
 	 }
-</script>  
+</script>
 
 <div id="dialog" title="Alert" style="font: white">
-	<p><b>อุณหภูมิมีความผิดปกติเกินจากมาตราฐานมา</b> <span id='time_alert'></span> <b>ชั่วโมง</b></p>
+	<p><b>อุณหภูมิ </b> <span id='temp_alert'></span> <b>องศาเซลเซีย</p>
+	<p>อุณหภูมิมีความผิดปกติเกินจากมาตราฐานมา</b> <span id='time_alert'></span> <b>ชั่วโมง</b></p>
 	<?php
 		foreach($infomation as $r) {
 	?>
@@ -116,72 +129,74 @@
 		}
 	?>
 </div>
-
-
-<div class="container box" style="background-color: beige">
-    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
-        <label>รหัสร้าน</label>
-        <div class="form-group">
-            <?php if($searchTerm == null) { ?>
-            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
-            <?php } ?>
-            <?php if($searchTerm != null) { ?>
-            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
-            <?php } ?>
-        </div>
-        
-        <label>อุปกรณ์</label>
-        <div class="form-group" id ="assetlist" name="assetlist">            
-            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
-            <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
-        </div>
-		<img class="imgloadinghidden" id="loading_gif" style="max-height: 20px; max-width: 20px" src='<?= base_url("public/images/loading.gif")?>' />
-        
-        <label>หมายเลขอุปกรณ์</label>
-        <div class="form-group" id ="assettypelist" name="assettypelist">
-            <?php $js2 = 'id="search_assettypelist" name="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
-            <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
-        </div>
-        
-        <button id="search" name="search" type="submit" class="button blue small">
-            Search
-        </button>
-    </form>
-    <br>
+<div class="row"></div>
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+		<div class="box" style="background-color: beige">
+		    <form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("temp/search") ?>" method="post">
+		        <label>รหัสร้าน</label>
+		        <div class="form-group">
+		            <?php if($searchTerm == null) { ?>
+		            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
+		            <?php } ?>
+		            <?php if($searchTerm != null) { ?>
+		            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
+		            <?php } ?>
+		        </div>
+		        
+		        <label>อุปกรณ์</label>
+		        <div class="form-group" id ="assetlist" name="assetlist">            
+		            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+		            <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
+		        </div>
+				<img class="imgloadinghidden" id="loading_gif" style="max-height: 20px; max-width: 20px" src='<?= base_url("public/images/loading.gif")?>' />
+		        
+		        <label>หมายเลขอุปกรณ์</label>
+		        <div class="form-group" id ="assettypelist" name="assettypelist">
+		            <?php $js2 = 'id="search_assettypelist" name="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
+		            <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
+		        </div>
+		        <img class="imgloadinghidden" id="loading_gif2" style="max-height: 20px; max-width: 20px" src='<?= base_url("public/images/loading.gif")?>' />
+		        <button id="search" name="search" type="submit" class="button blue small">
+		            Search
+		        </button>
+		    </form>
+		    <br>
+		</div>
+	</div>
 </div>
 <div class="row"></div>
-    <div class="col-xs-4 col-xs-offset-1">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-1">
     <div class="box" style="background-color: beige">
         <div class="form-group">
-            <label class="col-sm-5 control-label">รหัสสาขา</label>
+            <label class="col-xs-12 col-sm-5 control-label">รหัสสาขา</label>
             <div class="col-sm-7">
                 <p><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['store_id']}"; }}?> </p>
             </div>
         </div>
         <br>
         <div class="form-group">
-            <label class="col-sm-5 control-label">ชื่อสาขา</label>
+            <label class="col-xs-12 col-sm-5 control-label">ชื่อสาขา</label>
             <div class="col-sm-7">
                 <p><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['store_name']}"; }}?> </p>
             </div>
         </div>
         <br>
         <div class="form-group">
-            <label class="col-sm-5 control-label">อุปกรณ์</label>
+            <label class="col-xs-12 col-sm-5 control-label">อุปกรณ์</label>
             <div class="col-sm-7">
                 <p><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['type']}"; }}?> </p>
             </div>
         </div>
         <br>
         <div class="form-group">
-            <label class="col-sm-5 control-label">หมายเลขบาร์โค้ด</label>
+            <label class="col-xs-12 col-sm-5 control-label">หมายเลขบาร์โค้ด</label>
             <div class="col-sm-7">
                 <p><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['asset_barcode']}"; }}?> </p>
             </div>
         </div>
         <br>
         <div class="form-group">
-            <label class="col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
+            <label class="col-xs-12 col-sm-5 control-label">ชื่อย่ออุปกรณ์</label>
             <div class="col-sm-7">
                 <p><?php if($infomation > 0) { foreach($infomation as $r){ echo "{$r['asset_shortname']}"; }}?> </p>
             </div>
@@ -189,56 +204,70 @@
         <br>
     </div>    
     </div>    
-    <div class="col-xs-6">
+    <div class="col-xs-12 col-sm-6">
 	    <div class="box" style="background-color: beige">
 	   		<form id="table_form" method="post">
-	            <table id="table_page" class="table table-hover flat-table" cellspacing="0" width="100%" border="0">
-	                <thead class="center">
-	                    <tr style="background-color: #004276; color: white;">
-	                    	<th class="hidden" style="width:100px">id</th>
-	                    	<th style="width:100px">อุณหภูมิ(เซลเซียส)</th>
-	                        <th style="width:100px">เวลาที่เกินมาตรฐาน(ชั่วโมง)</th>
-	                        <th style="width:100px">เวลา</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <?php	                    	
-	                    if ($id > 0) {
-	                        $i = 1;
-	                        foreach ($id as $r) {
-	                        	if($i==1){
-	                        		$first = " first";
-	                        	} else {
-									$first = "";
+	   			<div class="table-responsive">
+		            <table id="table_page" class="table table-hover" cellspacing="0" width="100%" border="0">
+		                <thead class="center">
+		                    <tr style="background-color: #004276; color: white;">
+		                    	<th class="hidden" style="width:100px">id</th>
+		                    	<th class='text-overflow' style="width:100px">อุณหภูมิ(เซลเซียส)</th>
+		                        <th class='text-overflow' style="width:100px">เวลาที่เกินมาตรฐาน(ชั่วโมง)</th>
+		                        <th class='text-overflow' style="width:100px">เวลา</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    <?php	                    	
+		                    if ($id > 0) {
+		                        $i = 1;
+		                        foreach ($id as $r) {
+		                        	if($i==1){
+		                        		$first = " first";
+		                        	} else {
+										$first = "";
+									}
+									if($r['temp'] == '85')
+									{
+										echo "<tr class='startcolor$first' order=$i >";
+										echo "<td class='hidden'>{$i}</td>";
+			                            echo "<td></td>";
+									    echo "<td class='text-overflow'>"."Start"."</td>";
+			                            echo "<td style='white-space: nowrap;'>{$r['time']}</td>";
+			                            echo "</tr>";
+									}
+									else 
+									{
+			                        	if($r['status'] == 'ALERT') {
+				                            echo "<tr class='alertcolor$first' order=$i >";
+											echo "<td class='hidden'>{$i}</td>";
+				                            echo "<td>{$r['temp']}</td>";
+										    echo "<td class='text-overflow'>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
+				                            echo "<td style='white-space: nowrap;'>{$r['time']}</td>";
+				                            echo "</tr>";
+										} else if($r['status'] == 'WAIT') {
+											echo "<tr class='waitcolor$first' order=$i >";
+											echo "<td class='hidden'>{$i}</td>";
+				                            echo "<td>{$r['temp']}</td>";
+										    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
+				                            echo "<td style='white-space: nowrap;'>{$r['time']}</td>";
+				                            echo "</tr>";
+										} else {
+											echo "<tr class='normalcolor$first' order=$i >";
+											echo "<td class='hidden'>{$i}</td>";
+				                            echo "<td>{$r['temp']}</td>";
+										    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
+				                            echo "<td style='white-space: nowrap;'>{$r['time']}</td>";
+				                            echo "</tr>";
+										}
+										$i++;
+									}
 								}
-	                        	if($r['status'] == 'ALERT') {
-		                            echo "<tr class='alertcolor$first' order=$i >";
-									echo "<td class='hidden'>{$i}</td>";
-		                            echo "<td>{$r['temp']}</td>";
-								    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
-		                            echo "<td>{$r['time']}</td>";
-		                            echo "</tr>";
-								} else if($r['status'] == 'WAIT') {
-									echo "<tr class='waitcolor$first' order=$i >";
-									echo "<td class='hidden'>{$i}</td>";
-		                            echo "<td>{$r['temp']}</td>";
-								    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
-		                            echo "<td>{$r['time']}</td>";
-		                            echo "</tr>";
-								} else {
-									echo "<tr class='normalcolor$first' order=$i >";
-									echo "<td class='hidden'>{$i}</td>";
-		                            echo "<td>{$r['temp']}</td>";
-								    echo "<td>".gmdate('H:i:s',$r['abnormal_period'])."</td>";
-		                            echo "<td>{$r['time']}</td>";
-		                            echo "</tr>";
-								}
-								$i++;
-							}
-	                    }
-	                    ?>
-	                </tbody>
-	            </table>
+		                    }
+		                    ?>
+		                </tbody>
+		            </table>
+	            </div>
 	        </form>		
 		</div>
 	</div>

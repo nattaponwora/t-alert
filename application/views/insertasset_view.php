@@ -1,4 +1,5 @@
 <script>
+	var dialogr = 0;
 	$(function() {
 		var checkpoint_id = null;
 		var checkpoint_type = null;
@@ -8,6 +9,39 @@
 		$( '#search_storeasset' ).autocomplete({
 			source: availableTags
 		});
+		
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+		    modal: true,
+		    
+		    autoOpen: false,
+		   	buttons: {
+		        "ใช่": function() {
+		        	// alert(dialogr);
+		        	$.get("<?=base_url('insertasset/remove')?>/" + dialogr,$('#table_form').serialize(),function(response){});
+		        	$(".removetr").remove();
+		        	$(this).dialog( "close" );
+		        	
+		        },
+		        "ไม่ใช่": function() {
+		         	$(this).dialog( "close" );
+		        }
+			},
+			close: function( event, ui ) {
+		        $(".removetr").removeClass("removetr");
+		    }
+	    });
+	    
+		$(".remove_icon").on("click", function () {
+			var newcontent = $(this).parent().parent().attr('id');
+			$(this).parent().parent().addClass("removetr");
+			if(newcontent != 0) {
+				dialogr = newcontent;
+				$("#dialog-confirm").dialog( "open" );
+				
+			}
+		});
+		
 		
 		$(".editableTable").on("dblclick", ".editable", function () {
 			if($(this).hasClass( "editable" ))
@@ -84,6 +118,10 @@
 	}
 </script>
 
+<div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
+	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
+</div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog"  style="max-width: 500px; overflow: hidden" >
     <div class="modal-content">
@@ -155,18 +193,19 @@
 </div> 
 
 <div class="row">
-	<div class="container box" style="background-color: beige	">
+	<div class="container box col-center-block" style="background-color: beige	">
 		<form class="form-signin" id="table_form" action= "<?= base_url("insertasset/added") ?>" role="form" method="post">
 			<div class="form-group">
 				<div class="table-responsive">
 					<table id="insertasset_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 						<thead>
-							<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; ">
+							<tr class="centert" style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; ">
 								<th style="max-width:300px; width: 30px; white-space: nowrap">รหัสร้าน</th>
 								<th style="max-width:500px; width: 50px; white-space: nowrap">ชื่อร้าน</th>
 								<th style="max-width:500px; width: 50px; white-space: nowrap">ประเภทอุปกรณ์</th>
 								<th style="max-width:500px; width: 50px; white-space: nowrap">ชื่อย่ออุปกรณ์</th>
 								<th style="max-width:500px; width: 50px; white-space: nowrap">หมายเลขบาร์โค๊ดอุปกรณ์</th>
+								<th style="max-width:500px; width: 50px; white-space: nowrap">ลบ</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -180,6 +219,7 @@
 									echo "<td type='type'  style='max-width:500px; width: 50px; white-space: nowrap'>{$r['type']}</td>";
 									echo "<td class='editable' type='asset_shortname'  style='max-width:500px; width: 50px; white-space: nowrap'>{$r['asset_shortname']}</td>";
 									echo "<td class='editable' type='asset_barcode'  style='max-width:500px; width: 50px; white-space: nowrap'>{$r['asset_barcode']}</td>";
+									echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
 									echo "</tr>";
 									// $i++;
 								}

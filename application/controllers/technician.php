@@ -28,4 +28,8 @@ class Technician extends CI_Controller {
 		$data = $this -> input -> post();
 		$this -> technician_model -> add_technical($data);
 	}
+	
+	public function remove($in) {
+	 	$this -> technician_model -> remove_technician($in);
+	}
 }

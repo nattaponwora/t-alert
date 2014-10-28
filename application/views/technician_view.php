@@ -1,14 +1,48 @@
 <script>
+var dialogr = 0;
 $(function () {
 	var checkpoint_id = null;
 	var checkpoint_type = null;
 	var checkpoint_value = null;
+	
+	$( "#dialog-confirm" ).dialog({
+		resizable: false,
+	    modal: true,
+	    
+	    autoOpen: false,
+	   	buttons: {
+	        "ใช่": function() {
+	        	// alert(dialogr);
+	        	$.get("<?=base_url('technician/remove')?>/" + dialogr,$('#table_form').serialize(),function(response){});
+	        	$(".removetr").remove();
+	        	$(this).dialog( "close" );
+	        	
+	        },
+	        "ไม่ใช่": function() {
+	         	$(this).dialog( "close" );
+	        }
+		},
+		close: function( event, ui ) {
+	        $(".removetr").removeClass("removetr");
+	    }
+    });
+	
+	$(".remove_icon").on("click", function () {
+		var newcontent = $(this).parent().parent().attr('id');
+		$(this).parent().parent().addClass("removetr");
+		if(newcontent != 0) {
+			dialogr = newcontent;
+			$("#dialog-confirm").dialog( "open" );
+			
+		}
+	});
 	
 	$("#add_icon").on("click", function () { 	
 		var new_row = "<tr id='edition'>"+
 					  "<td class='cellEditing' type='team' style='max-width:30px; width:30px'><input id='team_input' name='team_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' type='supervisor_name' style='max-width:30px; width:30px'><input id='supervisor_name_input' name='supervisor_name_input' type='text' /></td>"+
 					  "<td class='cellEditing' type='tel' style='max-width:30px; width:30px'><input id='tel_input' name='tel_input' type='text' /></td>"+
+					  "<td align='center'>" + "<a class='mouse_hover remove_icon'><img src='public/images/remove.png'></td>" +
 					  "</tr>";
 					  
 		$('#teachnical_table').append(new_row);		
@@ -22,7 +56,7 @@ $(function () {
 			});
 			
 			var textbox = $("#edition").find('td');
-			for(i=0; i<textbox.length; i++) {
+			for(i=0; i<textbox.length-1; i++) {
 				var newContent = $(textbox[i]).children().val();
 				$(textbox[i]).removeClass();
 				$(textbox[i]).addClass("editable"); 
@@ -80,7 +114,6 @@ $(function () {
 			checkpoint_type = element_col;
 			$('#table_form').append("<input type='hidden' id='temp1' name='id'  value='"  + element_row + "' />");
 			$('#table_form').append("<input type='hidden' id='temp2' name='type'  value='"  + element_col + "' />");
-			
 			var OriginalContent = $(this).text();
 			checkpoint_value = OriginalContent;
 			
@@ -126,6 +159,9 @@ $(function () {
 });
 </script>
 
+<div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
+	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
+</div>
 
 <div class="row">
 	<div class="box col-sm-6 col-sm-push-3" style="background-color: beige">
@@ -134,10 +170,11 @@ $(function () {
 				<div class="table-responsive">
 					<table id="teachnical_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 						<thead>
-							<tr style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; white-space: nowrap">
+							<tr class="centert" style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; white-space: nowrap">
 								<th class='text-overflow' style="max-width:300px; width: 30px">ทีม</th>
 								<th class='text-overflow' style="max-width:500px; width: 50px">หัวหน้าแผนก</th>
 								<th class='text-overflow' style="max-width:500px; width: 50px">เบอร์โทร</th>
+								<th class='text-overflow' style="max-width:500px; width: 50px">ลบ</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -149,6 +186,7 @@ $(function () {
 									echo "<td class='editable text-overflow' type='supervisor_name' style='max-width:500px; width: 50px'>{$r['supervisor_name']}</td>";
 									echo "<td class='editable text-overflow' type='tel' style='max-width:500px; width: 50px'>{$r['tel']}</td>";
 									// echo ("<td><a href=\"edit_form.php?id=$row[employees_number]\">Edit</a></td></tr>");
+									echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
 									//echo "<td><a href='".base_url('technician')."/".$count . "'>"."<img src='public/images/icon/edit_icon.png' height='32px' width='32px'></a></td>";
 									echo "</tr>";
 								}

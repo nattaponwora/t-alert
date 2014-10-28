@@ -1,81 +1,60 @@
 <script>
+	var dialogr = 0;
 	$(function() {
 		var select = document.getElementById("search_assetlist");
 		var option = document.createElement('option');
         option.text = option.value = "โปรดเลือก";
         select.add(option, 0);
-        
-		var checkpoint_id = null;
-		var checkpoint_type = null;
-		var checkpoint_value = null;
-		$(".editableTable").on("dblclick", ".editable", function () {
-			if($(this).hasClass( "editable" ))
-			{
-				if(checkpoint_id != null) {
-					var old_id = "#" + checkpoint_id;
-					var old = $( old_id + " td[type='" + checkpoint_type + "']" );
-					$("#table_form input").remove();
-					$("#ok").remove();
-					$(old).html( checkpoint_value );
-					$(old).removeClass('cellEditing');
-					$(old).addClass("editable"); 
-				}
-				$(this).removeClass("editable");
-				var element_row = $(this).parent().attr("id");
-				var element_col = $(this).attr("type");
-				checkpoint_id = element_row;
-				checkpoint_type = element_col;
-				$('#table_form').append("<input type='hidden' id='temp1' name='id'  value='"  + element_row + "' />");
-				$('#table_form').append("<input type='hidden' id='temp2' name='type'  value='"  + element_col + "' />");
-				
-				var OriginalContent = $(this).text();
-				checkpoint_value = OriginalContent;
-				
-				$(this).addClass("cellEditing"); 
-				$(this).html("<input id='editvar' name='editvar' type='text' value='" + OriginalContent + "' />"); 			
-				//$(this).append("<img id='ok' src='public/images/icon/ok_icon.png' height='32px' width='32px'/>");
-				$(this).append("&nbsp&nbsp<input type='image' class='margin_center_okay' id='ok' name='ok' src='public/images/icon/ok_icon.png' height='24px' width='24px' /> &nbsp");
-				$(this).append("<input type='image' class='margin_center_no_okay' id='cancel' name='cancel' src='public/images/icon/cancel_icon.png' height='24px' width='24px' />");
-				
-				$(this).children().first().focus(); 
-				$("#ok").on("click", function(){
-					$.post("<?=base_url('insertmeter/insert')?>",$('#table_form').serialize(),function(response){
-						$('#show').html(response);
-					});
-					var textbox = $(this).parent().find('input').eq(0);
-					var newContent = $(textbox).val();
-					$('#temp1').remove();
-					$('#temp2').remove();
-					$(textbox).parent().removeClass();
-					$(textbox).parent().addClass("editable"); 
-					$(textbox).parent().text(newContent);
-					checkpoint_id = null;
-					checkpoint_type = null;
-					checkpoint_value = null;
-				});
-				
-				$("#cancel").on("click", function(){
-					$('#temp1').remove();
-					$('#temp2').remove();
-					$(this).parent().removeClass();
-					$(this).parent().addClass("editable"); 
-					$(this).parent().text(checkpoint_value);
-					
-					checkpoint_id = null;
-					checkpoint_type = null;
-					checkpoint_value = null;
-				});
-			}
-		}); 
 		
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+		    modal: true,
+		    
+		    autoOpen: false,
+		   	buttons: {
+		        "ใช่": function() {
+		        	// alert(dialogr);
+		        	$.get("<?=base_url('insertmeter/remove')?>/" + dialogr,$('#table_form').serialize(),function(response){});
+		        	$(".removetr").remove();
+		        	$(this).dialog( "close" );
+		        	
+		        },
+		        "ไม่ใช่": function() {
+		         	$(this).dialog( "close" );
+		        }
+			},
+			close: function( event, ui ) {
+		        $(".removetr").removeClass("removetr");
+		    }
+	    });
+			
 		$(".edit_icon").on("click", function () {
 			$("#edit_meterid").val($(this).parent().parent().children().eq(0).text());
 			$("#edit_storeasset").val($(this).parent().parent().children().eq(1).text());
 			var type_id = $(this).parent().parent().children().eq(1).attr('use_it');
 			load_asset('edit_form', type_id);			
+			
+			//var type_asset = $(this).parent().parent().attr('id');
+			//load_assettype('edit_form', 'type_asset');
+			
 			var assettype = $(this).parent().parent().children().eq(3).text();
+			var element_row = $(this).parent().parent().attr("id");
+			var element_col = $(this).parent().parent().children().eq(0).attr("type");
+			checkpoint_id = element_row;
+			checkpoint_type = element_col;
+			$('#edit_form').append("<input type='hidden' id='temp1' name='id'  value='"  + element_row + "' />");
+			$('#edit_form').append("<input type='hidden' id='temp2' name='type'  value='"  + element_col + "' />");
 		});
-	
+		
+		$(".remove_icon").on("click", function () {
+			var newcontent = $(this).parent().parent().children().eq(0).text();
+			$(this).parent().parent().addClass("removetr");
+			if(newcontent != 0) {
+				dialogr = newcontent;
+				$("#dialog-confirm").dialog( "open" );
+			}
+		});
+		
 		$('#insertmeter_table').dataTable();
 	});
 
@@ -102,6 +81,7 @@
     }
     
     function load_assettype(changevar, type_id) {
+    	alert(type_id);
     	if(changevar == 'insert_form') {
 			var search_value = $('#search_storeasset').val(); 
 			var search_valuelist = $('#search_assetlist').val();
@@ -109,14 +89,18 @@
 		}
 		else if(changevar == 'edit_form') {
 			var search_value = $('#edit_storeasset').val(); 
-			var search_valuelist = type_id;//$('#edit_assetlist').val();
+			var search_valuelist = $('#edit_assetlist').val();
 			var assettypelist = 'editassettypelist';
 		}
-		
+		//alert(type_id);
         var url = '<?= base_url("insertmeter/load_statestype") ?>/' + search_value + '/' + search_valuelist + '/' + changevar ; 
         loadStates(url, assettypelist);      
     }
 </script>
+
+<div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
+	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
+</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="max-width: 500px; overflow: hidden" >
@@ -194,19 +178,20 @@
       	<h4 class="modal-title" id="myModalLabel">Edit Meter</h4>
       </div>
       <div class="modal-body">
-        <form class="form-signin" name="edit_form" id="edit_form" action= "<?= base_url("insertmeter/insert") ?>" role="form" method="post">
+        <form class="form-signin" name="edit_form" id="edit_form" action= "<?= base_url("insertmeter/edit") ?>" role="form" method="post">
 					<br>
 					<br>
+					<input class='hidden'  />
 					<div class="form-group">
 						<label class="col-sm-5 control-label">หมายเลขเครื่องวัด</label>
 						<div class="col-sm-4 input-group">
-					  		<input class="form-control" id="edit_meterid" required="">
+					  		<input class="form-control" id="edit_meterid" name="edit_meterid" required="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-5 control-label">รหัสร้าน</label>
 						<div class="col-sm-4 input-group">
-					  		<input class="form-control" id="edit_storeasset" required="" onchange="load_asset('edit_form', 0)">
+					  		<input class="form-control" id="edit_storeasset" name="edit_storeasset" required="" onchange="load_asset('edit_form', 0)">
 						</div>			
 					</div>
 					<div class="form-group">
@@ -233,11 +218,11 @@
 					
 					<div class="row">
 						<div class="form-group">
-							<div class="col-xs-4 col-xs-offset-4">
-								<button id="search" name="search" type="submit" class="button green medium">
+							<div class="col-m-4 col-xs-offset-4">
+								<button id="update_btn" name="update_btn" type="submit" class="button green medium">
 									Update
 								</button>
-							</div
+							</div>
 						</div>
 					</div>
 				</div>
@@ -278,7 +263,7 @@
 								echo "<td align='center' type='type' class='type' style='max-width:50px; width: 500px' >{$r['type']}</td>";
 								echo "<td type='asset_shortname' class='asset_shoername' style='max-width:500px; width: 50px'>{$r['asset_shortname']}</td>";
 								echo "<td align='center'><a class='mouse_hover edit_icon' data-toggle='modal' data-target='#modal_edit' > <img src='public/images/setting.png'></a></td>";
-								echo "<td align='center'>" . "<a href=" . base_url('#') . "><img src=" . base_url('public/images/remove.png') . "></td>";
+								echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
 								echo "</tr>";
 								$i++;
 							}

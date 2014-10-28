@@ -28,5 +28,8 @@ class Store extends CI_Controller {
 		$data = $this -> input -> post();
 		$this -> store_model -> add_store($data);
 	}
-
+	
+	public function remove($in) {
+	 	$this -> store_model -> remove_store($in);
+	 }
 }

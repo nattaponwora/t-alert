@@ -73,4 +73,8 @@ class Insertasset extends CI_Controller {
 		$data = $this -> input -> post();
 		$this -> insertasset_model -> edit_asset($data);
 	}
+	
+	public function remove($in) {
+	 	$this -> insertasset_model -> remove_asset($in);
+	 }
 }

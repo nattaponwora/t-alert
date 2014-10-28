@@ -32,5 +32,9 @@ class Technician_model extends CI_model {
 		$this->db->set('tel', $data["tel_input"]);
 		$this->db->insert('optteam');
 	}
+	
+	function remove_technician($data) {
+		$this->db->delete('optteam', array('id' => $data)); 
+	}
 
 }

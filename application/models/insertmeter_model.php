@@ -97,23 +97,17 @@ class Insertmeter_model extends CI_model {
 	}
 
 	function edit_meter($data) {
-		$this -> db -> where('meter_id', $data['id']);
-		$arrays[$data['type']] = $data['editvar']; 
-		$this -> db -> update( 'meter', $arrays);
+		$this->db->set('m.meter_id', $data['edit_meterid']);
+		$this->db->set('a.store_id', $data['edit_storeasset']);
+		$this->db->set('a.asset_typeid', $data['edit_assetlist']);
+		//$this->db->set('b.companyaddress', 'Mannerheimtie 123, Helsinki Suomi');
+		
+		$this->db->where('m.meter_id', $data['id']);
+		$this->db->where('m.asset_id = a.id');
+		$this->db->update('meter as m, asset as a');
 	}
 
-	
-	// function get_dropdown_typelist($shortname) {
-		// $this -> db -> select('asset.asset_typeid');
-		// $this -> db -> from('asset');
-		// //$this -> db -> where('asset.store_id', $store_id);
-		// $this -> db -> where('asset_shortname', $shortname);
-		// $query = $this -> db -> get();
-		// $assets = array();
-		// foreach ($query->result_array() as $row) {
-			// $assets[] = $row;
-		// }
-		// $this->view->p($assets);
-		// return $assets;
-	// }
+	function remove_meter($data) {
+		$this->db->delete('meter', array('meter_id' => $data)); 
+	}
 }

@@ -26,4 +26,8 @@ class Inserttemp extends CI_Controller {
 		$data = $this -> input -> post();
 		$this -> inserttemp_model -> add_store($data);
 	}
+	
+	public function remove($in) {
+	 	$this -> inserttemp_model -> remove_assettype($in);
+	}
 }

@@ -79,4 +79,8 @@ class Insertasset_model extends CI_model {
 		$arrays[$data['type']] = $data['editvar']; 
 		$this -> db -> update( 'asset', $arrays);
 	}
+	
+	function remove_asset($data) {
+		$this->db->delete('asset', array('id' => $data)); 
+	}
 }

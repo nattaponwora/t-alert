@@ -4,11 +4,44 @@ $(function () {
 	var checkpoint_type = null;
 	var checkpoint_value = null;
 	
+	$( "#dialog-confirm" ).dialog({
+		resizable: false,
+	    modal: true,
+	    
+	    autoOpen: false,
+	   	buttons: {
+	        "ใช่": function() {
+	        	// alert(dialogr);
+	        	$.get("<?=base_url('store/remove')?>/" + dialogr,$('#table_form').serialize(),function(response){});
+	        	$(".removetr").remove();
+	        	$(this).dialog( "close" );
+	        	
+	        },
+	        "ไม่ใช่": function() {
+	         	$(this).dialog( "close" );
+	        }
+		},
+		close: function( event, ui ) {
+	        $(".removetr").removeClass("removetr");
+	    }
+    });
+	    
+	$(".remove_icon").on("click", function () {
+		var newcontent = $(this).parent().parent().children().eq(0).text();
+		$(this).parent().parent().addClass("removetr");
+		if(newcontent != 0) {
+			dialogr = newcontent;
+			$("#dialog-confirm").dialog( "open" );
+			
+		}
+	});
+	    
 	$("#add_icon").on("click", function () { 	
 		var new_row = "<tr id='edition'>"+
 					  "<td class='cellEditing' type='store_id' style='max-width:30px; width:30px'><input id='store_id_input' name='store_id_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' type='store_name' style='max-width:30px; width:30px'><input id='store_name_input' name='store_name_input' type='text' /></td>"+
 					  "<td class='cellEditing' type='opt_team' style='max-width:30px; width:30px'><input id='opt_team_input' name='opt_team_input' type='text' /></td>"+
+					  "<td align='center'>" + "<a class='mouse_hover remove_icon'><img src='public/images/remove.png'></td>" +
 					  "</tr>";
 					  
 		$('#store_table').append(new_row);		
@@ -22,7 +55,7 @@ $(function () {
 			});
 			
 			var textbox = $("#edition").find('td');
-			for(i=0; i<textbox.length; i++) {
+			for(i=0; i<textbox.length-1; i++) {
 				var newContent = $(textbox[i]).children().val();
 				$(textbox[i]).removeClass();
 				$(textbox[i]).addClass("editable"); 
@@ -37,7 +70,6 @@ $(function () {
 			$('#add_icon').show();
 			$("#add_btn").remove();
 			$("#cancel_btn").remove();
-			
 		});
 		
 		$("#cancel_btn").on("click", function () {
@@ -126,6 +158,10 @@ $(function () {
 });
 </script>
 
+<div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
+	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
+</div>
+
 <div class="row">
 	<div class="box col-sm-6 col-sm-push-3" style="background-color: beige">
 		<div class="form-group">
@@ -133,10 +169,11 @@ $(function () {
 		        <div class="table-responsive">
 		            <table id="store_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 		                <thead>
-		                    <tr style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
+		                    <tr class="centert" style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
 		                        <th style="max-width:300px; width:30px">รหัสร้าน</th>
 		                        <th style="max-width:300px; width:30px">ชื้อร้าน</th>
 		                        <th style="max-width:300px; width:30px">เขต</th>
+		                        <th style="max-width:500px; width:30px">ลบ</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -148,7 +185,8 @@ $(function () {
 		                            echo "<td class='editable' type='store_id' style='max-width:300px; width:30px'>{$r['store_id']}</td>";
 		                            echo "<td class='editable' type='store_name' style='max-width:300px; width:30px'>{$r['store_name']}</td>";
 		                            echo "<td class='editable' type='opt_team' style='max-width:300px; width:30px'>{$r['opt_team']}</td>";
-		                            echo "</tr>";
+									echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";    		                           
+								    echo "</tr>";
 									$id_row++;
 		                        }
 		                    }

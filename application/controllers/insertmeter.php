@@ -113,9 +113,14 @@ class Insertmeter extends CI_Controller {
 		}
 	}
 
-	public function insert() {
+	public function edit() {
 		$data = $this -> input -> post();
+		$this->view->p($data);
 		$this -> insertmeter_model -> edit_meter($data);
+		redirect('/insertmeter', 'refresh');
 	}
 
+	 public function remove($in) {
+	 	$this -> insertmeter_model -> remove_meter($in);
+	 }
 }

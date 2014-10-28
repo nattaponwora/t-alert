@@ -29,4 +29,8 @@ class Store_model extends CI_model {
 		$this->db->set('opt_team', $data["opt_team_input"]);
 		$this->db->insert('store');
 	}
+	
+	function remove_store($data) {
+		$this->db->delete('store', array('store_id' => $data)); 
+	}
 }

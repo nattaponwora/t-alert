@@ -1,8 +1,41 @@
 <script>
+var dialogr = 0;
 $(function () {
 	var checkpoint_id = null;
 	var checkpoint_type = null;
 	var checkpoint_value = null;
+	
+	$( "#dialog-confirm" ).dialog({
+		resizable: false,
+	    modal: true,
+	    
+	    autoOpen: false,
+	   	buttons: {
+	        "ใช่": function() {
+	        	// alert(dialogr);
+	        	$.get("<?=base_url('inserttemp/remove')?>/" + dialogr,$('#table_form').serialize(),function(response){});
+	        	$(".removetr").remove();
+	        	$(this).dialog( "close" );
+	        	
+	        },
+	        "ไม่ใช่": function() {
+	         	$(this).dialog( "close" );
+	        }
+		},
+		close: function( event, ui ) {
+	        $(".removetr").removeClass("removetr");
+	    }
+    });
+	
+	$(".remove_icon").on("click", function () {
+		var newcontent = $(this).parent().parent().attr('id');
+		$(this).parent().parent().addClass("removetr");
+		if(newcontent != 0) {
+			dialogr = newcontent;
+			$("#dialog-confirm").dialog( "open" );
+			
+		}
+	});
 	
 	$("#add_icon").on("click", function () { 	
 		var new_row = "<tr id='edition'>"+
@@ -11,6 +44,8 @@ $(function () {
 					  "<td class='cellEditing' type='min_temp' style='max-width:30px; width:30px'><input id='min_temp_input' name='min_temp_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' type='max_temp' style='max-width:30px; width:30px'><input id='max_temp_input' name='max_temp_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' type='std_time' style='max-width:30px; width:30px'><input id='std_time_input' name='std_time_input' type='text' style='height: 30px;' /></td>"+
+					  "<td class='cellEditing' align='center'>" + "<a class='mouse_hover remove_icon'><img src='public/images/remove.png'></td>"+
+
 					  "</tr>";
 					  
 		$('#temp_table').append(new_row);		
@@ -24,10 +59,12 @@ $(function () {
 			});
 			
 			var textbox = $("#edition").find('td');
-			for(i=0; i<textbox.length; i++) {
+			for(i=0; i<textbox.length-1; i++) {
 				var newContent = $(textbox[i]).children().val();
 				$(textbox[i]).removeClass();
-				$(textbox[i]).addClass("editable"); 
+				if(i >= 2 ) {
+					$(textbox[i]).addClass("editable"); 
+				}
 				$(textbox[i]).text(newContent);				
 				checkpoint_id = null;
 				checkpoint_type = null;
@@ -128,19 +165,23 @@ $(function () {
 });
 </script>
 
+<div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
+	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
+</div>
 
 <div class="row">
-	<div class="box col-sm-6 col-sm-push-3" style="background-color: beige">
+	<div class="box col-sm-7 col-center-block" style="background-color: beige">
 		<div class="form-group">
 		    <form  id="table_form" name="table_form" method="post">
 		        <div class="table-responsive">
 		            <table id="temp_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 		                <thead>
-		                    <tr class='text-overflow' style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
+		                    <tr class='text-overflow centert' style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
 		                        <th rowspan="2" style="text-align: center;">ประเภทอุปกรณ์</th>
 		                        <th rowspan="2" style="text-align: center;">ชื่อย่ออุปกรณ์</th>
 		                        <th colspan="2" style="text-align: center;">อุณหภูมิมาตราฐาน(องศาเซลเซียส)</th>
 		                        <th rowspan="2" style="text-align: center;">เวลาสูงสุด(นาที)</th>
+								<th rowspan="2" style="max-width:500px; width: 50px">ลบ</th>
 		                    </tr>
 		                    <tr style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef;">
 		                    	<td style="text-align: center;">ต่ำสุด</td>
@@ -153,11 +194,12 @@ $(function () {
 		                    	$id_row = 0;
 		                        foreach ($id as $r) {
 		                        	echo "<tr style='white-space: nowrap' id=".$r['id'].">";
-		                            echo "<td type='type' style='max-width:30px; width:30px'>{$r['type']}</td>";
-									echo "<td type='shortcode' style='max-width:30px; width:20px'>{$r['shortcode']}</td>";	
-		                            echo "<td class='editable' type='min_temp' style='max-width:30px; width:30px'>{$r['min_temp']}</td>";
-		                            echo "<td class='editable' type='max_temp' style='max-width:30px; width:30px'>{$r['max_temp']}</td>";
-									echo "<td class='editable' type='std_time' style='max-width:30px; width:30px'>{$r['std_time']}</td>";
+		                            echo "<td type='type' style='max-width:30px;'>{$r['type']}</td>";
+									echo "<td type='shortcode' style='max-width:30px; '>{$r['shortcode']}</td>";	
+		                            echo "<td class='editable' type='min_temp' style='max-width:30px;'>{$r['min_temp']}</td>";
+		                            echo "<td class='editable' type='max_temp' style='max-width:30px;'>{$r['max_temp']}</td>";
+									echo "<td class='editable' type='std_time' style='max-width:30px;'>{$r['std_time']}</td>";
+									echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
 		                            echo "</tr>";
 									$id_row++;
 		                        }

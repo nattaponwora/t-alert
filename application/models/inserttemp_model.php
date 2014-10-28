@@ -34,5 +34,8 @@ class Inserttemp_model extends CI_model {
 		$this -> db -> set('std_time', $data["std_time_input"]);
 		$this -> db -> insert('asset_type');
 	}
-
+	
+	function remove_assettype($data) {
+		$this->db->delete('asset_type', array('id' => $data)); 
+	}
 }

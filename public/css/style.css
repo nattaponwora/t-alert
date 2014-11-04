@@ -317,15 +317,6 @@ div.pagination span.disabled {
     margin-top: 5px;
 }
 
-.imgloadingshow {
-	display: inline;
-	
-}
-
-.imgloadinghidden { 
-	display : none;
-}
-
 .ui-dialog .ui-dialog-title {
 	color: aliceblue;
 }
@@ -340,3 +331,4 @@ div.pagination span.disabled {
 .centert th {
 	text-align: center;
 }
+

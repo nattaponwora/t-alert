@@ -199,13 +199,13 @@
 				<div class="table-responsive">
 					<table id="insertasset_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 						<thead>
-							<tr class="centert" style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; ">
-								<th style="max-width:300px; width: 30px; white-space: nowrap">รหัสร้าน</th>
-								<th style="max-width:500px; width: 50px; white-space: nowrap">ชื่อร้าน</th>
-								<th style="max-width:500px; width: 50px; white-space: nowrap">ประเภทอุปกรณ์</th>
-								<th style="max-width:500px; width: 50px; white-space: nowrap">ชื่อย่ออุปกรณ์</th>
-								<th style="max-width:500px; width: 50px; white-space: nowrap">หมายเลขบาร์โค๊ดอุปกรณ์</th>
-								<th style="max-width:500px; width: 50px; white-space: nowrap">ลบ</th>
+							<tr class="centert" style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef;">
+								<th style="max-width:300px; width: 30px; white-space: nowrap; vertical-align: middle;">รหัสร้าน</th>
+								<th style="max-width:300px; width: 30px; white-space: nowrap; vertical-align: middle;">ชื่อร้าน</th>
+								<th style="max-width:300px; width: 30px; white-space: nowrap; vertical-align: middle;">ประเภทอุปกรณ์</th>
+								<th style="max-width:300px; width: 30px; white-space: nowrap; vertical-align: middle;">ชื่อย่ออุปกรณ์<br/>(<font color="green">Editable</font>)</th>
+								<th style="max-width:300px; width: 30px; white-space: nowrap; vertical-align: middle;">หมายเลขบาร์โค๊ดอุปกรณ์<br/>(<font color="green">Editable</font>)</th>
+								<th style="max-width:300px; width: 30px; white-space: nowrap; vertical-align: middle;">ลบ</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -26,10 +26,12 @@ class Technician extends CI_Controller {
 	
 	public function addval() {		
 		$data = $this -> input -> post();
-		$this -> technician_model -> add_technical($data);
+		$db = $this -> technician_model -> add_technical($data);
+		echo $db;
 	}
 	
 	public function remove($in) {
 	 	$this -> technician_model -> remove_technician($in);
+		
 	}
 }

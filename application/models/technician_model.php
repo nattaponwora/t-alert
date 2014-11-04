@@ -31,10 +31,14 @@ class Technician_model extends CI_model {
 		$this->db->set('supervisor_name', $data["supervisor_name_input"]);
 		$this->db->set('tel', $data["tel_input"]);
 		$this->db->insert('optteam');
+		$insert_id = $this->db->insert_id();
+		return $insert_id;
 	}
 	
 	function remove_technician($data) {
 		$this->db->delete('optteam', array('id' => $data)); 
+		
+		
 	}
 
 }

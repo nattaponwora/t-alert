@@ -27,19 +27,9 @@ $(function () {
 	    }
     });
 	
-	$(".remove_icon").on("click", function () {
-		var newcontent = $(this).parent().parent().attr('id');
-		$(this).parent().parent().addClass("removetr");
-		if(newcontent != 0) {
-			dialogr = newcontent;
-			$("#dialog-confirm").dialog( "open" );
-			
-		}
-	});
-	
 	$("#add_icon").on("click", function () { 	
-		var new_row = "<tr id='edition'>"+
-					  "<td class='cellEditing' type='team' style='max-width:30px; width:30px'><input id='team_input' name='team_input' type='text' style='height: 30px;' /></td>"+
+		var new_row = "<tr id='edition' class='finding'>"+
+					  "<td class='cellEditing' type='team' style='max-width:30px; width:30px'><input id='team_input' name='team_input' type='text' /></td>"+
 					  "<td class='cellEditing' type='supervisor_name' style='max-width:30px; width:30px'><input id='supervisor_name_input' name='supervisor_name_input' type='text' /></td>"+
 					  "<td class='cellEditing' type='tel' style='max-width:30px; width:30px'><input id='tel_input' name='tel_input' type='text' /></td>"+
 					  "<td align='center'>" + "<a class='mouse_hover remove_icon'><img src='public/images/remove.png'></td>" +
@@ -52,7 +42,8 @@ $(function () {
 		
 		$("#add_btntech").on("click", function () {
 			$.post("<?=base_url('technician/addval')?>",$('#table_form').serialize(),function(response){
- 				$('#show').html(response);
+				$('.finding').attr('id', response);
+				$('#' + response).removeAttr('class');
 			});
 			
 			var textbox = $("#edition").find('td');
@@ -71,6 +62,9 @@ $(function () {
 			$('#add_icon').show();
 			$("#add_btntech").remove();
 			$("#cancel_btn").remove();
+			
+			
+			remove_btn();
 		});
 		
 		$("#cancel_btn").on("click", function () {
@@ -91,7 +85,6 @@ $(function () {
 			$("#add_btntech").remove();
 			$("#cancel_btn").remove();
 			$(tr).remove();
-			
 		});
 	}); 
 	
@@ -154,9 +147,21 @@ $(function () {
 	}); 
 	
 	$(function() {
+		remove_btn();
 		$('#teachnical_table').dataTable();
 	});
 });
+
+function remove_btn() {
+	$(".remove_icon").on("click", function () {
+		var newcontent = $(this).parent().parent().attr('id');
+		$(this).parent().parent().addClass("removetr");
+		if(newcontent != 0) {
+			dialogr = newcontent;
+			$("#dialog-confirm").dialog( "open" );
+		}
+	});
+}
 </script>
 
 <div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
@@ -171,10 +176,10 @@ $(function () {
 					<table id="teachnical_table" class="table table-striped table-bordered table-hover editableTable" cellspacing="0" border="0">
 						<thead>
 							<tr class="centert" style="font-weight: bold;background-color: #acf;border-bottom: 1px solid #cef; white-space: nowrap">
-								<th class='text-overflow' style="max-width:300px; width: 30px">ทีม</th>
-								<th class='text-overflow' style="max-width:500px; width: 50px">หัวหน้าแผนก</th>
-								<th class='text-overflow' style="max-width:500px; width: 50px">เบอร์โทร</th>
-								<th class='text-overflow' style="max-width:500px; width: 50px">ลบ</th>
+								<th class='text-overflow' style="max-width:300px; width: 30px; vertical-align: middle;">ทีม<br/>(<font color="green">Editable</font>)</th>
+								<th class='text-overflow' style="max-width:500px; width: 50px; vertical-align: middle;">หัวหน้าแผนก<br/>(<font color="green">Editable</font>)</th>
+								<th class='text-overflow' style="max-width:500px; width: 50px; vertical-align: middle;">เบอร์โทร<br/>(<font color="green">Editable</font>)</th>
+								<th class='text-overflow' style="max-width:500px; width: 50px; vertical-align: middle;">ลบ</th>
 							</tr>
 						</thead>
 						<tbody>

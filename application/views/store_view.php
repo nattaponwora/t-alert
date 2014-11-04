@@ -38,9 +38,9 @@ $(function () {
 	    
 	$("#add_icon").on("click", function () { 	
 		var new_row = "<tr id='edition'>"+
-					  "<td class='cellEditing' type='store_id' style='max-width:30px; width:30px'><input id='store_id_input' name='store_id_input' type='text' style='height: 30px;' /></td>"+
-					  "<td class='cellEditing' type='store_name' style='max-width:30px; width:30px'><input id='store_name_input' name='store_name_input' type='text' /></td>"+
-					  "<td class='cellEditing' type='opt_team' style='max-width:30px; width:30px'><input id='opt_team_input' name='opt_team_input' type='text' /></td>"+
+					  "<td class='cellEditing' type='store_id' style='max-width:30px; width:30px;'><input id='store_id_input' name='store_id_input' type='text'/></td>"+
+					  "<td class='cellEditing' type='store_name' style='max-width:30px; width:30px;'><input id='store_name_input' name='store_name_input' type='text' /></td>"+
+					  "<td class='cellEditing' type='opt_team' style='max-width:30px; width:30px;'><input id='opt_team_input' name='opt_team_input' type='text' /></td>"+
 					  "<td align='center'>" + "<a class='mouse_hover remove_icon'><img src='public/images/remove.png'></td>" +
 					  "</tr>";
 					  
@@ -70,6 +70,7 @@ $(function () {
 			$('#add_icon').show();
 			$("#add_btn").remove();
 			$("#cancel_btn").remove();
+			remove_btn();
 		});
 		
 		$("#cancel_btn").on("click", function () {
@@ -153,9 +154,21 @@ $(function () {
 		}
 	}); 
 	$(function() {
+		remove_btn();
 		$('#store_table').dataTable();
 	});
 });
+
+function remove_btn() {
+	$(".remove_icon").on("click", function () {
+		var newcontent = $(this).parent().parent().children().eq(0).text();
+		$(this).parent().parent().addClass("removetr");
+		if(newcontent != 0) {
+			dialogr = newcontent;
+			$("#dialog-confirm").dialog( "open" );
+		}
+	});
+}
 </script>
 
 <div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
@@ -170,10 +183,10 @@ $(function () {
 		            <table id="store_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 		                <thead>
 		                    <tr class="centert" style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
-		                        <th style="max-width:300px; width:30px">รหัสร้าน</th>
-		                        <th style="max-width:300px; width:30px">ชื้อร้าน</th>
-		                        <th style="max-width:300px; width:30px">เขต</th>
-		                        <th style="max-width:500px; width:30px">ลบ</th>
+		                        <th style="max-width:300px; width:30px; vertical-align: middle;">รหัสร้าน<br/>(<font color="green">Editable</font>)</th>
+		                        <th style="max-width:300px; width:30px; vertical-align: middle;">ชื้อร้าน<br/>(<font color="green">Editable</font>)</th>
+		                        <th style="max-width:300px; width:30px; vertical-align: middle;">เขต<br/>(<font color="green">Editable</font>)</th>
+		                        <th style="max-width:500px; width:30px; vertical-align: middle;">ลบ</th>
 		                    </tr>
 		                </thead>
 		                <tbody>

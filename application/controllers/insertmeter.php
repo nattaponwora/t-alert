@@ -98,7 +98,7 @@ class Insertmeter extends CI_Controller {
 		}
 	}
 
-	public function load_statestype($store_id, $asset_list, $wchange) {
+	public function load_statestype($store_id, $asset_list, $wchange, $barcode) {
 		if (isset($store_id) && isset($asset_list)) {
 			$assetlist2 = $this -> insertmeter_model -> get_assettypelist($store_id, $asset_list);
 			$states = '';
@@ -107,8 +107,17 @@ class Insertmeter extends CI_Controller {
 				echo form_dropdown('search_assettypelist', $assetlist2, 0, $js2);
 			}
 			else if($wchange == 'edit_form') {
-				$js2 = 'id="edit_assettypelist" class="btn btn-default dropdown-toggle"';
-				echo form_dropdown('edit_assettypelist', $assetlist2, 0, $js2);
+				if($barcode != 0) {
+					$assetbarcode = $this -> insertmeter_model -> get_assetbarcode($store_id, $asset_list, $barcode);
+					foreach($assetbarcode as $row) {
+						$js2 = 'id="edit_assettypelist" class="btn btn-default dropdown-toggle"';
+						echo form_dropdown('edit_assettypelist', $assetlist2, $row, $js2);
+					}
+				}
+				else {
+					$js2 = 'id="edit_assettypelist" class="btn btn-default dropdown-toggle"';
+					echo form_dropdown('edit_assettypelist', $assetlist2, 0, $js2);
+				}
 			}
 		}
 	}

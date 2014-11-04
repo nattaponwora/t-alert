@@ -1,5 +1,8 @@
 <script>
 	var dialogr = 0;
+	var temp_meterid = "";
+	var temp_storeid = "";
+	var temp_shortname = "";
 	$(function() {
 		var select = document.getElementById("search_assetlist");
 		var option = document.createElement('option');
@@ -29,21 +32,62 @@
 	    });
 			
 		$(".edit_icon").on("click", function () {
+			var store_id = $(this).parent().parent().children().eq(1).text();
 			$("#edit_meterid").val($(this).parent().parent().children().eq(0).text());
+			
 			$("#edit_storeasset").val($(this).parent().parent().children().eq(1).text());
+			var barcode = $(this).parent().parent().attr('barcode_data');
 			var type_id = $(this).parent().parent().children().eq(1).attr('use_it');
-			load_asset('edit_form', type_id);			
+			load_asset('edit_form', type_id, barcode);			
+			load_assettype('edit_form', type_id, barcode)
 			
-			//var type_asset = $(this).parent().parent().attr('id');
-			//load_assettype('edit_form', 'type_asset');
-			
+			temp_meterid = $(this).parent().parent().children().eq(0).text();
+			temp_storeid = store_id;
+			temp_shortname = $(this).parent().parent().children().eq(4).text();
 			var assettype = $(this).parent().parent().children().eq(3).text();
 			var element_row = $(this).parent().parent().attr("id");
 			var element_col = $(this).parent().parent().children().eq(0).attr("type");
+			
 			checkpoint_id = element_row;
 			checkpoint_type = element_col;
+			
 			$('#edit_form').append("<input type='hidden' id='temp1' name='id'  value='"  + element_row + "' />");
 			$('#edit_form').append("<input type='hidden' id='temp2' name='type'  value='"  + element_col + "' />");
+		});
+		
+		$("#update_btn").on("click", function () {
+			var check_duc = false;
+			var meterid_echeck = $("#edit_meterid").val();
+			var storeid_echeck = $("#edit_storeasset").val();
+			var shortname = $("#edit_assettypelist option:selected").text();
+			if(temp_meterid == meterid_echeck && temp_storeid == storeid_echeck && temp_shortname ==  shortname) {}
+			else {
+				$('#insertmeter_table tbody tr').each(function() {
+					var meter_check = $(this).children().eq(0).text();
+					var storeid_check = $(this).children().eq(1).text();
+					var shortname_check = $(this).children().eq(4).text();
+					
+					if(meterid_echeck == meter_check && meterid_echeck != temp_meterid ) {
+						check_duc = true;
+						return false;
+					} 
+					else {
+						if(storeid_echeck == storeid_check) {
+							if(shortname == shortname_check) {
+								alert("ผิดดอก");
+								check_duc = true;
+								return false;
+							}
+						}
+					}
+				});
+			}
+			
+			if(check_duc == true) {
+				return false;
+			}
+			
+			$('#edit_form').append("<input type='hidden' id='temp3' name='asset_shortname'  value='"  + shortname + "' />");
 		});
 		
 		$(".remove_icon").on("click", function () {
@@ -54,12 +98,12 @@
 				$("#dialog-confirm").dialog( "open" );
 			}
 		});
-		
+			
 		$('#insertmeter_table').dataTable();
 	});
 
     
-    function load_asset(changevar, type_id) {
+    function load_asset(changevar, type_id, barcode) {
     	if(changevar == 'insert_form') {
     		var search_value = document['insert_form']['search_storeasset'].value; 
     		dd_data_area = 'assetlist';
@@ -77,23 +121,27 @@
     	
     	var url = '<?= base_url("insertmeter/get_storename") ?>/' + search_value + '/' + changevar;
     	loadStates(url, name_data_area); 
-    	load_assettype(changevar, type_id);
+    	load_assettype(changevar, type_id, barcode);
     }
     
-    function load_assettype(changevar, type_id) {
-    	alert(type_id);
+    function load_assettype(changevar, type_id, barcode) {
+    	
     	if(changevar == 'insert_form') {
 			var search_value = $('#search_storeasset').val(); 
 			var search_valuelist = $('#search_assetlist').val();
 			var assettypelist = 'assettypelist';
+			var url = '<?= base_url("insertmeter/load_statestype") ?>/' + search_value + '/' + search_valuelist + '/' + changevar + '/' + 0; 
 		}
 		else if(changevar == 'edit_form') {
 			var search_value = $('#edit_storeasset').val(); 
 			var search_valuelist = $('#edit_assetlist').val();
 			var assettypelist = 'editassettypelist';
+			if(type_id != 0) var url = '<?= base_url("insertmeter/load_statestype") ?>/' + search_value + '/' + type_id + '/' + changevar + '/' + barcode; 
+			else var url = '<?= base_url("insertmeter/load_statestype") ?>/' + search_value + '/' + search_valuelist + '/' + changevar + '/' + barcode; 
+
 		}
 		//alert(type_id);
-        var url = '<?= base_url("insertmeter/load_statestype") ?>/' + search_value + '/' + search_valuelist + '/' + changevar ; 
+        
         loadStates(url, assettypelist);      
     }
 </script>
@@ -122,7 +170,7 @@
 					<div class="form-group">
 						<label class="col-sm-5 control-label">รหัสร้าน</label>
 						<div class="col-sm-4 input-group">
-					  		<input class="form-control" id="search_storeasset" name="search_storeasset" required="" onchange="load_asset('insert_form', 0)" />
+					  		<input class="form-control" id="search_storeasset" name="search_storeasset" required="" onchange="load_asset('insert_form', 0, 0)" />
 						</div>			
 					</div>
 					<div class="form-group">
@@ -134,7 +182,7 @@
 					<div class="form-group">
 						<label class="col-sm-5 control-label">ประเภทอุปกรณ์</label>
 						<div class="col-sm-7 input-group" id ="assetlist">            
-				            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype(\'insert_form\', 0)'; ?>
+				            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype(\'insert_form\', 0, 0)'; ?>
 				            <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
 				        </div>
 					</div>
@@ -191,7 +239,7 @@
 					<div class="form-group">
 						<label class="col-sm-5 control-label">รหัสร้าน</label>
 						<div class="col-sm-4 input-group">
-					  		<input class="form-control" id="edit_storeasset" name="edit_storeasset" required="" onchange="load_asset('edit_form', 0)">
+					  		<input class="form-control" id="edit_storeasset" name="edit_storeasset" required="" onchange="load_asset('edit_form', 0, 0)">
 						</div>			
 					</div>
 					<div class="form-group">
@@ -203,7 +251,7 @@
 					<div class="form-group">
 						<label class="col-sm-5 control-label">ประเภทอุปกรณ์</label>
 						<div class="col-sm-7 input-group" id ="edit_assetlist2">            
-				            <?php $js = 'id="edit_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype(\'edit_form\', 0)"'; ?>
+				            <?php $js = 'id="edit_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype(\'edit_form\', 0, 0)"'; ?>
 				            <?= form_dropdown('edit_assetlist', $selection, $search_asset, $js); ?>
 				        </div>
 					</div>
@@ -256,12 +304,12 @@
 							$i=0;
 							foreach ($data_table as $r) {
 								$r['id'] = $r['meter_id'];
-								echo "<tr style='white-space: nowrap' id='" . $r['id'] . "'>";
+								echo "<tr barcode_data='" . $r['asset_barcode'] . "' style='white-space: nowrap' id='" . $r['id'] . "'>";
 								echo "<td align='center' class='editable' type='meter_id' style='max-width:300px; width: 30px'>{$r['meter_id']}</td>";
 								echo "<td type='store_id' class='store_id' style='max-width:300px; width: 30px' use_it='". $r['asset_typeid'] . "'>{$r['store_id']}</td>";
 								echo "<td type='store_name' class='store_name' style='max-width:500px; width: 50px'>{$r['store_name']}</td>";
 								echo "<td align='center' type='type' class='type' style='max-width:50px; width: 500px' >{$r['type']}</td>";
-								echo "<td type='asset_shortname' class='asset_shoername' style='max-width:500px; width: 50px'>{$r['asset_shortname']}</td>";
+								echo "<td type='asset_shortname' class='asset_shortname' style='max-width:500px; width: 50px'>{$r['asset_shortname']}</td>";
 								echo "<td align='center'><a class='mouse_hover edit_icon' data-toggle='modal' data-target='#modal_edit' > <img src='public/images/setting.png'></a></td>";
 								echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
 								echo "</tr>";
@@ -274,7 +322,7 @@
 				<div id='show'></div>
 			</div>
 		</form>
-		<br>
+		<br>	
 		<form id="add_form" name="add_form" action="<?= base_url("insertmeter/added") ?>" role="form" method="post" >
 				<a id="add_icon" name="add_icon" class="col-xs-offset-10 mouse_hover" data-toggle="modal" data-target="#myModal" control='insert_form'> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>				
 		</form>

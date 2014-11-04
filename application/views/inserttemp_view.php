@@ -27,18 +27,8 @@ $(function () {
 	    }
     });
 	
-	$(".remove_icon").on("click", function () {
-		var newcontent = $(this).parent().parent().attr('id');
-		$(this).parent().parent().addClass("removetr");
-		if(newcontent != 0) {
-			dialogr = newcontent;
-			$("#dialog-confirm").dialog( "open" );
-			
-		}
-	});
-	
 	$("#add_icon").on("click", function () { 	
-		var new_row = "<tr id='edition'>"+
+		var new_row = "<tr style='white-space: nowrap' id='edition' role='row' class=''>"+
 					  "<td class='cellEditing' type='type' style='max-width:30px; width:30px'><input id='type_input' name='type_input' type='text' style='height: 30px;'/></td>"+
 					  "<td class='cellEditing' type='shortcode' style='max-width:30px; width:30px'><input id='shortcode_input' name='shortcode_input' type='text' style='height: 30px;'/></td>"+
 					  "<td class='cellEditing' type='min_temp' style='max-width:30px; width:30px'><input id='min_temp_input' name='min_temp_input' type='text' style='height: 30px;' /></td>"+
@@ -76,7 +66,7 @@ $(function () {
 			$('#add_icon').show();
 			$("#add_btn").remove();
 			$("#cancel_btn").remove();
-			
+			remove_btn();
 		});
 		
 		$("#cancel_btn").on("click", function () {
@@ -100,6 +90,15 @@ $(function () {
 			$(tr).remove();
 		});
 	}); 
+	
+	// $(".remove_icon").on("click", function () {
+		// var newcontent = $(this).parent().parent().attr('id');
+		// $(this).parent().parent().addClass("removetr");
+		// if(newcontent != 0) {
+			// dialogr = newcontent;
+			// $("#dialog-confirm").dialog( "open" );
+		// }
+	// });
 	
 	$(".editableTable").on("dblclick", ".editable", function () {
 		if($(this).hasClass( "editable" ))
@@ -159,10 +158,23 @@ $(function () {
 			});
 		}
 	}); 
+	
 	$(function() {
+		remove_btn();
 		$('#temp_table').dataTable();
 	});
 });
+
+function remove_btn() {
+	$(".remove_icon").on("click", function () {
+		var newcontent = $(this).parent().parent().children().eq(0).text();
+		$(this).parent().parent().addClass("removetr");
+		if(newcontent != 0) {
+			dialogr = newcontent;
+			$("#dialog-confirm").dialog( "open" );
+		}
+	});
+}
 </script>
 
 <div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
@@ -177,16 +189,16 @@ $(function () {
 		            <table id="temp_table" class="table table-striped table-bordered table-hover editableTable" border="0">
 		                <thead>
 		                    <tr class='text-overflow centert' style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef; white-space: nowrap">
-		                        <th rowspan="2" style="text-align: center;">ประเภทอุปกรณ์</th>
-		                        <th rowspan="2" style="text-align: center;">ชื่อย่ออุปกรณ์</th>
-		                        <th colspan="2" style="text-align: center;">อุณหภูมิมาตราฐาน(องศาเซลเซียส)</th>
-		                        <th rowspan="2" style="text-align: center;">เวลาสูงสุด(นาที)</th>
-								<th rowspan="2" style="max-width:500px; width: 50px">ลบ</th>
+		                        <th rowspan="2" style="text-align: center; vertical-align: middle;">ประเภทอุปกรณ์</th>
+		                        <th rowspan="2" style="text-align: center; vertical-align: middle;">ชื่อย่ออุปกรณ์</th>
+		                        <th colspan="2" style="text-align: center; vertical-align: middle;">อุณหภูมิมาตราฐาน(องศาเซลเซียส)<br/>(<font color="green">Editable</font>)</th>
+		                        <th rowspan="2" style="text-align: center; vertical-align: middle;">เวลาสูงสุด(นาที)<br/>(<font color="green">Editable</font>)</th>
+								<th rowspan="2" style="max-width:500px; width: 50px; vertical-align: middle;">ลบ</th>
 		                    </tr>
 		                    <tr style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef;">
 		                    	<td style="text-align: center;">ต่ำสุด</td>
 					            <td style="text-align: center;">สูงสูด</td>
-        					</tr>
+        					</tr>	
 		                </thead>
 		                <tbody>
 		                    <?php

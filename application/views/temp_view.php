@@ -3,21 +3,19 @@
 	var first_alert = false;
 	
     function load_asset() {
-    	$('#loading_gif').attr('class', 'imgloadingshow').fadeIn('500');
-        var search_value = document['search_form']['search_storeasset'].value; 
-        var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
-        loadStates(url, 'assetlist'); 
-        load_assettype();
-        $('#loading_gif').attr('class', 'imgloadingshow').fadeOut('2000');
+    var search_value = document['search_form']['search_storeasset'].value; 
+        if(search_value != "") {
+	        var url = '<?= base_url("temp/load_states") ?>/' + search_value; 
+	        loadStates(url, 'assetlist'); 
+	        load_assettype();
+	    }
     }
     
     function load_assettype() {
-    	$('#loading_gif2').attr('class', 'imgloadingshow').fadeIn('500');
         var search_value = document['search_form']['search_storeasset'].value; 
         var search_valuelist = document['search_form']['search_assetlist'].value; 
         var url = '<?= base_url("temp/load_statestype") ?>/' + search_value + '/' + search_valuelist; 
         loadStates(url, 'assettypelist');    
-        $('#loading_gif2').attr('class', 'imgloadingshow').fadeOut('2000');
     }
     
     $(function () {
@@ -138,24 +136,24 @@
 		            <?php if($searchTerm == null) { ?>
 		            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="" onchange="load_asset()" />
 		            <?php } ?>
-		            <?php if($searchTerm != null) { ?>
+		            <?php if($searchTerm != null ) { ?>
 		            <input class="form-control" id="search_storeasset" name="search_storeasset" type="text" value="<?= $searchTerm ?>" onchange="load_asset()" />
 		            <?php } ?>
 		        </div>
 		        
 		        <label>อุปกรณ์</label>
 		        <div class="form-group" id ="assetlist" name="assetlist">            
-		            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()"'; ?>
+		            <?php $js = 'id="search_assetlist" name="search_assetlist" class="btn btn-default dropdown-toggle" onchange="load_assettype()" img="public/images/loading.gif"'; ?>
 		            <?= form_dropdown('search_assetlist', $selection, $search_asset, $js); ?>
 		        </div>
-				<img class="imgloadinghidden" id="loading_gif" style="max-height: 20px; max-width: 20px" src='<?= base_url("public/images/loading.gif")?>' />
+		        <div id="spinner" class="spinner" style="display:none;"><img id="img-spinner" src="public/images/loading.gif" alt="Loading"/></div>
 		        
 		        <label>หมายเลขอุปกรณ์</label>
 		        <div class="form-group" id ="assettypelist" name="assettypelist">
 		            <?php $js2 = 'id="search_assettypelist" name="search_assettypelist" class="btn btn-default dropdown-toggle"'; ?>
 		            <?= form_dropdown('search_assettypelist', $selectiontype, $search_assettypelists, $js2); ?>
 		        </div>
-		        <img class="imgloadinghidden" id="loading_gif2" style="max-height: 20px; max-width: 20px" src='<?= base_url("public/images/loading.gif")?>' />
+
 		        <button id="search" name="search" type="submit" class="button blue small">
 		            Search
 		        </button>

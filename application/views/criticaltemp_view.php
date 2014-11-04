@@ -14,6 +14,7 @@
 	    	duration: 500
 	  	}
 	});
+	
 });
 </script>
 
@@ -25,9 +26,9 @@
     <div class="container box" style="background-color: beige">
         <form id="table_form" method="post">
         	<div class="table-responsive">
-            <table class="table table- -->hover table table-hover rwd-table" border="0">
+            <table id="critical_table" class="table table- -->hover table table-hover rwd-table" border="0">
                 <thead>
-                    <tr style="background-color: firebrick; color: white; white-space: nowrap">
+                    <tr style="background-color: #004276; color: white; white-space: nowrap">
                     	<th style="width:100px">รหัสสาขา</th>
                         <th style="width:100px">ชื่อสาขา</th>
                         <th style="width:100px">อุปกรณ์</th>

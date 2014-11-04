@@ -36,6 +36,6 @@ class Inserttemp_model extends CI_model {
 	}
 	
 	function remove_assettype($data) {
-		$this->db->delete('asset_type', array('id' => $data)); 
+		$this->db->delete('asset_type', array('type' => $data)); 
 	}
 }

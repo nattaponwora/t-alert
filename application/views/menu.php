@@ -2,13 +2,19 @@
 	body {
 		background-image: url("<?= base_url('public/images/backgroundall.png') ?>" );
 	}
+	define(['pace'], function(pace){
+  pace.start({
+    document: false
+  });
+});
 </style>
 
 <?php $session_page = $this->session->userdata('session_page'); ?>
-<div class="navbar navbar-default ">
+
+<div class="navbar navbar-inverse" style="border-radius: 0px; border: 0px;">
 	<div class="container">
 		<div class="navbar-header">
-			<a href="<?= base_url("index") ?>" class="navbar-brand"><img src=<?= base_url('public/images/logo.png') ?> style="margin-top: -15px;" height="50"></a>
+			<img style="" height="50" src=<?= base_url('public/images/logo.png') ?> /> 
 			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
 	        	<span class="icon-bar"></span>
 	        	<span class="icon-bar"></span>
@@ -78,3 +84,5 @@
 		</div>
 	</div>
 </div>
+
+

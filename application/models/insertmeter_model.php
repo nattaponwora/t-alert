@@ -82,7 +82,21 @@ class Insertmeter_model extends CI_model {
 
 		return $assets;
 	}
-
+	
+	function get_assetbarcode($in, $in2, $in4) {
+		$this -> db -> select('asset.id, asset.asset_barcode');
+		$this -> db -> from('asset');
+		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
+		$this -> db -> where('asset.store_id', $in);
+		$this -> db -> where('asset_typeid', $in2);
+		$this -> db -> where('asset_barcode', $in4);
+		$query = $this -> db -> get();
+		foreach ($query->result_array() as $row) {
+			$assets[$row["id"]] = $row["id"];
+		}
+		return $assets;
+	}
+	
 	function get_table() {
 		$this -> db -> from('asset');
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
@@ -100,6 +114,7 @@ class Insertmeter_model extends CI_model {
 		$this->db->set('m.meter_id', $data['edit_meterid']);
 		$this->db->set('a.store_id', $data['edit_storeasset']);
 		$this->db->set('a.asset_typeid', $data['edit_assetlist']);
+		$this->db->set('a.asset_shortname', $data['asset_shortname']);
 		//$this->db->set('b.companyaddress', 'Mannerheimtie 123, Helsinki Suomi');
 		
 		$this->db->where('m.meter_id', $data['id']);
@@ -110,4 +125,5 @@ class Insertmeter_model extends CI_model {
 	function remove_meter($data) {
 		$this->db->delete('meter', array('meter_id' => $data)); 
 	}
+
 }

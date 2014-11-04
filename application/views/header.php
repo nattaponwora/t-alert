@@ -13,9 +13,12 @@
 		echo link_tag("public/dataTables-1.10.2/media/css/jquery.dataTables.css", 'stylesheet');
 		echo link_tag("public/dataTables-1.10.2/media/css/dataTables.bootstrap.css", 'stylesheet');
 		echo link_tag("public/css/style.css", 'stylesheet');
+		echo link_tag("public/nprogress/nprogress.css", 'stylesheet');
 		?>
 	</head>
 	<body>
+		
+		
 		<script type="text/javascript" src="<?= base_url("public/jquery/jquery-1.11.1.min.js") ?>"></script>		
 		<script type="text/javascript" src="<?= base_url("public/bootstrap/js/bootstrap.js") ?>"></script>
 		
@@ -27,4 +30,19 @@
 
 		<script type="text/javascript" src="<?= base_url("public/dataTables-1.10.2/media/js/jquery.dataTables.min.js") ?>"></script>
 		
+		<script type="text/javascript" src="<?= base_url("public/script.js") ?>"></script>
+				
+		<script type="text/javascript" src="<?= base_url("public/nprogress/nprogress.js") ?>"></script>
+				
+		<script>
+			$(window).load(function(){
+			   NProgress.done();
+			});
+			
+			$(document).ready(function() {
+			   NProgress.start();
+			});			
+		});
+		</script>
+					
 		<!-- <script type="text/javascript" src="<?= base_url("public/dataTables.bootstrap.js") ?>"></script> -->

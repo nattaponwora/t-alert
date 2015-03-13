@@ -3,7 +3,7 @@
 		background-image: url("<?= base_url('public/images/backgroundall.png') ?>" );
 	}
 	define(['pace'], function(pace){
-  pace.start({
+  	pace.start({
     document: false
   });
 });
@@ -30,9 +30,21 @@
 					<a href="<?= base_url("criticaltemp") ?>">รายการอุปกรณ์ที่ผิดปกติ</a>
 				</li>
 				
-				<!-- <li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
-					<a href="<?= base_url("register") ?>">Register</a>
-				</li> -->
+				<li class="dropdown <?= (($session_page == 'reportstore' || ($session_page == 'reportasset') ) ?  'active' : 'last'); ?>">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">รายงาน<b class="caret"></b></a>
+		        	<ul class="dropdown-menu">
+			          	<li class="<?= (($session_page == 'reportasset') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("reportasset") ?>">รายงานเฉพาะอุปกรณ์</a>
+						</li>
+						<li class="<?= (($session_page == 'reportassetbroken') ?  'active' : 'last'); ?>">
+			          		<a href="<?= base_url("reportassetbroken") ?>">รายงานเฉพาะอุปกรณ์ที่ชำรุด</a>
+			       		</li>
+			          	<li class="<?= (($session_page == 'reportstore') ?  'active' : 'last'); ?>">
+			          		<a href="<?= base_url("reportstore") ?>">รายงานเฉพาะร้าน</a>
+			       		</li>
+		        	</ul>
+		      	</li>
+		      	
 				<li class="dropdown <?= (($session_page == 'inserttemp' || ($session_page == 'insertasset') || ($session_page == 'technician' || ($session_page == 'store')) ) ?  'active' : 'last'); ?>">
 		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">แก้ไขข้อมูล<b class="caret"></b></a>
 		        	<ul class="dropdown-menu">
@@ -51,23 +63,25 @@
 						<li class="<?= (($session_page == 'store') ?  'active' : 'last'); ?>">
 							<a href="<?= base_url("store") ?>">สาขา 7-11</a>
 						</li>
+						<li class="<?= (($session_page == 'permission') ?  'active' : 'last'); ?>">
+							<a href="<?= base_url("permission") ?>">สิทธิ์การเข้าถึง</a>
+						</li>
 			        </ul>
 			 	</li>
 			 	
-				<li class="dropdown <?= (($session_page == 'reportstore' || ($session_page == 'reportasset') ) ?  'active' : 'last'); ?>">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">รายงาน<b class="caret"></b></a>
-		        	<ul class="dropdown-menu">
-			          	<li class="<?= (($session_page == 'reportasset') ?  'active' : 'last'); ?>">
-							<a href="<?= base_url("reportasset") ?>">รายงานเฉพาะอุปกรณ์</a>
-						</li>
-			          	<li class="<?= (($session_page == 'reportstore') ?  'active' : 'last'); ?>">
-			          		<a href="<?= base_url("reportstore") ?>">รายงานเฉพาะร้าน</a>
-			       		</li>
-		        	</ul>
-		      	</li>
+				
 		      	<li class="<?= (($session_page == 'config') ?  'active' : 'last'); ?> ">
 					<a href="<?= base_url("config") ?>">ตั้งค่า</a>
 				</li>
+				<li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
+					<a href="<?= base_url("register") ?>">สมัครสมาชิก</a>
+				</li>
+				<!-- <li class="<?= (($session_page == 'graph') ?  'active' : 'last'); ?> ">
+					<a href="<?= base_url("graph") ?>">กราฟ</a>
+				</li> -->
+				<!-- <li class="<?= (($session_page == 'register') ?  'active' : 'last'); ?>">
+					<a href="<?= base_url("register") ?>">สมัครสมาชิก</a>
+				</li> -->
 			</ul>
 			
 			<form name="logout_form" id="logout_form" class="form-inline" role="form" action="<?= base_url("login/logout") ?>" method="post">
@@ -76,6 +90,7 @@
 					<li><label style="color: #FFFFFF; margin-top: 15px">สวัสดี &nbsp; <?= $log_user ?> &nbsp;</label></li>
 					<li>
 						<button name="logout_btn" id="logout_btn" type="submit" class="button gray small" style="margin-top: 5px" >
+							<span class="glyphicon glyphicon-log-out"></span>
 							Logout
 						</button>
 					</li>

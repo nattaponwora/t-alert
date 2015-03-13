@@ -8,6 +8,14 @@ class Temp extends CI_Controller {
 		$this -> session -> set_userdata('session_page', 'temp');
 		$this -> load -> model("temp_model");
 		
+		$this -> load -> model("permission_model");
+		$log_user = get_cookie('log_cookie');
+		$user_type = $this -> permission_model -> get_usertype($log_user, "permission");
+		$user_id = $this -> permission_model -> get_userid($user_type, 'temp', 'permission');
+ 		if($user_id['name'] != 'temp') {
+			redirect('/login/error_page', 'refresh');
+		} 
+		
 		$cookie = get_cookie('username_cookie');
 		if ($cookie == null) {
 			redirect('/login/', 'refresh');
@@ -25,7 +33,6 @@ class Temp extends CI_Controller {
 		$showTable["selectpage"] = 1;
 		$showTable["selection"] = array("โปรดเลือก");
 		$showTable["selectiontype"] = array("โปรดเลือก");
-
 		$this -> view -> page_view("temp_view", $showTable);
 	}
 
@@ -57,39 +64,42 @@ class Temp extends CI_Controller {
 		$old_searchterm = $current_tempview["searchTerm"];
 		$search_asset = $current_tempview["search_asset"];
 		$search_assettypelists = $current_tempview["search_assettypelists"];
-		$new_id = $this -> temp_model -> get_newid($old_id, $old_searchterm, $search_asset, $search_assettypelists);
-
-		if (sizeof($new_id) > 0) {
-			$current_tempview["id"] = $new_id[sizeof($new_id) - 1]['id'];
-			$this -> session -> set_userdata("current_tempview", $current_tempview);
-		}
-
-		echo json_encode($new_id);
-
-	}
-
-	public function old_show($in, $type, $list) {
-		$searchTerm = $in;
-		$searchAsset = $in;
-		$search_asset = $type;
-		$search_assettypelists = $list;
-
-		$searchasset["store_id"] = $this -> temp_model -> searchasset();
-		$showTable["id"] = null;
-		if (count($searchasset) > 0) {
-			foreach ($searchasset["store_id"] as $r) {
-				if ($r["store_id"] == $searchTerm) {
-					$showTable["id"] = $this -> temp_model -> showtable($searchTerm, $search_asset, $search_assettypelists);
-					break;
-				}
+		
+		if($old_searchterm != "") {
+			$new_id = $this -> temp_model -> get_newid($old_id, $old_searchterm, $search_asset, $search_assettypelists);
+	
+			if (sizeof($new_id) > 0) {
+				$current_tempview["id"] = $new_id[sizeof($new_id) - 1]['id'];
+				$this -> session -> set_userdata("current_tempview", $current_tempview);
 			}
+			
+			echo json_encode($new_id);
 		}
 
-		$showTable["searchTerm"] = $searchTerm;
-		$showTable["search_assettypelists"] = $search_assettypelists;
-		$showTable["search_asset"] = $search_asset;
-		$this -> view -> page_view("temp_view", $showTable);
 	}
+
+	// public function old_show($in, $type, $list) {
+		// $searchTerm = $in;
+		// $searchAsset = $in;
+		// $search_asset = $type;
+		// $search_assettypelists = $list;
+// 
+		// $searchasset["store_id"] = $this -> temp_model -> searchasset();
+		// $showTable["id"] = null;
+		// if (count($searchasset) > 0) {
+			// foreach ($searchasset["store_id"] as $r) {
+				// if ($r["store_id"] == $searchTerm) {
+					// $showTable["id"] = $this -> temp_model -> showtable($searchTerm, $search_asset, $search_assettypelists);
+					// break;
+				// }
+			// }
+		// }
+// 
+		// $showTable["searchTerm"] = $searchTerm;
+		// $showTable["search_assettypelists"] = $search_assettypelists;
+		// $showTable["search_asset"] = $search_asset;
+		// $this -> view -> page_view("temp_view", $showTable);
+	// }
 
 	public function load_states($store_id) {
 		if (isset($store_id)) {
@@ -113,5 +123,4 @@ class Temp extends CI_Controller {
 		$showTable["selectpage"] = $getpage;
 		$this -> view -> page_view("temp_view", $showTable);
 	}
-
 }

@@ -227,10 +227,10 @@ table tbody tr.waitcolor {
     margin: 20px auto 10px;
     padding: 15px 29px 0px;
     border: 1px solid #e5e5e5;
-    background-color: #E5E5E5;
-    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5)
+    /*background-color: #E5E5E5;*/
+    /*-webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5)*/
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    box-shadow: 0 10px 20px rgba(85, 126, 83, 1);
+    box-shadow: 0 0px 1px rgba(129, 129, 129, 1);
     border-radius:25px
 }
 
@@ -332,3 +332,36 @@ div.pagination span.disabled {
 	text-align: center;
 }
 
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+/* /////////////////////////////////////////////////////////////////// */
+
+#overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+    background-color: gray;
+    filter: alpha(opacity=75);
+    -moz-opacity: 0.75;
+    opacity: 0.75;
+    display: none;
+}
+#overlay h2 {
+    position: fixed;
+    margin-left: 40%;
+    top: 40%;
+}

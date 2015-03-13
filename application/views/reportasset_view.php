@@ -1,46 +1,4 @@
-<script type="text/javascript">
-    $(function() {
-        $( "#begindate" ).datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: ('yy-mm-dd'),
-            onClose: function( selectedDate ) {
-                $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
-            },
-            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
-        });
-        $( "#lastdate" ).datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: ('yy-mm-dd'),
-            onClose: function( selectedDate ) {
-                $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
-            },
-            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
-        });
-        
-        $('#table_export').dataTable();
-    });
-
-	$(document).ready(function () {
-        $("#export_excel").click(function () {
-            $("#table_export").btechco_excelexport({
-                containerid: "asset report"
-               , datatype: $datatype.Table
-            });
-        });
-    });
-        
-
-	function load_assettype() {
-		var search_valuelist = document['search_form']['search_assetlist'].value;
-
-		var url = '<?= base_url("reportasset/load_statestype") ?>/' + search_valuelist;
-		loadStates(url, 'assettypelist');
-	}
-</script>
+<div class="container-fluid">
 <div class="container box" style="background-color: beige">
 	<form name="search_form" id="search_form" class="form-inline" role="form" action="<?= base_url("reportasset/search") ?>" method="post">
 		<label>วันที่</label>
@@ -68,7 +26,7 @@
 	<br>
 </div>
 
-<div class="row"></div>
+<div class="row">
 	<div class="container box" style="background-color: beige">
 		<form id="table_form" method="post">
 			<div class='table-responsive'>
@@ -110,31 +68,65 @@
 		</ul>
 	</div>
 	
-	<div class="form-inline" style="width: 25%;margin: 0px auto 0px auto">
 		<br>
 		<br>
-		<form class="form-group" role="form" >
-			<button id="export_excel" class="button green medium" type="button">
-				Export to Excel
-			</button>
-		</form>
-		
-		&nbsp&nbsp&nbsp
-		<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportasset/exporttopdf') ?>" role="form" method="post">
-			<?php if ( $begindate == null ) { ?>
-        	<input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
-	        <?php } if ( $begindate != null ) { ?>
-	        <input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate"  style="cursor: pointer" readonly="readonly"  value="<?= $begindate ?>" />
-	        <?php } ?>
-	        <?php if ( $lastdate == null ) { ?>
-	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  />
-	        <?php } if ( $lastdate != null ) { ?>
-	        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
-	       	<?php } ?>
-	       	<input class="form-control mouse_hover" type="hidden" id="set_search_asset" name="set_search_asset" value="<?= $search_asset ?>" />
-			<button class="button orange medium" type="submit">
-				Export to PDF
-			</button>
-		</form>
-	</div>
+	<form id="export_pdf" name="export_pdf" class="form-group" action= "<?= base_url('reportasset/exporttopdf') ?>" role="form" method="post">
+		<?php if ( $begindate == null ) { ?>
+    	<input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate" style="cursor: pointer" readonly="readonly" />
+        <?php } if ( $begindate != null ) { ?>
+        <input class="form-control mouse_hover" type="hidden" id="begindate" name="begindate"  style="cursor: pointer" readonly="readonly"  value="<?= $begindate ?>" />
+        <?php } ?>
+        <?php if ( $lastdate == null ) { ?>
+        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  />
+        <?php } if ( $lastdate != null ) { ?>
+        <input class="form-control mouse_hover" type="hidden" id="lastdate" name="lastdate"  style="cursor: pointer" readonly="readonly"  value="<?= $lastdate ?>" />
+       	<?php } ?>
+       	<input class="form-control mouse_hover" type="hidden" id="set_search_asset" name="set_search_asset" value="<?= $search_asset ?>" />
+		<button class="button orange medium col-sm-push-5" type="submit">
+			Export to PDF
+		</button>
+	</form>
 </div>
+</div>
+<script type="text/javascript">
+	
+	$.fn.dataTable.TableTools.defaults.aButtons = [ "xls" ];
+    $(function() {
+        $( "#begindate" ).datepicker({
+            defaultDate: "w",
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: ('yy-mm-dd'),
+            onClose: function( selectedDate ) {
+                $( "#lastdate" ).datepicker( "option", "minDate", selectedDate );
+            },
+            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
+        });
+        $( "#lastdate" ).datepicker({
+            defaultDate: "w",
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: ('yy-mm-dd'),
+            onClose: function( selectedDate ) {
+                $( "#begindate" ).datepicker( "option", "maxDate", selectedDate );
+            },
+            monthNamesShort: [ "ม.ค.", "ก.พ.", "มี.ค", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค." ]
+        });
+     	
+     	$('#table_export').DataTable({
+	    	dom: 'T<"clear">lfrtip',
+	    	"oTableTools": {
+            	"sSwfPath" : "<?= base_url('public/dataTables-1.10.2/extensions/TableTools/swf/copy_csv_xls_pdf.swf') ?>"
+			}
+	    });
+    });
+
+	
+
+	function load_assettype() {
+		var search_valuelist = document['search_form']['search_assetlist'].value;
+
+		var url = '<?= base_url("reportasset/load_statestype") ?>/' + search_valuelist;
+		loadStates(url, 'assettypelist');
+	}
+</script>

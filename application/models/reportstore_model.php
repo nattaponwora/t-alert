@@ -19,9 +19,12 @@ class Reportstore_model extends CI_model {
 		$this -> db -> where('store.store_id', $in);
 		$this -> db -> where('temperature.time >=', $begindate);
 		$this -> db -> where('temperature.time <=', $lastdate);
-
+		
+		// start meter
+		$this -> db -> where('temperature.temp !=', '85');
+		
 		$this -> db -> group_by(array('asset.store_id', 'store.store_name', 'asset.asset_barcode', 'asset.asset_shortname', 'asset_type.type'));
-
+		
 		$this -> db -> order_by('asset.id', 'ASC');
 		$query = $this -> db -> get();
 		$assets = array();
@@ -150,6 +153,27 @@ class Reportstore_model extends CI_model {
 			$pdf -> setXY($x, $y += $space);
 		}
 		$pdf -> Output('storereport.pdf', 'D');
+	}
+
+	function get_date($in, $begindate, $lastdate) {
+		// $this -> db -> distinct();
+		$this -> db -> select('asset.asset_shortname, temperature.temp, temperature.time');
+		$this -> db -> from('temperature');
+		$this -> db -> join('asset', 'temperature.asset_id = asset.id');
+		$this -> db -> join('asset_type', 'asset.asset_typeid = asset_type.id');
+		$this -> db -> where('asset.store_id', $in);
+		$this -> db -> where('temperature.time >=', $begindate);
+		$this -> db -> where('temperature.time <=', $lastdate);
+		//$this -> db -> where('temperature.status', 'ALERT');
+		
+		$this -> db -> group_by(array("asset.asset_shortname", "temperature.temp", "temperature.time"));
+		$this -> db -> order_by('temperature.temp', 'DESC');
+		$query = $this -> db -> get();
+		$assets = array();
+		foreach ($query->result_array() as $row) {
+			$assets[] = $row;
+		}
+		return $assets;
 	}
 
 }

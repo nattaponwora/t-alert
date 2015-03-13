@@ -23,36 +23,44 @@ class Login extends CI_Controller {
 		$this -> load -> model("login_model");
 	}
 
-	public function index() {
-		
-		$this -> view -> section_view('login_view');
+	public function index($msg = NULL) {
+			
+		$data['msg'] = $msg;
+		$this -> view -> section_view('login_view', $data);
 	}
 
-	public function check() {
-		$username = $this -> input -> post('username');
-		$password = $this -> input -> post('password');
-
-		$data["id"] = $this -> login_model -> get_user($username, $password);
-
-		if ($data["id"] != null) {
-			$cookie = array('name' => 'username_cookie', 
+	public function process() {
+		
+		// Load the model
+        // Validate the user can login
+        $result = $this->login_model->validate();
+        // Now we verify the result
+        if(! $result){
+	    	$msg = '<div style="vertical-align: middle; padding: 0; background-color: white" class="box"><font color=red>Invalid username or password.</font><br /></div>';
+            $this->index($msg); 
+        }else{
+        	$cookie = array('name' => 'username_cookie', 
 							'value' => 'username2', 
 							'expire' => '86500',
 							'path'   => '/',
 			);
 			
 			$log_user = array('name' => 'log_cookie', 
-							'value' => $username, 
+							'value' => $result, 
 							'expire' => '86500',
 							'path'   => '/',
 			);
+			
 			$this -> input -> set_cookie($cookie);
 			$this -> input -> set_cookie($log_user);
-			redirect('/temp/', 'refresh');
-		} else {
-			delete_cookie("username_cookie");
-			redirect('/login/', 'refresh');
-		}
+            // If user did validate, 
+            // Send them to members area
+            redirect('temp');
+        }        
+	}	
+		
+	public function error_page() {
+		$this -> view -> page_view('error_page');
 	}
 
 	public function logout() {

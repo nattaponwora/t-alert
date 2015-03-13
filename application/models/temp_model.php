@@ -34,7 +34,7 @@ class Temp_model extends CI_model {
 		$this -> db -> where('asset_typeid', $type_id);
 		$this -> db -> where('asset.id', $droptype);
 		$this -> db -> order_by('temperature.id', 'DESC');
-		//$this->db->limit(10,0);
+		//$this->db->limit(100, 0);
 		$query = $this -> db -> get();
 		$assets = array();
 		foreach ($query->result_array() as $row) {
@@ -72,6 +72,7 @@ class Temp_model extends CI_model {
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
 		$this -> db -> where('asset.store_id', $in);
 		$this -> db -> where('asset_typeid', $in2);
+		$this -> db -> order_by('asset.asset_shortname', 'ASC');
 		$query = $this -> db -> get();
 		$assets[0] = "โปรดเลือก";
 		foreach ($query->result_array() as $row) {

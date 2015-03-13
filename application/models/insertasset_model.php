@@ -38,13 +38,13 @@ class Insertasset_model extends CI_model {
 	}
 
 	function get_assetshortname($in) {
-		$this -> db -> select('id, shortcode');
+		$this -> db -> select('id, shortcode, std_temp');
 		$this -> db -> from('asset_type');
 		$this -> db -> where('asset_type.id', $in);
 		$query = $this -> db -> get();
 		$assets = array();
 		foreach ($query->result_array() as $row) {
-			$assets[$row['id']] = $row['shortcode'];
+			$assets[$row['id']] = $row;
 		}
 		return $assets;
 	}
@@ -62,7 +62,7 @@ class Insertasset_model extends CI_model {
 	}
 
 	function get_table() {
-		$this -> db -> select('asset.id, asset.store_id, asset.asset_barcode, asset.asset_shortname, asset_type.type, store.store_name');
+		$this -> db -> select('asset.id, asset.store_id, asset.asset_barcode, asset.asset_shortname, asset.adjust_value, asset_type.type, store.store_name');
 		$this -> db -> from('asset');
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
 		$this -> db -> join('store', 'asset.store_id = store.store_id');

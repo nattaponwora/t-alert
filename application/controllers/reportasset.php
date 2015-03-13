@@ -8,6 +8,14 @@ class Reportasset extends CI_Controller {
 		$this -> session -> set_userdata('session_page', 'reportasset');
 		$this -> load -> model("reportasset_model");
 		
+		$this -> load -> model("permission_model");
+		$log_user = get_cookie('log_cookie');
+		$user_type = $this -> permission_model -> get_usertype($log_user, "permission");
+		$user_id = $this -> permission_model -> get_userid($user_type, 'reportasset', 'permission');
+ 		if($user_id['name'] != 'reportasset') {
+			redirect('/login/error_page', 'refresh');
+		} 
+		
 		$cookie = get_cookie('username_cookie');
 		if ($cookie == null) {
 			redirect('/login/', 'refresh');
@@ -53,10 +61,6 @@ class Reportasset extends CI_Controller {
 		$showTable["lastdate"] = $lastdate;
 		$this -> reportasset_model -> set_pdf($showTable);
 		redirect('/reportasset/', 'refresh');
-	}
-
-	public function exporttoexcel() {
-		
 	}
 }
 

@@ -28,12 +28,14 @@ $(function () {
     });
 	
 	$("#add_icon").on("click", function () { 	
+		//alert($("#temp_table").children().children().eq(0).attr('temp_''));
 		var new_row = "<tr style='white-space: nowrap' id='edition' role='row' class=''>"+
 					  "<td class='cellEditing' type='type' style='max-width:30px; width:30px'><input id='type_input' name='type_input' type='text' style='height: 30px;'/></td>"+
 					  "<td class='cellEditing' type='shortcode' style='max-width:30px; width:30px'><input id='shortcode_input' name='shortcode_input' type='text' style='height: 30px;'/></td>"+
 					  "<td class='cellEditing' type='min_temp' style='max-width:30px; width:30px'><input id='min_temp_input' name='min_temp_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' type='max_temp' style='max-width:30px; width:30px'><input id='max_temp_input' name='max_temp_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' type='std_time' style='max-width:30px; width:30px'><input id='std_time_input' name='std_time_input' type='text' style='height: 30px;' /></td>"+
+					  "<td class='cellEditing' type='std_temp' style='max-width:30px; width:30px'><input id='std_temp_input' name='std_temp_input' type='text' style='height: 30px;' /></td>"+
 					  "<td class='cellEditing' align='center'>" + "<a class='mouse_hover remove_icon'><img src='public/images/remove.png'></td>"+
 
 					  "</tr>";
@@ -101,7 +103,7 @@ $(function () {
 	// });
 	
 	$(".editableTable").on("dblclick", ".editable", function () {
-		if($(this).hasClass( "editable" ))
+		if($(this).hasClass( "editable" ) && (!$(this).hasClass( "none" )))
 		{
 			if(checkpoint_id != null) {
 				var old_id = "#" + checkpoint_id;
@@ -176,13 +178,13 @@ function remove_btn() {
 	});
 }
 </script>
-
+<div class="container-fluid">
 <div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
 	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
 </div>
 
 <div class="row">
-	<div class="box col-sm-7 col-center-block" style="background-color: beige">
+	<div class="box col-sm-8 col-sm-push-2" style="background-color: beige">
 		<div class="form-group">
 		    <form  id="table_form" name="table_form" method="post">
 		        <div class="table-responsive">
@@ -193,7 +195,8 @@ function remove_btn() {
 		                        <th rowspan="2" style="text-align: center; vertical-align: middle;">ชื่อย่ออุปกรณ์</th>
 		                        <th colspan="2" style="text-align: center; vertical-align: middle;">อุณหภูมิมาตราฐาน(องศาเซลเซียส)<br/>(<font color="green">Editable</font>)</th>
 		                        <th rowspan="2" style="text-align: center; vertical-align: middle;">เวลาสูงสุด(นาที)<br/>(<font color="green">Editable</font>)</th>
-								<th rowspan="2" style="max-width:500px; width: 50px; vertical-align: middle;">ลบ</th>
+								<th rowspan="2" style="text-align: center; vertical-align: middle;">ค่ากลางเครื่องมีดเตอร์<br/>(<font color="green">Editable</font>)</th>
+								<th rowspan="2" style="max-width:500px; width: 50px; vertical-align: middle; display: <?= $user_id_edit ?>">ลบ</th>
 		                    </tr>
 		                    <tr style="font-weight: bold; background-color: #acf; border-bottom: 1px solid #cef;">
 		                    	<td style="text-align: center;">ต่ำสุด</td>
@@ -208,11 +211,13 @@ function remove_btn() {
 		                        	echo "<tr style='white-space: nowrap' id=".$r['id'].">";
 		                            echo "<td type='type' style='max-width:30px;'>{$r['type']}</td>";
 									echo "<td type='shortcode' style='max-width:30px; '>{$r['shortcode']}</td>";	
-		                            echo "<td class='editable' type='min_temp' style='max-width:30px;'>{$r['min_temp']}</td>";
-		                            echo "<td class='editable' type='max_temp' style='max-width:30px;'>{$r['max_temp']}</td>";
-									echo "<td class='editable' type='std_time' style='max-width:30px;'>{$r['std_time']}</td>";
-									echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
-		                            echo "</tr>";
+		                            echo "<td class='editable ". $user_id_edit ."' type='min_temp' style='max-width:30px;'>{$r['min_temp']}</td>";
+		                            echo "<td class='editable ". $user_id_edit ."' type='max_temp' style='max-width:30px;'>{$r['max_temp']}</td>";
+									echo "<td class='editable ". $user_id_edit ."' type='std_time' style='max-width:30px;'>{$r['std_time']}</td>";
+									echo "<td class='editable ". $user_id_edit ."' type='std_temp' style='max-width:30px;'>{$r['std_temp']}</td>";
+									echo "<td align='center' style='display : ". $user_id_edit ."'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";
+		                           
+								    echo "</tr>";
 									$id_row++;
 		                        }
 		                    }
@@ -224,9 +229,10 @@ function remove_btn() {
 			</form>
 			<br>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-10 mouse_hover"> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>	
+				<a id="add_icon" name="add_icon" style="display: <?= $user_id_edit ?>" class="col-xs-offset-10 mouse_hover"> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>	
 			</form>
 			
 		</div>
 	</div>
+</div>
 </div>

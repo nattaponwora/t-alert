@@ -55,4 +55,29 @@ class Send_model extends CI_model {
 		}
 	}
 
+	function permiss($data) {
+		$this->db->select('meter.get_sms');
+		$this->db->from('meter');
+		$this->db->where('meter.meter_id', $data);
+		$rs= $this->db->get();
+		foreach ($rs->result_array() as $row) {
+			return $row;
+		}
+	}
+	
+	function get_adjust_value($data) {
+		$this->db->select('asset.adjust_value');
+		$this->db->from('asset');
+		$this->db->where('asset.id', $data);
+		$rs= $this->db->get();
+		foreach ($rs->result_array() as $row) {
+			return $row['adjust_value']	;
+		}
+	}
+	
+	function get_sending() {
+		
+	}
 }
+
+

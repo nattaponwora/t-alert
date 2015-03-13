@@ -34,9 +34,7 @@ class Insertmeter_model extends CI_model {
 	}
 
 	function insert_asset($meter_id, $store_id, $asset_shortname) {
-		$data = array('meter_id' => $meter_id, 
-					  'asset_id' => $asset_shortname, 
-					 );
+		$data = array('meter_id' => $meter_id, 'asset_id' => $asset_shortname, );
 
 		$this -> db -> insert('meter', $data);
 	}
@@ -82,7 +80,7 @@ class Insertmeter_model extends CI_model {
 
 		return $assets;
 	}
-	
+
 	function get_assetbarcode($in, $in2, $in4) {
 		$this -> db -> select('asset.id, asset.asset_barcode');
 		$this -> db -> from('asset');
@@ -96,7 +94,7 @@ class Insertmeter_model extends CI_model {
 		}
 		return $assets;
 	}
-	
+
 	function get_table() {
 		$this -> db -> from('asset');
 		$this -> db -> join('asset_type', 'asset_type.id = asset.asset_typeid');
@@ -111,19 +109,35 @@ class Insertmeter_model extends CI_model {
 	}
 
 	function edit_meter($data) {
-		$this->db->set('m.meter_id', $data['edit_meterid']);
-		$this->db->set('a.store_id', $data['edit_storeasset']);
-		$this->db->set('a.asset_typeid', $data['edit_assetlist']);
-		$this->db->set('a.asset_shortname', $data['asset_shortname']);
-		//$this->db->set('b.companyaddress', 'Mannerheimtie 123, Helsinki Suomi');
-		
-		$this->db->where('m.meter_id', $data['id']);
-		$this->db->where('m.asset_id = a.id');
-		$this->db->update('meter as m, asset as a');
+		$this -> db -> set('m.meter_id', $data['edit_meterid']);
+		$this -> db -> set('m.asset_id', $data['edit_assettypelist']);
+
+		$this -> db -> where('m.meter_id', $data['id']);
+		$this -> db -> where('m.asset_id = a.id');
+		$this -> db -> update('meter as m, asset as a');
 	}
 
 	function remove_meter($data) {
-		$this->db->delete('meter', array('meter_id' => $data)); 
+		$this -> db -> delete('meter', array('meter_id' => $data));
 	}
 
+	function change_sms($data) {
+		if($data['get_sms'] == 1) $data['get_sms'] = 1;
+		else if($data['get_sms'] == 0) $data['get_sms'] = 0;
+		
+		$this -> db -> set('m.get_sms', $data['get_sms']);
+		$this -> db -> where('m.meter_id', $data['id']);
+		$this -> db -> update('meter as m');
+	}
+		
+	function get_sms($data) {
+		$this -> db -> select('meter.get_sms');
+		$this -> db -> from('meter');
+		$this -> db -> where('meter.meter_id', $data['id']);
+		$query = $this -> db -> get();
+		foreach ($query->result_array() as $row) {
+			$assets[] = $row;
+		}
+		return $assets;
+	}
 }

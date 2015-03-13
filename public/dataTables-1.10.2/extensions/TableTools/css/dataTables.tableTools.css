@@ -130,8 +130,9 @@ a.DTTT_disabled {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa',GradientType=0 ); /* IE6-9 */
 }
 
-
-
+a.DTTT_button_xls {
+	/*display: none;	*/
+}
 /*
  * BUTTON_STYLES
  * Action specific button styles

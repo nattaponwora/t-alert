@@ -29,12 +29,11 @@ class Criticaltemp_model extends CI_model {
 	}
 
 	function sorting() {
-		$this -> db -> select('asset.id, temperature.status, temperature.time');
-		$this -> db -> from('asset');
-		$this -> db -> join('temperature', 'temperature.asset_id = asset.id');
-		$this -> db -> where('temperature.status', 'ALERT');
-		$this -> db -> or_where('temperature.status', 'WAIT');
-		$this -> db -> order_by('temperature.time', 'ASC');
+		// $this -> db -> select('SELECT * FROM (SELECT * FROM temperature ORDER BY temperature.time DESC) AS t', FALSE);
+		$this -> db -> from('(SELECT * FROM temperature ORDER BY temperature.time DESC) AS t', FALSE);
+		//$this -> db -> join('temperature', 'temperature.asset_id = asset.id');
+		//$this -> db -> order_by('temperature.time', 'ASC');
+		$this -> db -> group_by('t.asset_id');
 		$query = $this -> db -> get();
 		$assets = array();
 		foreach ($query->result_array() as $row) {
@@ -47,8 +46,8 @@ class Criticaltemp_model extends CI_model {
 		$this -> db -> select('asset.id, temperature.time');
 		$this -> db -> from('asset');
 		$this -> db -> join('temperature', 'temperature.asset_id = asset.id');
-		$this -> db -> where('temperature.status', 'WAIT');
-		$this -> db -> order_by('temperature.time', 'DESC');
+		$this -> db -> where('temperature.status', 'NORMAL');
+		$this -> db -> order_by('temperature.time', 'ASC');
 		$query = $this -> db -> get();
 		$assets = array();
 		foreach ($query->result_array() as $row) {

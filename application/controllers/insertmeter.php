@@ -7,7 +7,15 @@ class Insertmeter extends CI_Controller {
 		parent::__construct();
 		$this -> session -> set_userdata('session_page', 'insertmeter');
 		$this -> load -> model("insertmeter_model");
-
+		
+		$this -> load -> model("permission_model");
+		$log_user = get_cookie('log_cookie');
+		$user_type = $this -> permission_model -> get_usertype($log_user, "permission");
+		$user_id = $this -> permission_model -> get_userid($user_type, 'insertmeter', "permission");
+ 		if($user_id['name'] != 'insertmeter') {
+			redirect('/login/error_page', 'refresh');
+		} 
+		
 		$cookie = get_cookie('username_cookie');
 		if ($cookie == null) {
 			redirect('/login/', 'refresh');
@@ -15,6 +23,18 @@ class Insertmeter extends CI_Controller {
 	}
 
 	public function index() {
+		/***** how to reduce IDK sorry 
+		 * This under code mean permission can edit or not
+		 */
+		$log_user = get_cookie('log_cookie');
+		$user_type = $this -> permission_model -> get_usertype($log_user, "permission_edit");
+		$user_id_edit = $this -> permission_model -> get_userid($user_type, 'insertmeter', "permission_edit");
+		$data["user_id_edit"] = "";
+		if($user_id_edit['name'] != 'insertmeter') {
+			$data["user_id_edit"] = "none";
+		} 
+		//////////////////////////////////////////////////////////
+		
 		$data["id"] = 0;
 		$data["infomation"] = 0;
 		$data["searchTerm"] = null;
@@ -124,12 +144,22 @@ class Insertmeter extends CI_Controller {
 
 	public function edit() {
 		$data = $this -> input -> post();
-		$this->view->p($data);
 		$this -> insertmeter_model -> edit_meter($data);
 		redirect('/insertmeter', 'refresh');
 	}
 
-	 public function remove($in) {
-	 	$this -> insertmeter_model -> remove_meter($in);
-	 }
+	public function remove($in) {
+		$this -> insertmeter_model -> remove_meter($in);
+	}
+	
+	public function sms($bool_sms, $meter) {
+		$data['get_sms'] = $bool_sms;
+		$data['id'] = $meter;
+		$this -> insertmeter_model -> change_sms($data);
+	}
+
+	public function get_sms($meter) {
+		$data['id'] = $meter;
+		$data['sms_s'] = $this -> insertmeter_model -> get_sms($data);
+	}
 }

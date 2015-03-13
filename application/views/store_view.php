@@ -96,7 +96,7 @@ $(function () {
 	}); 
 	
 	$(".editableTable").on("dblclick", ".editable", function () {
-		if($(this).hasClass( "editable" ))
+		if($(this).hasClass( "editable" ) && (!$(this).hasClass( "none" )))
 		{
 			if(checkpoint_id != null) {
 				var old_id = "#" + checkpoint_id;
@@ -170,7 +170,7 @@ function remove_btn() {
 	});
 }
 </script>
-
+<div class="container-fluid">
 <div id="dialog-confirm" title="ยืนยันการลบ" style="font: white">
 	<p>คุณต้องการจะลบข้อมูลใช่หรือไม่</p>
 </div>
@@ -186,7 +186,7 @@ function remove_btn() {
 		                        <th style="max-width:300px; width:30px; vertical-align: middle;">รหัสร้าน<br/>(<font color="green">Editable</font>)</th>
 		                        <th style="max-width:300px; width:30px; vertical-align: middle;">ชื้อร้าน<br/>(<font color="green">Editable</font>)</th>
 		                        <th style="max-width:300px; width:30px; vertical-align: middle;">เขต<br/>(<font color="green">Editable</font>)</th>
-		                        <th style="max-width:500px; width:30px; vertical-align: middle;">ลบ</th>
+		                        <th style="max-width:500px; width:30px; vertical-align: middle; display: <?= $user_id_edit ?>">ลบ</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -195,10 +195,10 @@ function remove_btn() {
 		                    	$id_row = 0;
 		                        foreach ($id as $r) {
 		                            echo "<tr style='white-space: nowrap' id=".$r['store_id'].">";
-		                            echo "<td class='editable' type='store_id' style='max-width:300px; width:30px'>{$r['store_id']}</td>";
-		                            echo "<td class='editable' type='store_name' style='max-width:300px; width:30px'>{$r['store_name']}</td>";
-		                            echo "<td class='editable' type='opt_team' style='max-width:300px; width:30px'>{$r['opt_team']}</td>";
-									echo "<td align='center'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";    		                           
+		                            echo "<td class='editable ". $user_id_edit ."' type='store_id' style='max-width:300px; width:30px'>{$r['store_id']}</td>";
+		                            echo "<td class='editable ". $user_id_edit ."' type='store_name' style='max-width:300px; width:30px'>{$r['store_name']}</td>";
+		                            echo "<td class='editable ". $user_id_edit ."' type='opt_team' style='max-width:300px; width:30px'>{$r['opt_team']}</td>";
+									echo "<td align='center' style='display : ". $user_id_edit ."'>" . "<a class='mouse_hover remove_icon'><img src=" . base_url('public/images/remove.png') . "></td>";    		                           
 								    echo "</tr>";
 									$id_row++;
 		                        }
@@ -211,8 +211,9 @@ function remove_btn() {
 			</form>
 			<br>
 			<form id="add_form" name="add_form" method="post">
-				<a id="add_icon" name="add_icon" class="col-xs-offset-10 mouse_hover"> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>	
+				<a id="add_icon" name="add_icon" style="display: <?= $user_id_edit ?>" class="col-xs-offset-10 mouse_hover"> <img src='public/images/icon/add_icon.png' height='48px' width='48px'></a>	
 			</form>
 		</div>
 	</div>
+</div>
 </div>

@@ -32,6 +32,7 @@ class Inserttemp_model extends CI_model {
 		$this -> db -> set('min_temp', $data["min_temp_input"]);
 		$this -> db -> set('max_temp', $data["max_temp_input"]);
 		$this -> db -> set('std_time', $data["std_time_input"]);
+		$this -> db -> set('std_temp', $data["std_temp_input"]);
 		$this -> db -> insert('asset_type');
 	}
 	

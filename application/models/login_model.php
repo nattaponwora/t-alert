@@ -6,17 +6,28 @@ class Login_model extends CI_model {
         parent::__construct();
         $this->load->database();
     }     
-    
-    function get_user($username, $password) {
-        $this->db->select('login.username, login.password');
-        $this->db->from('login');
-		$this->db->where('login.username', $username);
-		$this->db->where('login.password', $password);
-        $query = $this->db->get();
-        $assets = array();                       
-        foreach ($query->result_array() as $row) {
-            $assets[] = $row;
+	
+	public function validate(){
+        // grab user input
+        $username = $this->security->xss_clean($this->input->post('username'));
+        $password = $this->security->xss_clean($this->input->post('password'));
+        
+        // Prep the query
+        $this->db->where('login.username', $username);
+        $this->db->where('login.password', $password);
+                
+        // Run the query
+        $query = $this->db->get('login');
+		
+        // Let's check if there are any results
+        if($query->num_rows == 1)
+        {
+            return $username;
         }
-        return $assets;
+		
+        // If the previous process did not validate
+        // then return false.
+        return false;
     }
 }
+	
